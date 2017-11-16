@@ -7,7 +7,7 @@
 
 <template>
 <div class="main">
-  <div class="sidebar-menu-con" :style="{width: sidebarWidth}">
+  <div class="sidebar-menu-con" :style="{'width': sidebarWidth}">
     <div class="logo-con">
       <img v-show="!hideMenuText" src='/src/assets/images/logo.jpg' key="max-logo" />
       <img v-show="hideMenuText" src="/src/assets/images/logo-min.jpg" key="min-logo" />
@@ -25,7 +25,7 @@
     <Col :span="12">
       <div class="header-avator-con">
         <icon-nav :icon-name="fullScreenIconName" :tip-content="fullScreenTip"></icon-nav>
-        <icon-nav icon-name="locked" tip-content="锁屏" :icon-size="19"></icon-nav>
+        <icon-nav icon-name="locked" tip-content="锁屏" :icon-size="20"></icon-nav>
       </div>
     </Col>
   </Row>
