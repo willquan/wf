@@ -1,26 +1,29 @@
 <template>
-    <Breadcrumb>
-        <BreadcrumbItem 
-            v-for="item in $store.state.currentPath" 
-            :href="item.path" 
-            :key="item.name"
-        >{{itemTitle(item)}}</BreadcrumbItem>
-    </Breadcrumb>
+<Breadcrumb :style="{'display': displayType, 'vertical-align': verticalAlign}">
+    <BreadcrumbItem v-for="item in currentPath" :href="item.path" :key="item.name">{{item.title}}</BreadcrumbItem>
+</Breadcrumb>
 </template>
 
 <script>
 export default {
     name: 'breadcrumbNav',
     props: {
-        currentPath: Array
+        currentPath: Array,
+        isBlock: {type: Boolean, default: false},
+        verticalAlign: {
+            type: String, 
+            default: "middle", 
+            validator:function(align){
+                return align=="middle" || align == "top" || align == "bottom"
+            }
+        }
     },
     methods: {
-        itemTitle (item) {
-            if (typeof item.title === 'object') {
-                return this.$t(item.title.i18n);
-            } else {
-                return item.title;
-            }
+       
+    },
+    computed: {
+        displayType() {
+            return this.isBlock ? "block" : "inline-block";
         }
     }
 };

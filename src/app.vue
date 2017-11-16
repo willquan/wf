@@ -1,5 +1,9 @@
+<style>
+@import "./app.less";
+</style>
+
 <template>
-    <div id="main" class="app-main">
+    <div class="app-main">
         <router-view></router-view>
     </div>
 </template>
@@ -21,6 +25,3 @@
         }
     };
 </script>
-<style>
-@import "./app.less";
-</style>
