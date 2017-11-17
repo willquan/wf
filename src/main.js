@@ -25,7 +25,14 @@ const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
-    next();
+    if (Cookies.get('locking') === '1' && to.name !== 'locking') {  // 判断当前是否是锁定状态
+        next(false);
+        router.replace({
+            name: 'locking'
+        });
+    } else {
+        next();
+    }
 });
 
 router.afterEach(() => {

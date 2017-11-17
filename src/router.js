@@ -8,6 +8,11 @@ export const loginRouter = {
     },
     component: resolve => { require(['./views/login/login.vue'], resolve); }
 };
+export const locking = {
+    path: '/locking',
+    name: 'locking',
+    component: resolve => { require(['./views/main_components/locking-page.vue'], resolve); }
+};
 export const page404 = {
     path: '/*',
     name: 'error_404',
@@ -47,6 +52,7 @@ const appRouter = [
 ];
 const routers = [
     loginRouter,
+    locking,
     ...appRouter,
     page500,
     page401,

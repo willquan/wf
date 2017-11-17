@@ -2,6 +2,9 @@
 .nav-icon-btn {
     display: inline-block;
     cursor: pointer;
+    i {
+        vertical-align: middle;
+    }
 }
 </style>
 

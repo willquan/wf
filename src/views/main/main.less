@@ -10,8 +10,9 @@
         z-index: 21;
         background: #495060;
         transition: width .3s;
+        
     }
-    &-header-con{
+    &-navbar{
         box-sizing: border-box;
         position: fixed;
         display: block;
@@ -20,12 +21,15 @@
         z-index: 20;
         box-shadow: 0 2px 1px 1px rgba(100,100,100,.1);
         transition: padding .3s;
+        .nav-tools-bar {
+            float: right;
+            margin-right: 32px;
+          }
     }
-    &-header{
-        background: #fff;
-        box-shadow: 0 2px 1px 1px rgba(100,100,100,.1);
-        position: relative;
-        z-index: 11;
+    &-user-name{
+        display: inline-block;
+        font-size: 14px;
+        vertical-align: top;
     }
 }
 .logo-con{
@@ -35,4 +39,10 @@
         height: 44px;
         width: auto;
     }
+}
+.sidebar-annimation-enter{
+    opacity: 0
+}
+.sidebar-annimation-enter-active{
+    transition: opacity 0.8s
 }
