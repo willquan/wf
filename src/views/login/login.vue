@@ -67,7 +67,7 @@ export default {
                         Cookies.set('access', 0);
                     } else {
                         Cookies.set('access', 1);
-                    }
+                    }alert(11);
                     this.$router.push({
                         name: 'home_index'
                     });
