@@ -12,8 +12,8 @@
       </transition>
     </div>
     <transition name="sidebar-annimation">
-      <sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14" key="large-menu" />
-      <sidebar-menu-shrink v-else :menuList="menuList" key="small-menu" />
+      <sidebar-menu v-if="!hideMenuText" :menuList="this.menuList" :iconSize="14" key="large-menu" :menuTheme="menuTheme"/>
+      <sidebar-menu-shrink v-else :menuList="this.menuList" key="small-menu" :menuTheme="menuTheme"/>
     </transition>
   </div>
   <Row type="flex" align="middle" class="main-navbar" :style="{paddingLeft: sidebarWidth}">
@@ -53,8 +53,9 @@ import tagsPageOpened from "../main_components/tagsPageOpened.vue";
 import breadcrumbNav from "../main_components/breadcrumbNav.vue";
 import sidebarMenuShrink from "../main_components/sidebarMenuShrink.vue";
 import iconNav from "../main_components/iconNav.vue";
-import Cookies from "js-cookie";
 import util from "@/libs/util.js";
+import { mapState} from 'vuex';
+import CookiesUtil from '@/libs/CookiesUtil.js'
 
 export default {
   components: {
@@ -85,13 +86,13 @@ export default {
     };
   },
   mounted(){
-    
     this.initLockScreen();
   },
   computed: {
-    menuList() {
-      return this.$store.state.menuList;
-    },
+    ...mapState({
+      'menuList': state=>state.menu.menuList,
+      'menuTheme': state=>state.menu.menuTheme
+    }),
     sidebarWidth() {
       return this.hideMenuText ? "60px" : "200px";
     },
@@ -160,8 +161,8 @@ export default {
       lockScreenBack.style.transition = 'all 3s';
       lockScreenBack.style.zIndex = 10000;
       lockScreenBack.style.boxShadow = '0 0 0 ' + this.lockScreenSize + 'px #667aa6 inset';
-      this.$store.commit('lock');
-      Cookies.set('last_page_name', this.$route.name); // 本地存储锁屏之前打开的页面以便解锁后打开
+      CookiesUtil.User.lock(this.$route.name);
+      CookiesUtil.User.setPageBeforeLock(this.$route.name);
       setTimeout(() => {
         lockScreenBack.style.transition = 'all 0s';
         this.$router.push({
@@ -169,8 +170,18 @@ export default {
         });
       }, 800);
     },
-    handleClickUserDropdown() {
-
+    handleClickUserDropdown(name) {
+      if (name === 'ownSpace') {
+          util.openNewPage(this, 'ownspace_index');
+          this.$router.push({
+              name: 'ownspace_index'
+          });
+      } else if (name === 'loginout') {
+        this.clearUserCache();
+        this.$router.push({
+            name: 'login'
+        });
+      }
     }
   }
 };

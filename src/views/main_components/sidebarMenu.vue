@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <Menu ref="sideMenu" :active-name="$route.name" :open-names="openedSubmenuArr" :theme="$store.state.menuTheme" width="auto" @on-select="changeMenu">
+    <Menu ref="sideMenu" :active-name="$route.name" :open-names="openedSubmenuArr" :theme="menuTheme" width="auto" @on-select="changeMenu">
         <template v-for="item in menuList">
             <MenuItem v-if="item.children.length<=1" :name="item.children[0].name" :key="item.path">
                 <Icon :type="item.icon" :size="iconSize" :key="item.path"></Icon>
@@ -39,12 +39,11 @@ export default {
     props: {
         slotTopClass: String,
         menuList: Array,
-        iconSize: Number
+        iconSize: Number,
+        menuTheme: String
     },
     computed: {
-        tagsList () {
-            return this.$store.state.tagsList;
-        }
+      
     },
     methods: {
         changeMenu (active) {

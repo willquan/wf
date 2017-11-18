@@ -1,10 +1,9 @@
+import Cookies from 'js-cookie';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Cookies from 'js-cookie';
-
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+const menu = {
     state: {
         menuList: [{
             path: '/component',
@@ -56,19 +55,7 @@ const store = new Vuex.Store({
             ]
         }],
         menuTheme: 'dark'
-    },
-    getters: {
-
-    },
-    mutations: {
-        lock(state) {
-            Cookies.set('locking', '1');
-        },
-        unlock(state) {
-            Cookies.set('locking', '0');
-        }
-    },
-    actions: {
-
     }
-});
+};
+
+export default menu;

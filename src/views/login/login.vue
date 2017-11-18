@@ -38,13 +38,15 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
+
+import CookiesUtil from '@/libs/CookiesUtil.js'
+
 export default {
     data () {
         return {
             form: {
                 userName: 'admin',
-                password: '123'
+                password: ''
             },
             rules: {
                 userName: [
@@ -60,15 +62,15 @@ export default {
         handleSubmit () {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
-                    Cookies.set('user', this.form.userName);
-                    Cookies.set('password', this.form.password);
-                    this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    if (this.form.userName === 'iview_admin') {
-                        Cookies.set('access', 0);
+                    CookiesUtil.User.saveUserName(this.form.userName);
+                    CookiesUtil.User.savePassword(this.form.password);
+                    CookiesUtil.User.setAvator('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
+                    if (this.form.userName === 'admin') {
+                        CookiesUtil.User.saveAccess(0);
                     } else {
-                        Cookies.set('access', 1);
-                    }alert(11);
-                    this.$router.push({
+                       CookiesUtil.User.saveAccess(1);
+                    }
+                    this.$router.replace({
                         name: 'home_index'
                     });
                 }

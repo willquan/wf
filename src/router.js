@@ -39,19 +39,21 @@ export const page500 = {
     name: 'error_500',
     component: resolve => { require(['./views/error_page/500.vue'], resolve); }
 };
-
+export const otherRouter = {
+    path: '/',
+    name: 'otherRouter',
+    component: Main,
+    children: [
+        { path: 'home', title: 'home', name: 'home_index', component: resolve => { require(['./views/home/home.vue'], resolve); } },
+        { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['./views/own-space/own-space.vue'], resolve); } },
+    ]
+};
 const appRouter = [
-    {
-        path: '/',
-        name: 'home_index',
-        component: Main,
-        children: [
-            { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['./views/home/home.vue'], resolve); } },
-        ]
-    }
+    
 ];
 const routers = [
     loginRouter,
+    otherRouter,
     locking,
     ...appRouter,
     page500,

@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
+import CookiesUtil from '@/libs/CookiesUtil.js'
+
 export default {
     name: 'Unlock',
     data () {
@@ -41,11 +42,10 @@ export default {
         showUnlock: {
             type: Boolean,
             default: false
-        }
-    },
-    computed: {
-        avatorPath () {
-            return localStorage.avatorImgPath;
+        },
+        avatorPath: {
+            type: String,
+            default: ''
         }
     },
     methods: {
@@ -55,11 +55,11 @@ export default {
             this.$refs.inputEle.focus();
         },
         handleUnlock () {
-            if (Cookies.get('password') === this.password) {
+            if (CookiesUtil.User.getPassword() === this.password) {
                 this.avatorLeft = '0px';
                 this.inputLeft = '400px';
                 this.password = '';
-                this.$store.commit('unlock');
+                CookiesUtil.User.unlock();
                 this.$emit('on-unlock');
             } else {
                 this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可，这里没有做后端验证');
