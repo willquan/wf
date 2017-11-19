@@ -23,7 +23,6 @@ router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
     //手动输入地址时，from.name为null
-    console.log(CookiesUtil.User.isLocking() + '-----------------------' + to.name);
     if (CookiesUtil.User.isLocking() && to.name !== 'locking') {  // 如果当前是锁定状态，不管访问哪个路由，都跳转到锁屏界面
         next(false);
         router.replace({
