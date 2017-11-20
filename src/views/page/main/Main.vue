@@ -12,8 +12,8 @@
       </transition>
     </div>
     <transition name="sidebar-annimation">
-      <sidebar-menu v-if="!hideMenuText" :menuList="this.menuList" :iconSize="14" key="large-menu" :menuTheme="menuTheme"/>
-      <sidebar-menu-shrink v-else :menuList="this.menuList" key="small-menu" :menuTheme="menuTheme"/>
+      <sidebar-menu v-if="!hideMenuText" :menuList="this.menuList" :iconSize="14" key="large-menu" :menuTheme="menuTheme" />
+      <sidebar-menu-shrink v-else :menuList="this.menuList" key="small-menu" :menuTheme="menuTheme" />
     </transition>
   </div>
   <Row type="flex" align="middle" class="main-navbar" :style="{paddingLeft: sidebarWidth}">
@@ -21,7 +21,7 @@
     <Button :style="{transform: navIconRotate}" type="text" @click="toggleClick">
         <Icon type="navicon" size="32"></Icon>
       </Button>
-    <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
+    <breadcrumb-nav></breadcrumb-nav>
     </Col>
     <Col :span="12">
     <div class="nav-tools-bar">
@@ -33,9 +33,9 @@
       </span>
       <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
         <a href="javascript:void(0)">
-                <span class="main-user-name">{{ userName }}</span>
-                <Icon type="arrow-down-b"></Icon>
-            </a>
+          <span class="main-user-name">{{ userName }}</span>
+          <Icon type="arrow-down-b"></Icon>
+        </a>
         <DropdownMenu slot="list">
           <DropdownItem name="ownSpace">个人中心</DropdownItem>
           <DropdownItem name="loginout" divided>退出登录</DropdownItem>
@@ -44,23 +44,28 @@
     </div>
     </Col>
   </Row>
+  <div class="single-page-con" :style="{'left': sidebarWidth}">
+    <div class="single-page">
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
-import sidebarMenu from "../main_components/sidebarMenu.vue";
-import tagsPageOpened from "../main_components/tagsPageOpened.vue";
-import breadcrumbNav from "../main_components/breadcrumbNav.vue";
-import sidebarMenuShrink from "../main_components/sidebarMenuShrink.vue";
-import iconNav from "../main_components/iconNav.vue";
+import sidebarMenu from "@/views/components/sidebarMenu.vue";
+import breadcrumbNav from "@/views/components/breadcrumbNav.vue";
+import sidebarMenuShrink from "@/views/components/sidebarMenuShrink.vue";
+import iconNav from "@/views/components/iconNav.vue";
 import util from "@/libs/util.js";
-import { mapState} from 'vuex';
-import CookiesUtil from '@/libs/CookiesUtil.js'
+import { mapState } from "vuex";
+import CookiesUtil from "@/libs/CookiesUtil.js";
 
 export default {
   components: {
-    sidebarMenu,
-    tagsPageOpened,
+    'sidebarMenu': sidebarMenu,
     breadcrumbNav,
     sidebarMenuShrink,
     iconNav
@@ -71,27 +76,16 @@ export default {
       hideMenuText: false,
       userName: "张三李四王五赵六",
       isFullScreen: false,
-      lockScreenSize: 0,
-      currentPath: [{
-          name: "首页",
-          path: "",
-          title: "首页"
-        },
-        {
-          name: "组件",
-          path: "",
-          title: "组件"
-        }
-      ]
+      lockScreenSize: 0
     };
   },
-  mounted(){
+  mounted() {
     this.initLockScreen();
   },
   computed: {
     ...mapState({
-      'menuList': state=>state.menu.menuList,
-      'menuTheme': state=>state.menu.menuTheme
+      menuList: state => state.menu.menuList,
+      menuTheme: state => state.menu.menuTheme
     }),
     sidebarWidth() {
       return this.hideMenuText ? "60px" : "200px";
@@ -100,10 +94,10 @@ export default {
       return "rotateZ(" + this.hideMenuText ? "-90deg" : "0deg" + ")";
     },
     fullScreenIconName() {
-      return this.isFullScreen ? 'arrow-shrink' : 'arrow-expand';
+      return this.isFullScreen ? "arrow-shrink" : "arrow-expand";
     },
     fullScreenTip() {
-      return this.isFullScreen ? '退出全屏' : '全屏';
+      return this.isFullScreen ? "退出全屏" : "全屏";
     },
     showFullScreenBtn() {
       return window.navigator.userAgent.indexOf("MSIE") < 0;
@@ -139,47 +133,47 @@ export default {
       this.isFullScreen = !this.isFullScreen;
     },
     initLockScreen() {
-      let lockScreenBack = document.getElementById('lock_screen_back');
+      let lockScreenBack = document.getElementById("lock_screen_back");
       let x = document.body.clientWidth;
       let y = document.body.clientHeight;
       let r = Math.sqrt(x * x + y * y);
       let size = parseInt(r);
       this.lockScreenSize = size;
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         let x = document.body.clientWidth;
         let y = document.body.clientHeight;
         let r = Math.sqrt(x * x + y * y);
         let size = parseInt(r);
         this.lockScreenSize = size;
-        lockScreenBack.style.transition = 'all 0s';
-        lockScreenBack.style.width = lockScreenBack.style.height = size + 'px';
+        lockScreenBack.style.transition = "all 0s";
+        lockScreenBack.style.width = lockScreenBack.style.height = size + "px";
       });
-      lockScreenBack.style.width = lockScreenBack.style.height = size + 'px';
+      lockScreenBack.style.width = lockScreenBack.style.height = size + "px";
     },
     lockScreen() {
-      let lockScreenBack = document.getElementById('lock_screen_back');
-      lockScreenBack.style.transition = 'all 3s';
+      let lockScreenBack = document.getElementById("lock_screen_back");
+      lockScreenBack.style.transition = "all 3s";
       lockScreenBack.style.zIndex = 10000;
-      lockScreenBack.style.boxShadow = '0 0 0 ' + this.lockScreenSize + 'px #667aa6 inset';
+      lockScreenBack.style.boxShadow =
+        "0 0 0 " + this.lockScreenSize + "px #667aa6 inset";
       CookiesUtil.User.lock(this.$route.name);
       CookiesUtil.User.setPageBeforeLock(this.$route.name);
       setTimeout(() => {
-        lockScreenBack.style.transition = 'all 0s';
+        lockScreenBack.style.transition = "all 0s";
         this.$router.push({
-          name: 'locking'
+          name: "locking"
         });
       }, 800);
     },
     handleClickUserDropdown(name) {
-      if (name === 'ownSpace') {
-          util.openNewPage(this, 'ownspace_index');
-          this.$router.push({
-              name: 'ownspace_index'
-          });
-      } else if (name === 'loginout') {
+      if (name === "ownSpace") {
+        this.$router.push({
+          name: "ownspace_index"
+        });
+      } else if (name === "loginout") {
         this.clearUserCache();
         this.$router.push({
-            name: 'login'
+          name: "login"
         });
       }
     }

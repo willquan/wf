@@ -5,7 +5,7 @@ let util = {
 
 };
 util.title = function(title) {
-    title = title ? title + ' - Home' : '两票五防系统';
+    title = title ? title + ' - Home' : 'iview project';
     window.document.title = title;
 };
 

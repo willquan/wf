@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import unlock from './unlock.vue';
+import unlock from '@/views/components/unlock.vue';
 import CookiesUtil from '@/libs/CookiesUtil.js'
 
 export default {

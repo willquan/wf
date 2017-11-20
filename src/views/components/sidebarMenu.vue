@@ -18,7 +18,7 @@
                 <template v-for="child in item.children">
                     <MenuItem :name="child.name" :key="child.name">
                         <Icon :type="child.icon" :size="iconSize" :key="child.name"></Icon>
-                        <span class="layout-text" :key="child.name">{{ child.title }}</span>
+                        <span class="layout-text" :key="child.name">{{ child.meta.title }}</span>
                     </MenuItem>
                 </template>
             </Submenu>
@@ -47,15 +47,12 @@ export default {
     },
     methods: {
         changeMenu (active) {
-            if (active !== 'accesstest_index') {
-                util.openNewPage(this, active);
-                this.$router.push({
-                    name: active
-                });
-            }
+            this.$router.push({
+                name: active
+            });
         },
         itemTitle (item) {
-            return item.title;
+            return item.meta.title;
         }
     },
     watch: {

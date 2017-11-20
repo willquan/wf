@@ -53,14 +53,13 @@ export default {
     methods: {
         changeMenu (active) {
             if (active !== 'accesstest_index') {
-                util.openNewPage(this, active);
                 this.$router.push({
                     name: active
                 });
             }
         },
         itemTitle (item) {
-            return item.title;
+            return item.meta.title;
         }
     },
     watch: {

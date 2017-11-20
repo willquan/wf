@@ -1,6 +1,6 @@
 <template>
   <div>
-      home index
+     <p>home</p>
   </div>
 </template>
 
