@@ -70,7 +70,7 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'access', meta:{title: '权限管理'}, name: 'access_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
-            { path: 'department', meta:{title: '部门管理'}, name: 'department_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'department', meta:{title: '部门管理'}, name: 'department_index', component: resolve => { require(['@/views/page/department.vue'], resolve); } },
             { path: 'role', meta:{title: '角色管理'}, name: 'role_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
             { path: 'job', meta:{title: '岗位管理'}, name: 'job_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
         ]

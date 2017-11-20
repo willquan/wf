@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './app.vue';
 import store from './store';
 import {router} from './router/router.js';
-import '@/permission' // 权限
+import '@/permission'; // 权限
 
 new Vue({
     el: '#app',

@@ -18,9 +18,9 @@
   </div>
   <Row type="flex" align="middle" class="main-navbar" :style="{paddingLeft: sidebarWidth}">
     <Col :span="12">
-    <Button :style="{transform: navIconRotate}" type="text" @click="toggleClick">
-        <Icon type="navicon" size="32"></Icon>
-      </Button>
+    <Button class="hamburger" v-bind:class="{'is-active':hideMenuText}" type="text" @click="toggleClick">
+      <Icon type="navicon" size="32"></Icon>
+    </Button>
     <breadcrumb-nav></breadcrumb-nav>
     </Col>
     <Col :span="12">
@@ -89,9 +89,6 @@ export default {
     }),
     sidebarWidth() {
       return this.hideMenuText ? "60px" : "200px";
-    },
-    navIconRotate() {
-      return "rotateZ(" + this.hideMenuText ? "-90deg" : "0deg" + ")";
     },
     fullScreenIconName() {
       return this.isFullScreen ? "arrow-shrink" : "arrow-expand";
@@ -171,7 +168,7 @@ export default {
           name: "ownspace_index"
         });
       } else if (name === "loginout") {
-        this.clearUserCache();
+        CookiesUtil.User.clearUserCache();
         this.$router.push({
           name: "login"
         });
