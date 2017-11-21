@@ -51,7 +51,24 @@ export const otherRouter = {
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/page/own-space/own-space.vue'], resolve); } },
     ]
 };
-export const appRouter = [
+
+export const constantRouterMap = [
+    loginRouter,
+    otherRouter,
+    locking,
+    page500,
+    page401,
+    page404
+];
+
+// 路由配置
+export const RouterConfig = {
+    mode: 'history',
+    routes: constantRouterMap
+};
+export const router = new VueRouter(RouterConfig);
+
+export const asyncRouterMap = [
     {
         path: '/home',
         icon: 'key',
@@ -76,19 +93,3 @@ export const appRouter = [
         ]
     }
 ];
-export const routers = [
-    loginRouter,
-    otherRouter,
-    locking,
-    ...appRouter,
-    page500,
-    page401,
-    page404
-];
-
-// 路由配置
-export const RouterConfig = {
-    mode: 'history',
-    routes: routers
-};
-export const router = new VueRouter(RouterConfig);

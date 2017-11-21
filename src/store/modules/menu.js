@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { appRouter } from '@/router/router.js';
+import store from '@/store'
 
 Vue.use(Vuex);
 
@@ -12,7 +12,7 @@ const menu = {
     },
     mutations: {
         updateMenulist(state) {
-            state.menuList = appRouter;
+            state.menuList = [];
         }
     }
 };

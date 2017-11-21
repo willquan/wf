@@ -2,15 +2,16 @@ import user from './modules/user';
 import menu from './modules/menu';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import permission from './modules/permission'
+import getters from './getters'
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-       
+       isLocking: false
     },
-    getters: {
-        
-    },
+    getters,
     mutations: {
        
     },
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     },
     modules: {
         user,
-        menu
+        menu,
+        permission
     }
 });
 

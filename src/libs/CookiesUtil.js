@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-
+const TokenKey = 'Admin-Token'
 const CookiesUtil = {
     User: {
         getUserName() {
@@ -19,7 +19,7 @@ const CookiesUtil = {
         },
         isLocking() {
             return Cookies.get('locking') === '1';
-        }, 
+        },
         setPageBeforeLock(pageName) {
             Cookies.set('pageBeforeLock', pageName);
         },
@@ -46,6 +46,19 @@ const CookiesUtil = {
             Cookies.remove('password');
             Cookies.remove('access');
             localStorage.clear();
+        }
+    },
+    Token: {
+        getToken() {
+            return Cookies.get(TokenKey)
+        },
+
+        setToken(token) {
+            return Cookies.set(TokenKey, token)
+        },
+
+        removeToken() {
+            return Cookies.remove(TokenKey)
         }
     }
 }

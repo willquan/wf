@@ -27,7 +27,7 @@
                             </Input>
                         </FormItem>
                         <FormItem>
-                            <Button @click="handleSubmit" type="primary" long>登录</Button>
+                            <Button @click="handleSubmit" :loading="isLoading" type="primary" long>登录</Button>
                         </FormItem>
                     </Form>
                     <p class="login-tip">输入任意用户名和密码即可</p>
@@ -55,24 +55,24 @@ export default {
                 password: [
                     { required: true, message: '密码不能为空', trigger: 'blur' }
                 ]
-            }
+            },
+            isLoading: false
         };
     },
     methods: {
         handleSubmit () {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
-                    CookiesUtil.User.saveUserName(this.form.userName);
-                    CookiesUtil.User.savePassword(this.form.password);
-                    CookiesUtil.User.setAvator('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    if (this.form.userName === 'admin') {
-                        CookiesUtil.User.saveAccess(0);
-                    } else {
-                       CookiesUtil.User.saveAccess(1);
-                    }
-                    this.$router.replace({
-                        name: 'home_index'
-                    });
+                    this.isLoading = true
+                    this.$store.dispatch('Login', this.form).then(() => {
+                        this.isLoading = false
+                        this.$router.push({name: 'home_index'})
+                    }).catch(() => {
+                        this.isLoading = false
+                    })
+                } else {
+                    console.log('请检查用户名密码是否正确')
+                    return false
                 }
             });
         }
