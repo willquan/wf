@@ -21,8 +21,9 @@ router.beforeEach((to, from, next) => {
     } else if (!isLocking && to.name === 'locking') {//如果没有锁屏，不允许手动跳转到锁屏界面
         next(false);
     } else if(getToken()) {
-        if (to.login === 'login') {
-            next({name: 'home_index'})
+        if (to.name === 'login') {
+            next({name: 'home_index'});
+            iView.LoadingBar.finish();
         } else {
             if (store.getters.roles.length === 0) { //获取角色信息
                 store.dispatch('GetInfo').then(res => {

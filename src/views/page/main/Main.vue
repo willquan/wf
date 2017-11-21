@@ -168,9 +168,10 @@ export default {
           name: "ownspace_index"
         });
       } else if (name === "loginout") {
-        CookiesUtil.User.clearUserCache();
-        this.$router.push({
-          name: "login"
+        this.$store.dispatch("LogOut").then(resp => {
+          this.$router.push({
+            name: "login"
+          });
         });
       }
     }

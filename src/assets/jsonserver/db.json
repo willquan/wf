@@ -1,0 +1,20 @@
+{
+    "login": {
+        "code": 20000,
+        "data": {
+            "token": "sldjfsljfdsljfslkd123123"
+        }
+    },
+    "info": {
+        "code": 20000,
+        "data": {
+            "role": "admin",
+            "name": "张三",
+            "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
+        }
+    },
+    "logout": {
+        "code": 20000,
+        "data": {}
+    }
+}
