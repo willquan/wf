@@ -8,40 +8,41 @@ import { getToken } from '@/libs/auth' // 验权
 
 Vue.use(iView);
 
+function nextStep(to, from, next) {
+    const isLocking = store.state.lock.isLocking;
+    if (to.name === 'login') {  //免登录，自动跳转到主页面
+        next({name: 'home_index'});
+        iView.LoadingBar.finish();
+    } else if (isLocking && to.name == 'locking') {
+        next();
+    } else if(isLocking && to.name !== 'locking') {
+        next(false);
+        iView.LoadingBar.finish();
+    } else if (!isLocking && to.name === 'locking') {
+        //如果没有锁屏，不允许手动跳转到锁屏界面
+        // 如果当前是锁定状态，访问非锁屏路由，不跳转
+        next({name: 'home_index'});
+        iView.LoadingBar.finish();
+    } else {
+        next();
+    }
+}
+
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
-    const isLocking = store.state.isLocking;
-    
-    if(isLocking && to.name !== 'locking') { // 如果当前是锁定状态，不管访问哪个路由，都跳转到锁屏界面
-        next(false);
-        router.replace({
-            name: 'locking'
-        });
-    } else if (!isLocking && to.name === 'locking') {//如果没有锁屏，不允许手动跳转到锁屏界面
-        next(false);
-    } else if(getToken()) {
-        if (to.name === 'login') {
-            next({name: 'home_index'});
-            iView.LoadingBar.finish();
+    if(getToken()) {
+        const userInfoLoaded = store.getters.roles.length != 0;
+        if(!userInfoLoaded) {
+            store.dispatch('GetInfo').then(res => {
+               nextStep(to, from, next); 
+            })
         } else {
-            if (store.getters.roles.length === 0) { //获取角色信息
-                store.dispatch('GetInfo').then(res => {
-                    const roles = res.data.role
-                    store.dispatch('GenerateRoutes', {
-                        roles
-                    }).then(() => {
-                        router.addRoutes(store.getters.addRouters)
-                        next({ ...to })
-                    })
-                })
-            } else { //如果已经存在用户信息则直接跳转
-                next()
-            }
+            nextStep(to, from, next);
         }
-    } else { //没有授权的直接跳转到登录页面
+    } else { //没有登录，或者退出登录
         if(to.name === 'login') next();
-        else next({name: 'login'})
+        else next({name: 'login'});
     }
 });
 

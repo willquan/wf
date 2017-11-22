@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import CookiesUtil from '@/libs/CookiesUtil.js'
-
+import { unlock } from '@/api/login'
 export default {
     name: 'Unlock',
     data () {
@@ -55,15 +54,14 @@ export default {
             this.$refs.inputEle.focus();
         },
         handleUnlock () {
-            if (CookiesUtil.User.getPassword() === this.password) {
+            unlock(this.password).then((data)=>{
                 this.avatorLeft = '0px';
                 this.inputLeft = '400px';
                 this.password = '';
-                CookiesUtil.User.unlock();
                 this.$emit('on-unlock');
-            } else {
-                this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可，这里没有做后端验证');
-            }
+            }).catch(()=>{
+                this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可');
+            });
         },
         unlockMousedown () {
             this.$refs.unlockBtn.className = 'unlock-btn click-unlock-btn';

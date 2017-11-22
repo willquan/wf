@@ -25,3 +25,13 @@ export function logout() {
     method: 'get'
   })
 }
+
+export function unlock(password) {
+  return fetch({
+    url: '/user/unlock',
+    method: 'get',
+    data: {
+      password
+    }
+  })
+}

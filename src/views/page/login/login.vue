@@ -38,9 +38,6 @@
 </template>
 
 <script>
-
-import CookiesUtil from '@/libs/CookiesUtil.js'
-
 export default {
     data () {
         return {
@@ -64,14 +61,14 @@ export default {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     this.isLoading = true
-                    this.$store.dispatch('Login', this.form).then(() => {
+                    this.$store.dispatch('Login', this.form).then((response) => {
                         this.isLoading = false
                         this.$router.push({name: 'home_index'})
-                    }).catch(() => {
+                    }).catch((error) => {
                         this.isLoading = false
                     })
                 } else {
-                    console.log('请检查用户名密码是否正确')
+                    // console.log('请检查用户名密码是否正确')
                     return false
                 }
             });

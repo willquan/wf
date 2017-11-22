@@ -8,7 +8,6 @@
 
 <script>
 import unlock from '@/views/components/unlock.vue';
-import CookiesUtil from '@/libs/CookiesUtil.js'
 
 export default {
     components: {
@@ -17,7 +16,7 @@ export default {
     data () {
         return {
             showUnlock: false,
-            avatorPath: CookiesUtil.User.getAvator()
+            avatorPath: ""
         };
     },
     methods: {
@@ -26,8 +25,9 @@ export default {
             this.showUnlock = false;
             lockScreenBack.style.zIndex = -1;
             lockScreenBack.style.boxShadow = '0 0 0 0 #667aa6 inset';
+            this.$store.commit('unlock');
             this.$router.replace({
-                name: CookiesUtil.User.getPageBeforeLock()  // 解锁之后跳转到锁屏之前的页面
+                name: this.$store.state.lock.pageBeforeLock  // 解锁之后跳转到锁屏之前的页面
             });
         }
     },

@@ -61,7 +61,6 @@ import sidebarMenuShrink from "@/views/components/sidebarMenuShrink.vue";
 import iconNav from "@/views/components/iconNav.vue";
 import util from "@/libs/util.js";
 import { mapState } from "vuex";
-import CookiesUtil from "@/libs/CookiesUtil.js";
 
 export default {
   components: {
@@ -153,8 +152,7 @@ export default {
       lockScreenBack.style.zIndex = 10000;
       lockScreenBack.style.boxShadow =
         "0 0 0 " + this.lockScreenSize + "px #667aa6 inset";
-      CookiesUtil.User.lock(this.$route.name);
-      CookiesUtil.User.setPageBeforeLock(this.$route.name);
+      this.$store.commit('lock', this.$route.name)
       setTimeout(() => {
         lockScreenBack.style.transition = "all 0s";
         this.$router.push({
