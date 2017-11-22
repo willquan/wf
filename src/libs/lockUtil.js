@@ -9,10 +9,10 @@ const lockUtil = {
         Cookies.set('pageBeforeLock', '');
     },
     isLocking() {
-        return Cookies.get("locking");
+        return Cookies.get("locking") == '1';
     },
     getPageBeforeLock() {
-        return Cookies.get("pageBeforeLock");
+        return Cookies.get("pageBeforeLock") == undefined ? '' : Cookies.get("pageBeforeLock");
     }
 }
 export default lockUtil;

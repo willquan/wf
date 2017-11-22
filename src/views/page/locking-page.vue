@@ -16,7 +16,7 @@ export default {
     data () {
         return {
             showUnlock: false,
-            avatorPath: ""
+            avatorPath: this.$store.getters.avatar
         };
     },
     methods: {
@@ -25,9 +25,10 @@ export default {
             this.showUnlock = false;
             lockScreenBack.style.zIndex = -1;
             lockScreenBack.style.boxShadow = '0 0 0 0 #667aa6 inset';
+            const pageBeforeLock = this.$store.state.lock.pageBeforeLock;
             this.$store.commit('unlock');
             this.$router.replace({
-                name: this.$store.state.lock.pageBeforeLock  // 解锁之后跳转到锁屏之前的页面
+                name: pageBeforeLock ? pageBeforeLock : 'login'  // 解锁之后跳转到锁屏之前的页面
             });
         }
     },

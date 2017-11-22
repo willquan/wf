@@ -63,7 +63,7 @@ export default {
                     this.isLoading = true
                     this.$store.dispatch('Login', this.form).then((response) => {
                         this.isLoading = false
-                        this.$router.push({name: 'home_index'})
+                        this.$router.replace({name: 'home_index'})
                     }).catch((error) => {
                         this.isLoading = false
                     })

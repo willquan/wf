@@ -11,6 +11,7 @@ const lock = {
     mutations: {
         lock(state, page) {
             state.isLocking = 1;
+            state.pageBeforeLock = page;
             lockUtil.lock(page)
         },
         unlock(state) {

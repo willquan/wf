@@ -32,7 +32,8 @@ export default {
         getBreadcrumb() {
             let matched = this.$route.matched.filter(item => item.name);
             this.levelList = [];
-            matched.forEach((element, index) => {
+            if(matched.length == 2) { //防止访问一级目录报错
+                matched.forEach((element, index) => {
                 const path = (index == 0 ? "" : element.path);
                 this.levelList.push({
                     name: element.name,
@@ -45,6 +46,7 @@ export default {
                 const i = this.levelList[1];
                 this.levelList=[];
                 this.levelList.push(i);
+            }
             }
         }
     },

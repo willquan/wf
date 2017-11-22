@@ -155,7 +155,7 @@ export default {
       this.$store.commit('lock', this.$route.name)
       setTimeout(() => {
         lockScreenBack.style.transition = "all 0s";
-        this.$router.push({
+        this.$router.replace({
           name: "locking"
         });
       }, 800);

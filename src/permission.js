@@ -9,20 +9,18 @@ import { getToken } from '@/libs/auth' // 验权
 Vue.use(iView);
 
 function nextStep(to, from, next) {
-    const isLocking = store.state.lock.isLocking;
-    if (to.name === 'login') {  //免登录，自动跳转到主页面
-        next({name: 'home_index'});
-        iView.LoadingBar.finish();
-    } else if (isLocking && to.name == 'locking') {
+    const isLocking = store.state.lock.isLocking == 1;
+    if (isLocking && to.name == 'locking') {
         next();
     } else if(isLocking && to.name !== 'locking') {
         next(false);
-        iView.LoadingBar.finish();
+        router.replace({name: 'locking'});
     } else if (!isLocking && to.name === 'locking') {
-        //如果没有锁屏，不允许手动跳转到锁屏界面
-        // 如果当前是锁定状态，访问非锁屏路由，不跳转
-        next({name: 'home_index'});
-        iView.LoadingBar.finish();
+        next(false);
+        router.replace({name: 'home_index'});
+    } else if (to.name === 'login') {  //免登录，自动跳转到主页面
+        next(false);
+        router.replace({name: 'home_index'});
     } else {
         next();
     }
@@ -42,7 +40,11 @@ router.beforeEach((to, from, next) => {
         }
     } else { //没有登录，或者退出登录
         if(to.name === 'login') next();
-        else next({name: 'login'});
+        else {
+            next(false);
+            router.replace({name: 'login'});
+            iView.LoadingBar.finish();
+        }
     }
 });
 
