@@ -28,10 +28,11 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
   response => {
-  /**
-  * code为非20000是抛错 可结合自己业务进行修改
-  */
+    /**
+    * code为非20000是抛错 可结合自己业务进行修改
+    */
     const res = response.data
+    
     if (res.code !== 1) {
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -49,7 +50,7 @@ service.interceptors.response.use(
       }
       return Promise.reject(res.message);
     } else {
-      return response.data
+      return response.data.data;
     }
   },
   error => {

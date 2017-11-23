@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <Menu ref="sideMenu" :active-name="$route.name" :open-names="openedSubmenuArr" :theme="menuTheme" width="auto" @on-select="changeMenu">
+    <Menu ref="sideMenu" :active-name="$route.name" :open-names="$route.path.split('/')" :theme="menuTheme" width="auto" @on-select="changeMenu">
         <template v-for="item in menuList">
             <MenuItem v-if="item.children.length<=1" :name="item.children[0].name" :key="item.path">
                 <Icon :type="item.icon" :size="iconSize" :key="item.path"></Icon>
@@ -32,8 +32,9 @@ import Vue from 'vue';
 export default {
     data () {
         return {
-            openedSubmenuArr: this.$store.state.openedSubmenuArr
         };
+    },
+    mounted(){
     },
     name: 'sidebarMenu',
     props: {
@@ -54,27 +55,6 @@ export default {
         itemTitle (item) {
             return item.meta.title;
         }
-    },
-    watch: {
-        '$route' (to) {
-            localStorage.currentPageName = to.name;
-        },
-        currentPageName () {
-            this.openedSubmenuArr = this.$store.state.openedSubmenuArr;
-            this.$nextTick(() => {
-                if (this.$refs.sideMenu) {
-                    this.$refs.sideMenu.updateOpened();
-                }
-            });
-        }
-    },
-    updated () {
-        this.$nextTick(() => {
-            if (this.$refs.sideMenu) {
-                this.$refs.sideMenu.updateOpened();
-            }
-        });
     }
-
 };
 </script>

@@ -12,8 +12,8 @@
       </transition>
     </div>
     <transition name="sidebar-annimation">
-      <sidebar-menu v-if="!hideMenuText" :menuList="this.menuList" :iconSize="14" key="large-menu" :menuTheme="menuTheme" />
-      <sidebar-menu-shrink v-else :menuList="this.menuList" key="small-menu" :menuTheme="menuTheme" />
+      <sidebar-menu v-if="!hideMenuText && menuList.length>0" :menuList="menuList" :iconSize="14" key="large-menu" :menuTheme="menuTheme" />
+      <sidebar-menu-shrink v-else :menuList="menuList" key="small-menu" :menuTheme="menuTheme" />
     </transition>
   </div>
   <Row type="flex" align="middle" class="main-navbar" :style="{paddingLeft: sidebarWidth}">
@@ -61,6 +61,8 @@ import sidebarMenuShrink from "@/views/components/sidebarMenuShrink.vue";
 import iconNav from "@/views/components/iconNav.vue";
 import util from "@/libs/util.js";
 import { mapState } from "vuex";
+import {appRouter} from '@/router/router';
+import {getMenu} from '@/api/menu'
 
 export default {
   components: {
@@ -73,18 +75,19 @@ export default {
     return {
       currentPageName: "",
       hideMenuText: false,
-      userName: "张三李四王五赵六",
       isFullScreen: false,
-      lockScreenSize: 0
+      lockScreenSize: 0,
+      menuList: []
     };
   },
   mounted() {
     this.initLockScreen();
+    this.initMenu();
   },
   computed: {
     ...mapState({
-      menuList: state => state.menu.menuList,
-      menuTheme: state => state.menu.menuTheme
+      menuTheme: state => state.menu.menuTheme,
+      userName: state => state.user.name
     }),
     sidebarWidth() {
       return this.hideMenuText ? "60px" : "200px";
@@ -100,6 +103,39 @@ export default {
     }
   },
   methods: {
+    initMenu(){
+      getMenu().then((data) => {
+        this.menuList = this.filterRoutes(appRouter, data.menus);
+      }).catch(error => {
+      });
+    },
+    filterRoutes(routers, menus) {
+      var targetRoutes = [];
+      routers.forEach(router => {
+        menus.forEach(menu => {
+          if(router.name == menu.name) {
+            targetRoutes.push(router);
+            if(router.children && menu.children) {
+              router.children = this.filterRoutes(router.children, menu.children);
+            }
+          }
+        });
+     });
+     return targetRoutes;
+    },
+    handleClickUserDropdown(name) {
+      if (name === "ownSpace") {
+        this.$router.push({
+          name: "ownspace_index"
+        });
+      } else if (name === "loginout") {
+        this.$store.dispatch("LogOut").then(resp => {
+          this.$router.push({
+            name: "login"
+          });
+        });
+      }
+    },
     toggleClick() {
       this.hideMenuText = !this.hideMenuText;
     },
@@ -159,19 +195,6 @@ export default {
           name: "locking"
         });
       }, 800);
-    },
-    handleClickUserDropdown(name) {
-      if (name === "ownSpace") {
-        this.$router.push({
-          name: "ownspace_index"
-        });
-      } else if (name === "loginout") {
-        this.$store.dispatch("LogOut").then(resp => {
-          this.$router.push({
-            name: "login"
-          });
-        });
-      }
     }
   }
 };

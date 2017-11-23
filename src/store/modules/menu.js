@@ -5,13 +5,10 @@ Vue.use(Vuex);
 
 const menu = {
     state: {
-        menuList: [],
         menuTheme: 'dark'
     },
     mutations: {
-        updateMenulist(state) {
-            state.menuList = [];
-        }
+        
     }
 };
 

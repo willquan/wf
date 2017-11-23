@@ -46,6 +46,7 @@ export const page500 = {
 export const otherRouter = {
     path: '/',
     name: 'otherRouter',
+    redirect: {name: 'home_index'},
     component: Main,
     children: [
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/page/own-space/own-space.vue'], resolve); } },
@@ -54,7 +55,8 @@ export const otherRouter = {
 export const appRouter = [
     {
         path: '/home',
-        icon: 'key',
+        redirect: {name: 'home_index'},
+        icon: 'home',
         name: 'home',
         meta: {title: '首页'},
         component: Main,
@@ -64,15 +66,17 @@ export const appRouter = [
     },
     {
         path: '/manager',
-        icon: 'key',
+        redirect: {name: 'home_index'},
+        icon: 'briefcase',
         name: 'manager',
         meta: {title: '系统管理'},
         component: Main,
         children: [
-            { path: 'access', meta:{title: '权限管理'}, name: 'access_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
-            { path: 'department', meta:{title: '部门管理'}, name: 'department_index', component: resolve => { require(['@/views/page/department.vue'], resolve); } },
-            { path: 'role', meta:{title: '角色管理'}, name: 'role_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
-            { path: 'job', meta:{title: '岗位管理'}, name: 'job_index', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'access', meta:{title: '权限管理'}, name: 'access', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department.vue'], resolve); } },
+            { path: 'role', meta:{title: '角色管理'}, name: 'role', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'job', meta:{title: '岗位管理'}, name: 'job', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'employee', meta:{title: '人员管理'}, name: 'employee', component: resolve => { require(['@/views/page/employee.vue'], resolve); } },
         ]
     }
 ];

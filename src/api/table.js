@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch'
+import fetch from '@/libs/fetch'
 
 export function getList(params) {
   return fetch({

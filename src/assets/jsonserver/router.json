@@ -1,3 +1,6 @@
 {
-    "/user/*" : "/$1"
+    "/user/*" : "/$1",
+    "/main/*" : "/$1",
+    "/manager/employee/add" : "/employeeAdd",
+    "/manager/employee/list" : "/employeeList"
 }

@@ -41,14 +41,10 @@ export default {
     },
     data () {
         return {
-            currentPageName: this.$route.name,
-            openedSubmenuArr: this.$store.state.openedSubmenuArr
         };
     },
     computed: {
-        tagsList () {
-            return this.$store.state.tagsList;
-        }
+       
     },
     methods: {
         changeMenu (active) {
@@ -60,12 +56,6 @@ export default {
         },
         itemTitle (item) {
             return item.meta.title;
-        }
-    },
-    watch: {
-        '$route' (to) {
-            this.currentPageName = to.name;
-            localStorage.currentPageName = to.name;
         }
     }
 };
