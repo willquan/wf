@@ -23,7 +23,6 @@ export default {
         }
     },
     mounted: function() {
-        this.currentTab = this.tabs[0].name;
         let trace = this.currentTab;
         this.tabTrace.push(trace);
         
@@ -33,7 +32,7 @@ export default {
     },
     methods: {
         tabChanged(name) {
-           this.currentTab = name;
+            this.$emit('update:currentTab', name)
         },
         handleTabRemove(name) {
             this.tabs.forEach(_tab => {
@@ -47,28 +46,16 @@ export default {
                 let rightOne = this.tabTrace[traceIndex + 1];
                 if(leftOne) this.currentTab = leftOne;
                 else if(rightOne) this.currentTab = rightOne;
-                else this.currentTab = '';
+                else this.$emit('update:currentTab', tabs[0].name);
             }
             this.tabTrace = this.tabTrace.filter(trace => {return trace != name});
         }
     },
     watch: {
-        tabs: {
-            handler(newVal, oldVal) {
-               this.onlyForWatch.forEach((isShow, index) => {
-                   const openedTab = newVal[index]
-                   // 只关心打开的情况
-                   if(!isShow && openedTab.show) {
-                        this.currentTab = openedTab.name
-                        if(!this.tabTrace.some(trace=>{ return trace == this.currentTab})) this.tabTrace.push(openedTab)
-                   }
-                   //更新状态
-                   if(isShow != openedTab.show) {
-                       this.onlyForWatch[index] = openedTab.show;
-                   }
-               })
-            },
-            deep: true
+        currentTab: function(newVal, oldVal) {
+            this.tabs.forEach(_tab => {
+                if(_tab.name == newVal && !_tab.show) _tab.show = true;
+            });
         }
     }
 }
