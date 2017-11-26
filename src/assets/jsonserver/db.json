@@ -28,40 +28,38 @@
     "data": {}
   },
   "menu": {
-    "code": 1,
+    "code": 401,
     "message": "获取菜单失败",
-    "data": {
-      "menus": [
-        {
-          "name": "home",
-          "children": [
-            {
-              "name": "home_index"
-            }
-          ]
-        },
-        {
-          "name": "manager",
-          "children": [
-            {
-              "name": "access"
-            },
-            {
-              "name": "department"
-            },
-            {
-              "name": "role"
-            },
-            {
-              "name": "job"
-            },
-            {
-              "name": "employee"
-            }
-          ]
-        }
-      ]
-    }
+    "data": [
+      {
+        "name": "home",
+        "children": [
+          {
+            "name": "home_index"
+          }
+        ]
+      },
+      {
+        "name": "manager",
+        "children": [
+          {
+            "name": "access"
+          },
+          {
+            "name": "department"
+          },
+          {
+            "name": "role"
+          },
+          {
+            "name": "job"
+          },
+          {
+            "name": "employee"
+          }
+        ]
+      }
+    ]
   },
   "users": [
     {

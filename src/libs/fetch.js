@@ -3,6 +3,7 @@ import iView from 'iview';
 import store from '../store'
 import { getToken } from '@/libs/auth'
 import env from '../config/env';
+import { router } from '@/router/router.js';
 
 const ajaxUrl = env === 'development' ? 'http://localhost:3000' :
                 env === 'production' ? 'https://www.url.com' : 'https://debug.url.com';
@@ -21,7 +22,6 @@ service.interceptors.request.use(config => {
   return config
 }, error => {
   // Do something with request error
-  console.log(error) // for debug
   Promise.reject(error)
 })
 
@@ -47,6 +47,8 @@ service.interceptors.response.use(
         });
       } else if(res.code == 0) {
         iView.Message.error(res.message);
+      } else if(res.code == 401) {//没有权限
+        router.push({name: "error_401"});
       }
       return Promise.reject(res.message);
     } else {

@@ -105,7 +105,7 @@ export default {
   methods: {
     initMenu(){
       getMenu().then((data) => {
-        this.menuList = this.filterRoutes(appRouter, data.menus);
+        this.menuList = this.filterRoutes(appRouter, data);
       }).catch(error => {
       });
     },
