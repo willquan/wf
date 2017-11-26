@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import {postEmployee, modifyEmployee, getDepartments, getPositions, getRoles, getEmployeeById} from '@/api/employee'
+import {addEmployee, modifyEmployee, getDepartments, getPositions, getRoles, getEmployeeById} from '@/api/employee'
 
 export default {
     name: 'employeeForm',
@@ -81,11 +81,6 @@ export default {
         getRoles().then(data => {
             this.roles = data;
         });
-        if(this.userId != 0) {
-            getEmployeeById(this.userId).then(data => {
-                if(data.length > 0) this.form = data[0];
-            });
-        }
     },
     data() {
         return {
@@ -148,6 +143,7 @@ export default {
                             this.$refs.addEmployeeForm.resetFields();
                         }).catch(e => {
                             this.isLoading = false;
+                            console.log(e);
                         });
                     } else {
                         //修改用户
@@ -164,6 +160,17 @@ export default {
                     return false
                 }
             });
+        }
+    },
+    watch: {
+        userId: function(newUserId) {
+            alert(newUserId)
+            this.$refs.addEmployeeForm.resetFields();
+            if(newUserId != 0) {
+                getEmployeeById(newUserId).then(data => {
+                    this.form = data;
+                });
+            }
         }
     }
 }

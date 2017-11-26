@@ -28,7 +28,7 @@
     "data": {}
   },
   "menu": {
-    "code": 401,
+    "code": 1,
     "message": "获取菜单失败",
     "data": [
       {
@@ -85,6 +85,18 @@
       "positionId": 1,
       "roleId": 1,
       "id": 2
+    },
+    {
+      "username": "zhaoliu",
+      "pwd": "zhaoliu",
+      "worknum": "32232",
+      "phone": "2323",
+      "name": "赵六",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 2,
+      "roleId": 7,
+      "id": 3
     }
   ],
   "departments": [

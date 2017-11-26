@@ -39,18 +39,15 @@ export function getRoles() {
 
 export function getEmployeeList() {
   return fetch({
-    url: '/users',
+    url: '/users?_expand=department&_expand=role&_expand=position',
     method: 'get'
   })
 }
 
 export function getEmployeeById(id) {
   return fetch({
-    url: '/users',
-    method: 'get',
-    data: {
-      id : id
-    }
+    url: '/users/' + id,
+    method: 'get'
   })
 }
 
