@@ -63,9 +63,156 @@
       ]
     }
   },
-  "employeeAdd": {
-    "username": "sdsd",
-    "pwd": "ssssss",
-    "id": 26091
-  }
+  "users": [
+    {
+      "username": "lisa",
+      "pwd": "123",
+      "worknum": "123",
+      "phone": "15010801461",
+      "name": "李四",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 15,
+      "roleId": 1,
+      "id": 1
+    },
+    {
+      "username": "wangwu",
+      "pwd": "wangwu",
+      "worknum": "222",
+      "phone": "22222",
+      "name": "王五",
+      "sex": "man",
+      "departmentId": 2,
+      "positionId": 1,
+      "roleId": 1,
+      "id": 2
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "运行部"
+    },
+    {
+      "id": 2,
+      "name": "检修部"
+    }
+  ],
+  "positions": [
+    {
+      "id": 1,
+      "name": "值长"
+    },
+    {
+      "id": 2,
+      "name": "副值长"
+    },
+    {
+      "id": 3,
+      "name": "集控主值"
+    },
+    {
+      "id": 4,
+      "name": "集控副值"
+    },
+    {
+      "id": 5,
+      "name": "巡操员"
+    },
+    {
+      "id": 6,
+      "name": "学员"
+    },
+    {
+      "id": 7,
+      "name": "机务主管"
+    },
+    {
+      "id": 8,
+      "name": "机务班长"
+    },
+    {
+      "id": 9,
+      "name": "机务主责"
+    },
+    {
+      "id": 10,
+      "name": "机务技术员"
+    },
+    {
+      "id": 11,
+      "name": "热控主管"
+    },
+    {
+      "id": 12,
+      "name": "热控班长"
+    },
+    {
+      "id": 13,
+      "name": "热控主责"
+    },
+    {
+      "id": 14,
+      "name": "热控技术员"
+    },
+    {
+      "id": 15,
+      "name": "电气主管"
+    },
+    {
+      "id": 16,
+      "name": "电气班长"
+    },
+    {
+      "id": 17,
+      "name": "电气主责"
+    },
+    {
+      "id": 18,
+      "name": "电气技术员"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "值长"
+    },
+    {
+      "id": 2,
+      "name": "操作人"
+    },
+    {
+      "id": 3,
+      "name": "监护人"
+    },
+    {
+      "id": 4,
+      "name": "值班负责人"
+    },
+    {
+      "id": 5,
+      "name": "工作票签收人"
+    },
+    {
+      "id": 6,
+      "name": "工作票许可人"
+    },
+    {
+      "id": 7,
+      "name": "签发人"
+    },
+    {
+      "id": 8,
+      "name": "工作负责人"
+    },
+    {
+      "id": 9,
+      "name": "工作班成员"
+    },
+    {
+      "id": 10,
+      "name": "工作联系人"
+    }
+  ]
 }

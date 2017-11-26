@@ -1,25 +1,35 @@
 <template>
-    <Tabs type="card">
-        <TabPane v-for="tab in tabs" :key="tab" :label="'标签' + tab">
-            <employee-form ></employee-form>
-        </TabPane>
-        <Button type="ghost" @click="handleTabsAdd" size="small" slot="extra">增加</Button>
-    </Tabs>
+    <Form :model="formLeft" label-position="left" :label-width="100">
+        <FormItem label="Title">
+            <Input v-model="formLeft.input1"></Input>
+        </FormItem>
+        <FormItem label="Title name">
+            <Input v-model="formLeft.input2"></Input>
+        </FormItem>
+        <FormItem label="Aligned title">
+            <Input v-model="formLeft.input3"></Input>
+        </FormItem>
+    </Form>
 </template>
 <script>
-import employeeForm from '../employee/employeeForm'
     export default {
-        components: {
-        employeeForm
-    },
         data () {
             return {
-                tabs: 2
-            }
-        },
-        methods: {
-            handleTabsAdd () {
-                this.tabs ++;
+                formLeft: {
+                    input1: '',
+                    input2: '',
+                    input3: ''
+                },
+                formRight: {
+                    input1: '',
+                    input2: '',
+                    input3: ''
+                },
+                formTop: {
+                    input1: '',
+                    input2: '',
+                    input3: ''
+                }
             }
         }
     }
