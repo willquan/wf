@@ -37,11 +37,20 @@ export function getRoles() {
   })
 }
 
-export function getEmployeeList() {
-  return fetch({
-    url: '/users?_expand=department&_expand=role&_expand=position',
-    method: 'get'
-  })
+export function getList(_params) {
+  return fetch.get('/users?_expand=department&_expand=role&_expand=position', {
+    params: {
+      ..._params
+    }
+  });
+}
+
+export function getListTotal(_params) {
+  return fetch.get('/users/total', {
+    params: {
+      //..._params
+    }
+  });
 }
 
 export function getEmployeeById(id) {
@@ -49,5 +58,15 @@ export function getEmployeeById(id) {
     url: '/users/' + id,
     method: 'get'
   })
+}
+
+export function deleteByIds(ids) {
+  return fetch.delete({
+    url: '/users'
+  });
+}
+
+export function deleteById(id) {
+  return fetch.delete('/users/' + id);
 }
 

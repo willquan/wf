@@ -71,7 +71,7 @@ export default {
             default: 0
         }
     },
-    created: function() {
+    mounted: function() {
         getDepartments().then(data => {
             this.departments = data;
         });
@@ -81,6 +81,7 @@ export default {
         getRoles().then(data => {
             this.roles = data;
         });
+        this.getData(this.userId);
     },
     data() {
         return {
@@ -160,17 +161,19 @@ export default {
                     return false
                 }
             });
+        },
+        getData(uId){
+            this.$refs.addEmployeeForm.resetFields();
+            if(uId != 0) {
+                getEmployeeById(uId).then(data => {
+                    this.form = data;
+                });
+            }
         }
     },
     watch: {
         userId: function(newUserId) {
-            alert(newUserId)
-            this.$refs.addEmployeeForm.resetFields();
-            if(newUserId != 0) {
-                getEmployeeById(newUserId).then(data => {
-                    this.form = data;
-                });
-            }
+            this.getData(newUserId)
         }
     }
 }

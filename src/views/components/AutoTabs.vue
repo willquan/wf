@@ -44,8 +44,8 @@ export default {
                 let traceIndex = this.tabTrace.indexOf(name);
                 let leftOne = this.tabTrace[traceIndex - 1];
                 let rightOne = this.tabTrace[traceIndex + 1];
-                if(leftOne) this.currentTab = leftOne;
-                else if(rightOne) this.currentTab = rightOne;
+                if(leftOne) this.$emit('update:currentTab', leftOne)
+                else if(rightOne) this.$emit('update:currentTab', rightOne)
                 else this.$emit('update:currentTab', tabs[0].name);
             }
             this.tabTrace = this.tabTrace.filter(trace => {return trace != name});

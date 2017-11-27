@@ -1,26 +1,75 @@
 <template>
 <div>
-    <auto-table :columns="cols" :data="tableData"></auto-table>
+    <auto-table 
+        :columns="cols" 
+        :data="tableData" 
+        :total="total" 
+        :pageSize="filterParams._limit" 
+        @changePage="pageChanged"
+        @DelBtnClicked="deleteEmployee"
+        :searchFields="searchFields"
+        :loading="loading">
+    </auto-table>
 </div>
 </template>
 <script>
 import AutoTable from '../../components/AutoTable'
-import {getEmployeeList} from '@/api/employee'
+import TableOpBtns from '../../components/TableOpBtns'
+import {getList, getListTotal, deleteById} from '@/api/employee'
 
 export default {
-    components: {AutoTable},
+    components: {AutoTable, TableOpBtns},
     created: function(){
-        this.getData(30, 1);
+        this.getData();
     },
     methods: {
-        getData(pageSize, pageNum) {
-            getEmployeeList(pageSize, pageNum).then(data => {
-                this.tableData = data;
+        getData() {
+            getListTotal(this.filterParams).then(d => {
+                getList(this.filterParams).then(data => {
+                    this.total = d.total;
+                    this.tableData = data;
+                    this.loading = false;
+                }).catch(e => {
+                    this.loading = false;
+                });
+            }).catch(e => {
+                this.loading = false;
+            });
+        },
+        pageChanged(pageNum) {
+            this.filterParams._page = pageNum;
+            this.getData();
+        },
+        deleteEmployee(uIds) {
+            if(uIds && uIds.length > 0) {
+                if(uIds.length == 1) {
+                    deleteById(uIds[0]).then(d => {
+                        this.$Message.success("删除成功")
+                        this.getData();
+                    });
+                } else {
+                    this.$Message.warning("暂时不开放多项删除")
+                }
+            } else {
+                this.$Message.warning("请选择要删除的数据")
+            }
+        }
+    },
+    computed: {
+        searchFields() {
+            return this.cols.filter(c => {
+                return c.key == "name" || c.key == "worknum"
             });
         }
     },
     data() {
         return {
+            total: 0,
+            loading: false,
+            filterParams:{
+                _page: 1,
+                _limit: 20
+            },
             tableData: [],
             cols: 
             [
@@ -72,36 +121,22 @@ export default {
                 {
                     title: '操作',
                     key: 'action',
-                    width: 150,
+                    width: 180,
                     align: 'center',
                     render:(h, params) => {
-                        return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.$emit('ViewBtnClicked', params.row.id)
-                                        }
-                                    }
-                                }, '查看'),
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.$emit('EditBtnClicked', params.row.id)
-                                        }
-                                    }
-                                }, '编辑')
-                            ]);
+                        return h(TableOpBtns,{
+                            on: {
+                                ViewBtnClicked: () => {
+                                    this.$emit('ViewBtnClicked', params.row.id);
+                                },
+                                EditBtnClicked: () => {
+                                    this.$emit('EditBtnClicked', params.row.id);
+                                },
+                                DelBtnClicked: () => {
+                                    this.deleteEmployee([params.row.id]);
+                                }
+                            }
+                        })
                     }
                 }
             ]
