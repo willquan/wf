@@ -1,6 +1,6 @@
 <template>
 <auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab">
-    <employee-list :slot="tabs[0].name" @:ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></employee-list>
+    <employee-list :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></employee-list>
     <employee-form :slot="tabs[1].name" :isEditable="true"></employee-form>
     <employee-form :slot="tabs[2].name" :isEditable="true" :userId="editUserId"></employee-form>
     <employee-form :slot="tabs[3].name" :isEditable="false" :userId="checkUserId"></employee-form>

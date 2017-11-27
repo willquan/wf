@@ -46,16 +46,28 @@
   },
   "users": [
     {
-      "username": "zhaoliu",
-      "pwd": "zhaoliu",
-      "worknum": "32232",
-      "phone": "2323",
-      "name": "赵六",
+      "username": "zhangsan",
+      "pwd": "sdfsdfsdf",
+      "worknum": "23423",
+      "phone": "23423423",
+      "name": "张三",
       "sex": "man",
       "departmentId": 1,
-      "positionId": 2,
-      "roleId": 7,
-      "id": 3
+      "positionId": 13,
+      "roleId": 2,
+      "id": 4
+    },
+    {
+      "username": "lisi",
+      "pwd": "sdfsdf",
+      "worknum": "3423423",
+      "phone": "2342342",
+      "name": "李四",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 15,
+      "roleId": 2,
+      "id": 5
     }
   ],
   "departments": [
