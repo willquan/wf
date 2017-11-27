@@ -68,6 +68,54 @@
       "positionId": 15,
       "roleId": 2,
       "id": 5
+    },
+    {
+      "username": "wangwu",
+      "pwd": "wangwu",
+      "worknum": "234234234",
+      "phone": "234234",
+      "name": "sdfsdf323",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 1,
+      "roleId": 2,
+      "id": 6
+    },
+    {
+      "username": "zhaoliu",
+      "pwd": "123423423",
+      "worknum": "23423",
+      "phone": "234234",
+      "name": "赵六",
+      "sex": "man",
+      "departmentId": 2,
+      "positionId": 2,
+      "roleId": 1,
+      "id": 7
+    },
+    {
+      "username": "wangwu",
+      "pwd": "wangwu",
+      "worknum": "sdfsd",
+      "phone": "sdfsdf",
+      "name": "王五",
+      "sex": "man",
+      "departmentId": 2,
+      "positionId": 2,
+      "roleId": 2,
+      "id": 8
+    },
+    {
+      "username": "songqi",
+      "pwd": "songq",
+      "worknum": "sdf",
+      "phone": "sdff",
+      "name": "宋琦",
+      "sex": "man",
+      "departmentId": 2,
+      "positionId": 2,
+      "roleId": 2,
+      "id": 9
     }
   ],
   "departments": [

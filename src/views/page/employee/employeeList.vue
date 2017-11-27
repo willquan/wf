@@ -7,6 +7,7 @@
         :pageSize="filterParams._limit" 
         @changePage="pageChanged"
         @DelBtnClicked="deleteEmployee"
+        @RefreshTable="refreshTable"
         :searchFields="searchFields"
         :loading="loading">
     </auto-table>
@@ -53,6 +54,9 @@ export default {
             } else {
                 this.$Message.warning("请选择要删除的数据")
             }
+        },
+        refreshTable() {
+            this.getData();
         }
     },
     computed: {

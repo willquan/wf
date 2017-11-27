@@ -142,6 +142,7 @@ export default {
                             this.isLoading = false;
                             this.$Message.success('添加成功');
                             this.$refs.addEmployeeForm.resetFields();
+                            this.$emit('FormDataChanged')
                         }).catch(e => {
                             this.isLoading = false;
                             console.log(e);
@@ -151,6 +152,7 @@ export default {
                         modifyEmployee(this.form).then(data => {
                             this.isLoading = false;
                             this.$Message.success('修改成功');
+                            this.$emit('FormDataChanged')
                         }).catch(e => {
                             this.isLoading = false;
                         });

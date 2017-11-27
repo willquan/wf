@@ -11,6 +11,7 @@
         </Col>
         <Col span="12">
             <div style="float: right;">
+                <Button @click="refreshTable"><Icon type="refresh"></Icon>刷新列表</Button>
                 <Button><Icon type="ios-download-outline"></Icon>导出数据</Button>
             </div>
         </Col>
@@ -72,6 +73,9 @@
                 selection.forEach(el => {
                     this.selectedArray.push(el.id)
                 });
+            },
+            refreshTable() {
+                this.$emit('RefreshTable')
             }
         }
     }

@@ -1,8 +1,8 @@
 <template>
 <auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab">
-    <employee-list :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></employee-list>
-    <employee-form :slot="tabs[1].name" :isEditable="true"></employee-form>
-    <employee-form :slot="tabs[2].name" :isEditable="true" :userId="editUserId"></employee-form>
+    <employee-list ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></employee-list>
+    <employee-form :slot="tabs[1].name" :isEditable="true" @FormDataChanged="()=>$refs.list.refreshTable()"></employee-form>
+    <employee-form :slot="tabs[2].name" :isEditable="true" :userId="editUserId" @FormDataChanged="()=>$refs.list.refreshTable()"></employee-form>
     <employee-form :slot="tabs[3].name" :isEditable="false" :userId="checkUserId"></employee-form>
     <Button type="primary" @click="switchToTab('AddTab')" size="small" slot="extra">添加员工</Button>
 </auto-tabs>
