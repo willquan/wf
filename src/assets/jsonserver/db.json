@@ -5,7 +5,15 @@
   "info": {
     "role": "admin",
     "access": {
-      "users": {"create": false, "del": false, "update": false, "list": true, "detail": false, "export": false}
+      "users": {
+        "create": false,
+        "del": true,
+        "dels": false,
+        "update": true,
+        "list": true,
+        "detail": true,
+        "export": true
+      }
     },
     "name": "张三",
     "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
@@ -47,20 +55,8 @@
   },
   "users": [
     {
-      "username": "zhangsan",
-      "pwd": "zhangsanfeng",
-      "worknum": "23423",
-      "phone": "23423423",
-      "name": "张三丰",
-      "sex": "man",
-      "departmentId": 1,
-      "positionId": 13,
-      "roleId": 2,
-      "id": 4
-    },
-    {
       "username": "lisi",
-      "pwd": "sdfsdf",
+      "pwd": "1212121",
       "worknum": "3423423",
       "phone": "2342342",
       "name": "李四光",

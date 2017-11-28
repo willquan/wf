@@ -16,6 +16,7 @@ export default function createApi(path) {
     }
     
     api.delete = function (id) {
+      const _url = baseUrl;
       return fetch.delete(_url + '/' + id);
     }
     

@@ -20,7 +20,7 @@
     <Table border :data="data" :columns="columns" stripe :loading="loading" @on-selection-change="selectChanged"></Table>
     <Row type="flex" justify="center" align="middle" style="margin-top: 8px">
         <Col span="12">
-            <Poptip v-if="permissions.del" confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
+            <Poptip v-if="permissions.del && permissions.dels" confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
                 <Button>删除选中</Button>
             </Poptip>
         </Col>

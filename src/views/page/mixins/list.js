@@ -1,5 +1,6 @@
 import AutoTable from '@/views/components/AutoTable'
 import { mapGetters } from 'vuex'
+import TableOpBtns from '@/views/components/TableOpBtns'
 
 export default {
     render(h) {
@@ -30,10 +31,35 @@ export default {
                 _limit: 20
             },
             showLoadFinish: false,
+            optCol: {
+                title: '操作',
+                key: 'action',
+                width: 180,
+                align: 'center',
+                render:(h, params) => {
+                    return h(TableOpBtns,{
+                        props: {
+                            permissions: this.access[this.getApi().accessName]
+                        },
+                        on: {
+                            ViewBtnClicked: () => {
+                                this.$emit('ViewBtnClicked', params.row.id);
+                            },
+                            EditBtnClicked: () => {
+                                this.$emit('EditBtnClicked', params.row.id);
+                            },
+                            DelBtnClicked: () => {
+                                this.deleteItemById([params.row.id]);
+                            }
+                        }
+                    })
+                    }
+            },
         }
     },
     created: function(){
         this.queryList();
+        this.addOptCol();
     },
     methods: {
         queryList(params) {
@@ -61,7 +87,7 @@ export default {
         deleteItemById(uIds) {
             if(uIds && uIds.length > 0) {
                 if(uIds.length == 1) {
-                    this.getApi().deleteById(uIds[0]).then(d => {
+                    this.getApi().delete(uIds[0]).then(d => {
                         this.$Message.success("删除成功")
                         this.queryList();
                     });
@@ -83,18 +109,22 @@ export default {
             } else {
                 this.queryList();
             }
-        }
-    },
-    computed: {
-        searchFields() {
-            return this.cols.filter(c => {
-                return c.searchble
-            });
+        },
+        addOptCol() {
+            const permissions = this.access[this.getApi().accessName]
+            if(permissions.detail || permissions.update || permissions.del) {
+                return this.cols.push(this.optCol)
+            }
         }
     },
     computed: {
         ...mapGetters([
             'access'
-        ])
+        ]),
+        searchFields() {
+            return this.cols.filter(c => {
+                return c.able2search
+            });
+        }
     }
 }
