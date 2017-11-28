@@ -3,11 +3,11 @@
     <Col span="20" :lg="15">
         <Card>
             <p slot="title">员工信息</p>
-            <a href="#" v-if="isEditable" slot="extra" @click.prevent="$refs.addEmployeeForm.resetFields()">
+            <a href="#" v-if="isEditable" slot="extra" @click.prevent="$refs.wfForm.resetFields()">
                 <Icon type="ios-loop-strong"></Icon>
                 清空表单
             </a>
-            <Form ref="addEmployeeForm" :model="form" :rules="rules" label-position="left" :label-width="100">
+            <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="100">
                 <FormItem prop="username" label="登录名">
                     <Input v-model="form.username" :maxlength="30" placeholder="登录时使用" :disabled="!isEditable"></Input>
                 </FormItem>
@@ -51,7 +51,7 @@
                     </Select>
                 </FormItem>
                 <FormItem  v-if="isEditable">
-                    <Button @click="handleSubmit" :loading="isLoading" type="primary" long>{{userId==0 ? '添加' : '修改'}}</Button>
+                    <Button @click="handleSubmit" :loading="isLoading" type="primary" long>{{itemId==0 ? '添加' : '修改'}}</Button>
                 </FormItem>
             </Form>
         </Card>
@@ -60,32 +60,14 @@
 </template>
 
 <script>
-import {addEmployee, modifyEmployee, getDepartments, getPositions, getRoles, getEmployeeById} from '@/api/employee'
+import formMixin from '@/views/page/mixins/form'
+import {ApiUser, ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
 
 export default {
+    mixins:[formMixin],
     name: 'employeeForm',
-    props: {
-        isEditable: Boolean,
-        userId: {
-            type: Number,
-            default: 0
-        }
-    },
-    mounted: function() {
-        getDepartments().then(data => {
-            this.departments = data;
-        });
-        getPositions().then(data => {
-            this.positions = data;
-        });
-        getRoles().then(data => {
-            this.roles = data;
-        });
-        this.getData(this.userId);
-    },
     data() {
         return {
-            isLoading: false,
             roles:[],
             positions: [],
             departments: [],
@@ -132,50 +114,22 @@ export default {
         }
     },
     methods: {
-        handleSubmit() {
-            this.$refs.addEmployeeForm.validate((valid) => {
-                if (valid) {
-                    this.isLoading = true;
-                    // 增加用户
-                    if(this.userId == 0) {
-                        addEmployee(this.form).then(data => {
-                            this.isLoading = false;
-                            this.$Message.success('添加成功');
-                            this.$refs.addEmployeeForm.resetFields();
-                            this.$emit('FormDataChanged')
-                        }).catch(e => {
-                            this.isLoading = false;
-                            console.log(e);
-                        });
-                    } else {
-                        //修改用户
-                        modifyEmployee(this.form).then(data => {
-                            this.isLoading = false;
-                            this.$Message.success('修改成功');
-                            this.$emit('FormDataChanged')
-                        }).catch(e => {
-                            this.isLoading = false;
-                        });
-                    }
-                    
-                } else {
-                    console.log('校验没通过');
-                    return false
-                }
+        onFormComponentDataPrepare() {
+            ApiDep.queryList().then(data => {
+                this.departments = data;
+            });
+            ApiPos.queryList().then(data => {
+                this.positions = data;
+            });
+            ApiRole.queryList().then(data => {
+                this.roles = data;
             });
         },
-        getData(uId){
-            this.$refs.addEmployeeForm.resetFields();
-            if(uId != 0) {
-                getEmployeeById(uId).then(data => {
-                    this.form = data;
-                });
-            }
-        }
-    },
-    watch: {
-        userId: function(newUserId) {
-            this.getData(newUserId)
+        getApi() {
+            return ApiUser
+        },
+        getFormRef() {
+            return this.$refs.wfForm
         }
     }
 }

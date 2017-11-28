@@ -2,17 +2,17 @@
 <div class="autotable">
     <Row type="flex" justify="center" align="middle" style="margin-bottom: 8px">
         <Col span="12">
-            <Input v-model="searchContent" style="width: 300px" placeholder="搜索内容" class="condition-input">
+            <Input v-if="searchFields.length > 0" v-model="searchContent" style="width: 300px" placeholder="搜索内容" class="condition-input" @on-enter="search">
                 <Select v-model="searchField" slot="prepend" class="condition-select">
                     <Option v-for="search in searchFields" :value="search.key" :key="search.key">{{ search.title }}</Option>
                 </Select>
-                <Button slot="append" icon="ios-search" class="condition-btn"></Button>
+                <Button slot="append" icon="ios-search" class="condition-btn" @click="search"></Button>
             </Input>
         </Col>
         <Col span="12">
             <div style="float: right;">
                 <Button @click="refreshTable"><Icon type="refresh"></Icon>刷新列表</Button>
-                <Button><Icon type="ios-download-outline"></Icon>导出数据</Button>
+                <Button v-if="permissions.export"><Icon type="ios-download-outline"></Icon>导出数据</Button>
             </div>
         </Col>
     </Row>
@@ -20,7 +20,7 @@
     <Table border :data="data" :columns="columns" stripe :loading="loading" @on-selection-change="selectChanged"></Table>
     <Row type="flex" justify="center" align="middle" style="margin-top: 8px">
         <Col span="12">
-            <Poptip confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
+            <Poptip v-if="permissions.del" confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
                 <Button>删除选中</Button>
             </Poptip>
         </Col>
@@ -37,6 +37,7 @@
     export default {
         name: 'AutoTable',
         props: {
+            permissions: {type: Object, default: function(){ return {}} },
             loading: {type: Boolean, default: false},
             total: { type: Number, default: 0},
             pageSize: { type: Number, default: 20},
@@ -55,7 +56,8 @@
             }
         },
         created: function() {
-            this.searchField = this.searchFields[0].key;
+            if(this.searchFields && this.searchFields.length > 0)
+                this.searchField = this.searchFields[0].key;
         },
         data() {
             return {
@@ -76,17 +78,22 @@
             },
             refreshTable() {
                 this.$emit('RefreshTable')
+            },
+            search() {
+                let searchCondition = {}
+                searchCondition[this.searchField] = this.searchContent;
+                if(this.searchField && this.searchContent) {
+                    this.$emit('SearchClicked', searchCondition)
+                } else {
+                    this.$emit('SearchClicked', undefined)
+                }
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
-    .condition-input {
-    }
     .condition-select {
         width: 70px;
-    }
-    .condition-btn {
     }
 </style>

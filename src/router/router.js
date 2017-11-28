@@ -72,11 +72,11 @@ export const appRouter = [
         meta: {title: '系统管理'},
         component: Main,
         children: [
-            { path: 'access', meta:{title: '权限管理'}, name: 'access', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
-            { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department/department.vue'], resolve); } },
-            { path: 'role', meta:{title: '角色管理'}, name: 'role', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'employee', meta:{title: '人员管理'}, name: 'employee', component: resolve => { require(['@/views/page/employee/page.vue'], resolve); } },
             { path: 'job', meta:{title: '岗位管理'}, name: 'job', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
-            { path: 'employee', meta:{title: '人员管理'}, name: 'employee', component: resolve => { require(['@/views/page/employee/employee.vue'], resolve); } },
+            { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department/department.vue'], resolve); } },
+            { path: 'access', meta:{title: '菜单管理'}, name: 'access', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } },
+            { path: 'role', meta:{title: '角色权限'}, name: 'role', component: resolve => { require(['@/views/page/access/access.vue'], resolve); } }
         ]
     }
 ];

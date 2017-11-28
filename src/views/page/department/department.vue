@@ -7,7 +7,13 @@
 
 <script>
 import AutoTabs from '@/views/components/AutoTabs'
+import test from './config'
+
 export default {
+    mixins:[test],
+    mounted: function() {
+        this.notify();
+    },
     data() {
         return {
             tabs: [

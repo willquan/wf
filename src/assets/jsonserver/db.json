@@ -3,9 +3,10 @@
     "token": "sldjfsljfdsljfslkd123123"
   },
   "info": {
-    "role": [
-      "admin"
-    ],
+    "role": "admin",
+    "access": {
+      "users": {"create": false, "del": false, "update": false, "list": true, "detail": false, "export": false}
+    },
     "name": "张三",
     "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
   },
@@ -47,10 +48,10 @@
   "users": [
     {
       "username": "zhangsan",
-      "pwd": "sdfsdfsdf",
+      "pwd": "zhangsanfeng",
       "worknum": "23423",
       "phone": "23423423",
-      "name": "张三",
+      "name": "张三丰",
       "sex": "man",
       "departmentId": 1,
       "positionId": 13,
@@ -62,24 +63,12 @@
       "pwd": "sdfsdf",
       "worknum": "3423423",
       "phone": "2342342",
-      "name": "李四",
+      "name": "李四光",
       "sex": "man",
       "departmentId": 1,
       "positionId": 15,
       "roleId": 2,
       "id": 5
-    },
-    {
-      "username": "wangwu",
-      "pwd": "wangwu",
-      "worknum": "234234234",
-      "phone": "234234",
-      "name": "sdfsdf323",
-      "sex": "man",
-      "departmentId": 1,
-      "positionId": 1,
-      "roleId": 2,
-      "id": 6
     },
     {
       "username": "zhaoliu",
@@ -110,12 +99,48 @@
       "pwd": "songq",
       "worknum": "sdf",
       "phone": "sdff",
-      "name": "宋琦",
+      "name": "宋八",
       "sex": "man",
       "departmentId": 2,
       "positionId": 2,
       "roleId": 2,
       "id": 9
+    },
+    {
+      "username": "tianqi",
+      "pwd": "tianqi",
+      "worknum": "22323",
+      "phone": "232323",
+      "name": "田七",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 2,
+      "roleId": 2,
+      "id": 10
+    },
+    {
+      "username": "xiaobao",
+      "pwd": "xiaobao",
+      "worknum": "2323",
+      "phone": "23232",
+      "name": "宋小宝",
+      "sex": "man",
+      "departmentId": 2,
+      "positionId": 4,
+      "roleId": 2,
+      "id": 11
+    },
+    {
+      "username": "zhangxiao",
+      "pwd": "zhangxiao",
+      "worknum": "sssss",
+      "phone": "ss32323",
+      "name": "张晓",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 2,
+      "roleId": 2,
+      "id": 12
     }
   ],
   "departments": [
