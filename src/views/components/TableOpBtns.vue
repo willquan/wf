@@ -1,8 +1,8 @@
 <template>
 <div>
-    <Button type="primary" size="small" style="margin-right: 5px" @click="ViewBtnClicked" v-if="permissions.detail">查看</Button>
-    <Button type="primary" size="small" style="margin-right: 5px" @click="EditBtnClicked" v-if="permissions.update">编辑</Button>
-    <Poptip confirm title="您确定要删除这条数据吗?" transfer placement="left" @on-ok="DelBtnClicked" v-if="permissions.del">
+    <Button type="primary" size="small" style="margin-right: 5px" @click="ViewBtnClicked" v-if="hasPermission('detail')">查看</Button>
+    <Button type="primary" size="small" style="margin-right: 5px" @click="EditBtnClicked" v-if="hasPermission('update')">编辑</Button>
+    <Poptip confirm title="您确定要删除这条数据吗?" transfer placement="left" @on-ok="DelBtnClicked" v-if="hasPermission('del')">
         <Button type="default" size="small" style="margin-right: 5px">删除</Button>
     </Poptip>
 </div>
@@ -28,6 +28,9 @@ export default {
         },
         DelBtnClicked() {
             this.$emit('DelBtnClicked');
+        },
+        hasPermission(permissionName) {
+            return this.permissions && this.permissions[permissionName]
         }
     }
 }

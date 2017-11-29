@@ -4,5 +4,7 @@ const getters = {
   name: state => state.user.name,
   roles: state => state.user.roles,
   access: state => state.user.access,
+  scroll: state => state.scroll.scroll,
+  currentScroll: state => state.scroll.currentScroll,
 }
 export default getters

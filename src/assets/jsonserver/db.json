@@ -6,9 +6,36 @@
     "role": "admin",
     "access": {
       "users": {
-        "create": false,
+        "create": true,
         "del": true,
-        "dels": false,
+        "dels": true,
+        "update": true,
+        "list": true,
+        "detail": true,
+        "export": true
+      },
+      "departments": {
+        "create": true,
+        "del": true,
+        "dels": true,
+        "update": true,
+        "list": true,
+        "detail": true,
+        "export": true
+      },
+      "positions": {
+        "create": true,
+        "del": true,
+        "dels": true,
+        "update": true,
+        "list": true,
+        "detail": true,
+        "export": true
+      },
+      "roles": {
+        "create": true,
+        "del": true,
+        "dels": true,
         "update": true,
         "list": true,
         "detail": true,

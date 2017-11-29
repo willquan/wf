@@ -1,5 +1,5 @@
 <template>
-<div class="autotable">
+<div class="autotable" style="overflow: auto; position: absolute; top: 100px; right: 0px; bottom: 0px;z-index: 1000">
     <Row type="flex" justify="center" align="middle" style="margin-bottom: 8px">
         <Col span="12">
             <Input v-if="searchFields.length > 0" v-model="searchContent" style="width: 300px" placeholder="搜索内容" class="condition-input" @on-enter="search">
@@ -20,7 +20,7 @@
     <Table border :data="data" :columns="columns" stripe :loading="loading" @on-selection-change="selectChanged"></Table>
     <Row type="flex" justify="center" align="middle" style="margin-top: 8px">
         <Col span="12">
-            <Poptip v-if="permissions.del && permissions.dels" confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
+            <Poptip v-if="permissions && permissions.del && permissions.dels" confirm title="您确定要删除这条数据吗?" transfer placement="right" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
                 <Button>删除选中</Button>
             </Poptip>
         </Col>

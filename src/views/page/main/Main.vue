@@ -44,7 +44,7 @@
     </div>
     </Col>
   </Row>
-  <div class="single-page-con" :style="{'left': sidebarWidth}">
+  <div class="single-page-con" :style="{'left': sidebarWidth}" @scroll="contentScrolled($event)">
     <div class="single-page">
         <keep-alive>
             <router-view></router-view>
@@ -195,6 +195,9 @@ export default {
           name: "locking"
         });
       }, 800);
+    },
+    contentScrolled(event) {
+      console.log(event.target.scrollTop)
     }
   }
 };

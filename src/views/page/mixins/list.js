@@ -112,8 +112,8 @@ export default {
         },
         addOptCol() {
             const permissions = this.access[this.getApi().accessName]
-            if(permissions.detail || permissions.update || permissions.del) {
-                return this.cols.push(this.optCol)
+            if(permissions && (permissions.detail || permissions.update || permissions.del)) {
+                this.cols.push(this.optCol)
             }
         }
     },

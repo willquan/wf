@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import getters from './getters'
 import lock from './modules/lock'
+import scroll from './modules/scroll'
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     modules: {
         user,
         menu,
-        lock
+        lock,
+        scroll
     }
 });
 
