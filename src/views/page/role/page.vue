@@ -24,11 +24,11 @@ export default {
     },
     data() {
         return {
-            add: {name:'AddTab', label: '添加员工', closable: true, show: false},
-            edit: {name:'EditTab', label: '编辑员工', closable: true, show: false},
+            add: {name:'AddTab', label: '添加角色', closable: true, show: false},
+            edit: {name:'EditTab', label: '编辑角色', closable: true, show: false},
             view: {name:'ViewTab', label: '查看信息', closable: true, show: false},
             tabs: [
-                {name:'ListTab', label: '员工列表', closable: false, show: true}
+                {name:'ListTab', label: '角色列表', closable: false, show: true}
             ]
         }
     }

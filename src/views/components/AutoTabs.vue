@@ -18,33 +18,30 @@ export default {
     },
     data() {
         return {
-            tabTrace: [],
-            onlyForWatch: []
+            tabTrace: []
         }
-    },
-    mounted: function() {
-        let trace = this.currentTab;
-        this.tabTrace.push(trace);
-        
-        this.tabs.forEach(_tab=>{
-            this.onlyForWatch.push(_tab.show)
-        });
     },
     methods: {
         tabChanged(name) {
             this.$emit('update:currentTab', name)
         },
         handleTabRemove(name) {
-            this.$emit('BeforeTabRemove', name)
-            // if(name == this.currentTab) {
-            //     let traceIndex = this.tabTrace.indexOf(name);
-            //     let leftOne = this.tabTrace[traceIndex - 1];
-            //     let rightOne = this.tabTrace[traceIndex + 1];
-            //     if(leftOne) this.$emit('update:currentTab', leftOne)
-            //     else if(rightOne) this.$emit('update:currentTab', rightOne)
-            //     else this.$emit('update:currentTab', tabs[0].name);
-            // }
-            // this.tabTrace = this.tabTrace.filter(trace => {return trace != name});
+            var tabsCopy = [];
+            var leftOne = {}
+            this.tabs.forEach((tab, index) => {
+                if(tab.name != name) {
+                    tabsCopy.push(tab)
+                } else {
+                    tab.show = false;
+                    leftOne = this.tabs[index-1]
+                }
+            });
+
+            if(this.currentTab == name) {
+                this.$emit('update:currentTab', leftOne.name)
+            }
+            
+            this.$emit('update:tabs', tabsCopy)
         }
     },
     watch: {

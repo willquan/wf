@@ -36,17 +36,17 @@
                     <Input v-model="form.phone" :maxlength="11" placeholder="请输入手机号" :disabled="!isEditable"></Input>
                 </FormItem>
                 <FormItem prop="departmentId" label="部门">
-                    <Select v-model="form.departmentId" placeholder="选择部门" :disabled="!isEditable">
+                    <Select v-model="form.departmentId" placeholder="选择部门" :disabled="!isEditable" transfer>
                         <Option v-for="d in departments" :value="d.id" :key="d.id">{{ d.name }}</Option>
                     </Select>
                 </FormItem>
                 <FormItem prop="positionId" label="职位">
-                    <Select v-model="form.positionId" placeholder="选择职位" :disabled="!isEditable">
+                    <Select v-model="form.positionId" placeholder="选择职位" :disabled="!isEditable" transfer>
                         <Option v-for="p in positions" :value="p.id" :key="p.id">{{ p.name }}</Option>
                     </Select>
                 </FormItem>
                 <FormItem  prop="roleId" label="角色">
-                    <Select v-model="form.roleId" placeholder="选择角色" :disabled="!isEditable">
+                    <Select v-model="form.roleId" placeholder="选择角色" :disabled="!isEditable" transfer>
                         <Option v-for="r in roles" :value="r.id" :key="r.id">{{ r.name }}</Option>
                     </Select>
                 </FormItem>
