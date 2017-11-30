@@ -44,7 +44,7 @@
     </div>
     </Col>
   </Row>
-  <div class="single-page-con" :style="{'left': sidebarWidth}" @scroll="contentScrolled($event)">
+  <div ref="singlePageCon" class="single-page-con" :style="{'left': sidebarWidth}">
     <div class="single-page">
         <keep-alive>
             <router-view></router-view>
@@ -83,6 +83,11 @@ export default {
   mounted() {
     this.initLockScreen();
     this.initMenu();
+    this.$store.commit('ADD_HEIGHT', this.getSinglePageConHeight())
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy: function() {
+    window.removeEventListener('resize', this.handleResize)
   },
   computed: {
     ...mapState({
@@ -196,8 +201,11 @@ export default {
         });
       }, 800);
     },
-    contentScrolled(event) {
-      console.log(event.target.scrollTop)
+    handleResize() {
+      this.$store.commit('ADD_HEIGHT', this.getSinglePageConHeight())
+    },
+    getSinglePageConHeight() {
+      return window.getComputedStyle(this.$refs.singlePageCon).height.split('px')[0] - 10
     }
   }
 };

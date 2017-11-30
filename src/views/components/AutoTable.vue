@@ -1,9 +1,9 @@
 <template>
-<div class="autotable" style="overflow: auto; position: absolute; top: 100px; right: 0px; bottom: 0px;z-index: 1000">
+<div>
     <Row type="flex" justify="center" align="middle" style="margin-bottom: 8px">
         <Col span="12">
             <Input v-if="searchFields.length > 0" v-model="searchContent" style="width: 300px" placeholder="搜索内容" class="condition-input" @on-enter="search">
-                <Select v-model="searchField" slot="prepend" class="condition-select">
+                <Select v-model="searchField" slot="prepend" style="width: 70px;">
                     <Option v-for="search in searchFields" :value="search.key" :key="search.key">{{ search.title }}</Option>
                 </Select>
                 <Button slot="append" icon="ios-search" class="condition-btn" @click="search"></Button>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    
     export default {
         name: 'AutoTable',
         props: {
@@ -91,9 +92,3 @@
         }
     }
 </script>
-
-<style lang="less" scoped>
-    .condition-select {
-        width: 70px;
-    }
-</style>

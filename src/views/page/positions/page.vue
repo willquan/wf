@@ -1,10 +1,10 @@
 <template>
 <auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab">
-    <table-list ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></table-list>
-    <item-form :slot="tabs[1].name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
-    <item-form :slot="tabs[2].name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
-    <item-form :slot="tabs[3].name" :isEditable="false" :itemId="viewItemId"></item-form>
-    <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" v-if="hasCreatePermission">添加岗位</Button>
+    <table-list v-fix-height ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></table-list>
+    <item-form v-fix-height :slot="tabs[1].name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
+    <item-form v-fix-height :slot="tabs[2].name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
+    <item-form v-fix-height :slot="tabs[3].name" :isEditable="false" :itemId="viewItemId"></item-form>
+    <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" v-if="hasPermission('create')" style="margin-right: 10px">{{tabs[1].label}}</Button>
 </auto-tabs>
 </template>
 
@@ -13,9 +13,11 @@ import AutoTabs from '@/views/components/AutoTabs'
 import ItemForm from './ItemForm'
 import TableList from './TableList'
 import pageMixin from '@/views/page/mixins/page'
+import apiMixin from './config'
+
 
 export default {
-    mixins:[pageMixin],
+    mixins:[pageMixin, apiMixin],
     components: {
         AutoTabs,
         ItemForm,
@@ -29,11 +31,6 @@ export default {
                 {name:'EditTab', label: '编辑岗位', closable: true, show: false},
                 {name:'ViewTab', label: '查看信息', closable: true, show: false}
             ]
-        }
-    },
-    methods: {
-        hasCreatePermission() {
-            return this.access.positions && this.access.positions.create
         }
     }
 }

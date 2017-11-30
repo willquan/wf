@@ -1,14 +1,10 @@
 <script>
 import { ApiPos } from '@/api/apiUtil'
 import listmixin from '@/views/page/mixins/list'
+import apiMixin from './config'
 
 export default {
-    mixins: [listmixin],
-    methods: {
-        getApi() {
-            return ApiPos
-        }
-    },
+    mixins: [listmixin, apiMixin],
     data() {
         return {
             cols: [

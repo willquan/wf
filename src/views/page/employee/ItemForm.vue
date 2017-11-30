@@ -61,10 +61,11 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiUser, ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
+import {ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
+import apiMixin from './config'
 
 export default {
-    mixins:[formMixin],
+    mixins:[formMixin, apiMixin],
     name: 'employeeForm',
     data() {
         return {
@@ -124,9 +125,6 @@ export default {
             ApiRole.queryList().then(data => {
                 this.roles = data;
             });
-        },
-        getApi() {
-            return ApiUser
         },
         getFormRef() {
             return this.$refs.wfForm

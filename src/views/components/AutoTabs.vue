@@ -35,20 +35,16 @@ export default {
             this.$emit('update:currentTab', name)
         },
         handleTabRemove(name) {
-            this.tabs.forEach(_tab => {
-               if(_tab.name == name) {
-                   _tab.show = false;
-               }
-            });
-            if(name == this.currentTab) {
-                let traceIndex = this.tabTrace.indexOf(name);
-                let leftOne = this.tabTrace[traceIndex - 1];
-                let rightOne = this.tabTrace[traceIndex + 1];
-                if(leftOne) this.$emit('update:currentTab', leftOne)
-                else if(rightOne) this.$emit('update:currentTab', rightOne)
-                else this.$emit('update:currentTab', tabs[0].name);
-            }
-            this.tabTrace = this.tabTrace.filter(trace => {return trace != name});
+            this.$emit('BeforeTabRemove', name)
+            // if(name == this.currentTab) {
+            //     let traceIndex = this.tabTrace.indexOf(name);
+            //     let leftOne = this.tabTrace[traceIndex - 1];
+            //     let rightOne = this.tabTrace[traceIndex + 1];
+            //     if(leftOne) this.$emit('update:currentTab', leftOne)
+            //     else if(rightOne) this.$emit('update:currentTab', rightOne)
+            //     else this.$emit('update:currentTab', tabs[0].name);
+            // }
+            // this.tabTrace = this.tabTrace.filter(trace => {return trace != name});
         }
     },
     watch: {

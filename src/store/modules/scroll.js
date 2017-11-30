@@ -5,12 +5,11 @@ Vue.use(Vuex);
 
 const scroll = {
     state: {
-        currentScroll: 0,
-        scrolls: {}
+        singlePageHeight: ''
     },
     mutations: {
-        ADD_SCROLL: (state, scroll) => {
-            state.scroll = scroll
+        ADD_HEIGHT: (state, singlePageHeight) => {
+            state.singlePageHeight = singlePageHeight - 32 - 16
         }
     }
 };

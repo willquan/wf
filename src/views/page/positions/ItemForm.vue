@@ -22,10 +22,10 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiPos} from '@/api/apiUtil'
+import apiMixin from './config'
 
 export default {
-    mixins:[formMixin],
+    mixins:[formMixin, apiMixin],
     name: 'depForm',
     data() {
         return {
@@ -40,9 +40,6 @@ export default {
         }
     },
     methods: {
-        getApi() {
-            return ApiPos
-        },
         getFormRef() {
             return this.$refs.wfForm
         }

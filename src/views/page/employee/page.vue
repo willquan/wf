@@ -1,10 +1,10 @@
 <template>
-<auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab">
-    <table-list ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></table-list>
-    <item-form :slot="tabs[1].name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
-    <item-form :slot="tabs[2].name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
-    <item-form :slot="tabs[3].name" :isEditable="false" :itemId="viewItemId"></item-form>
-    <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" v-if="this.access.users.create">添加员工</Button>
+<auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab" @BeforeTabRemove="BeforeTabRemove">
+    <table-list v-fix-height ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></table-list>
+    <item-form v-fix-height :slot="add.name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
+    <item-form v-fix-height :slot="edit.name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
+    <item-form v-fix-height :slot="view.name" :isEditable="false" :itemId="viewItemId"></item-form>
+    <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" style="margin-right: 10px" v-if="hasPermission('create')">{{add.label}}</Button>
 </auto-tabs>
 </template>
 
@@ -13,9 +13,10 @@ import AutoTabs from '@/views/components/AutoTabs'
 import ItemForm from './ItemForm'
 import TableList from './TableList'
 import pageMixin from '@/views/page/mixins/page'
+import apiMixin from './config'
 
 export default {
-    mixins:[pageMixin],
+    mixins:[pageMixin, apiMixin],
     components: {
         AutoTabs,
         ItemForm,
@@ -23,11 +24,11 @@ export default {
     },
     data() {
         return {
+            add: {name:'AddTab', label: '添加员工', closable: true, show: false},
+            edit: {name:'EditTab', label: '编辑员工', closable: true, show: false},
+            view: {name:'ViewTab', label: '查看信息', closable: true, show: false},
             tabs: [
-                {name:'ListTab', label: '员工列表', closable: false, show: true}, 
-                {name:'AddTab', label: '添加员工', closable: true, show: false},
-                {name:'EditTab', label: '编辑员工', closable: true, show: false},
-                {name:'ViewTab', label: '查看信息', closable: true, show: false}
+                {name:'ListTab', label: '员工列表', closable: false, show: true}
             ]
         }
     }
