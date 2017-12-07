@@ -17,9 +17,26 @@ export default {
                     title: '角色名称',
                     key: 'name',
                     able2search: true
-                }
+                },
+                // {
+                //     title: '权限列表',
+                //     key: 'right'
+                // },
+                // {
+                //     title: '编辑权限',
+                //     key: 'right'
+                // }
             ]
         }
+    },
+    mounted: function() {
+        console.log(this.access)
+        // this.access.forEach(element => {
+        //     console.log(element)
+        // });
+    },
+    methods: {
+       
     }
 }
 </script>

@@ -2,79 +2,98 @@
   "login": {
     "token": "sldjfsljfdsljfslkd123123"
   },
-  "info": {
-    "role": "admin",
-    "access": {
-      "users": {
-        "create": true,
-        "del": true,
-        "dels": true,
-        "update": true,
-        "list": true,
-        "detail": true,
-        "export": true
-      },
-      "departments": {
-        "create": true,
-        "del": true,
-        "dels": true,
-        "update": true,
-        "list": true,
-        "detail": true,
-        "export": true
-      },
-      "positions": {
-        "create": true,
-        "del": true,
-        "dels": true,
-        "update": true,
-        "list": true,
-        "detail": true,
-        "export": true
-      },
-      "roles": {
-        "create": true,
-        "del": true,
-        "dels": true,
-        "update": true,
-        "list": true,
-        "detail": true,
-        "export": true
-      }
+  "access": [
+    {
+      "id": 1,
+      "categery": "users",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
     },
-    "name": "张三",
-    "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
-  },
+    {
+      "id": 2,
+      "categery": "departments",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    },
+    {
+      "id": 3,
+      "categery": "positions",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    },
+    {
+      "id": 4,
+      "categery": "roles",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    }
+  ],
   "logout": {},
   "unlock": {},
-  "menu": [
+  "menus": [
     {
-      "name": "home",
-      "children": [
-        {
-          "name": "home_index"
-        }
-      ]
+      "id": 1,
+      "name": "home"
     },
     {
-      "name": "manager",
-      "children": [
-        {
-          "name": "access"
-        },
-        {
-          "name": "department"
-        },
-        {
-          "name": "role"
-        },
-        {
-          "name": "job"
-        },
-        {
-          "name": "employee"
-        }
-      ]
+      "id": 2,
+      "name": "manager"
+    }
+  ],
+  "children": [
+    {
+      "id": 1,
+      "menuId": 1,
+      "name": "home_index"
+    },
+    {
+      "id": 2,
+      "menuId": 2,
+      "name": "access"
+    },
+    {
+      "id": 3,
+      "menuId": 2,
+      "name": "department"
+    },
+    {
+      "id": 4,
+      "menuId": 2,
+      "name": "role"
+    },
+    {
+      "id": 5,
+      "menuId": 2,
+      "name": "job"
+    },
+    {
+      "id": 6,
+      "menuId": 2,
+      "name": "employee"
     }
   ],
   "total": {
@@ -91,7 +110,8 @@
       "departmentId": 1,
       "positionId": 15,
       "roleId": 2,
-      "id": 5
+      "id": 5,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
       "username": "zhaoliu",
@@ -103,7 +123,8 @@
       "departmentId": 2,
       "positionId": 2,
       "roleId": 1,
-      "id": 7
+      "id": 7,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
       "username": "wangwu",
@@ -115,7 +136,8 @@
       "departmentId": 2,
       "positionId": 2,
       "roleId": 2,
-      "id": 8
+      "id": 8,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
       "username": "songqi",
@@ -127,7 +149,8 @@
       "departmentId": 2,
       "positionId": 2,
       "roleId": 2,
-      "id": 9
+      "id": 9,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
       "username": "tianqi",
@@ -151,7 +174,8 @@
       "departmentId": 2,
       "positionId": 4,
       "roleId": 2,
-      "id": 11
+      "id": 11,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
       "username": "zhangxiao",
@@ -163,7 +187,8 @@
       "departmentId": 1,
       "positionId": 2,
       "roleId": 2,
-      "id": 12
+      "id": 12,
+      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     }
   ],
   "departments": [

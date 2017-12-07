@@ -73,7 +73,7 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'employee', meta:{title: '人员管理'}, name: 'employee', component: resolve => { require(['@/views/page/employee/page.vue'], resolve); } },
-            { path: 'job', meta:{title: '岗位管理'}, name: 'job', component: resolve => { require(['@/views/page/positions/page.vue'], resolve); } },
+            { path: 'position', meta:{title: '岗位管理'}, name: 'position', component: resolve => { require(['@/views/page/position/page.vue'], resolve); } },
             { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department/page.vue'], resolve); } },
             { path: 'role', meta:{title: '角色权限'}, name: 'role', component: resolve => { require(['@/views/page/role/page.vue'], resolve); } }
         ]

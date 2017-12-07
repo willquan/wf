@@ -48,7 +48,11 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(data => {
           commit('SET_ROLES', data.role)
-          commit('SET_ACCESS', data.access)
+          let temp = {};
+          data.access.forEach(element => {
+            temp[element.categery] = element
+          });
+          commit('SET_ACCESS', temp);
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           resolve(data)

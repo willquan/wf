@@ -2,7 +2,7 @@
 <Row type="flex" justify="center" style="margin-bottom: 8px;">
     <Col span="20" :lg="15">
         <Card>
-            <p slot="title">员工信息</p>
+            <p slot="title">角色信息</p>
             <a href="#" v-if="isEditable" slot="extra" @click.prevent="$refs.wfForm.resetFields()">
                 <Icon type="ios-loop-strong"></Icon>
                 清空表单

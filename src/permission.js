@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
     if(getToken()) {
-        const userInfoLoaded = store.getters.roles.length != 0;
+        const userInfoLoaded = store.getters.name.length != 0;
         if(!userInfoLoaded) {
             store.dispatch('GetInfo').then(res => {
                nextStep(to, from, next); 

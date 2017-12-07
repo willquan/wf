@@ -62,7 +62,7 @@ import iconNav from "@/views/components/iconNav.vue";
 import util from "@/libs/util.js";
 import { mapState } from "vuex";
 import {appRouter} from '@/router/router';
-import {getMenu} from '@/api/menu'
+import {ApiMenu} from '@/api/apiUtil'
 
 export default {
   components: {
@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     initMenu(){
-      getMenu().then((data) => {
+      ApiMenu.queryList().then((data) => {
         this.menuList = this.filterRoutes(appRouter, data);
       }).catch(error => {
       });
