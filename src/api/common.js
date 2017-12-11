@@ -1,9 +1,9 @@
 import fetch from '@/libs/fetch'
 
-export default function createApi(path) {
+export default function createApi(res) {
     let api = {}
-    const baseUrl = '/' + path
-    api.accessName = path;
+    const baseUrl = '/' + res
+    api.res = res;
     /*===================增=========================*/
     api.create = function create(item) {
       const _url = baseUrl;
@@ -35,7 +35,7 @@ export default function createApi(path) {
     api.queryList = function (_params) {
         if(!_params) _params = {}
         let _url = baseUrl
-        if(path == 'users') _url = baseUrl + '?_expand=department&_expand=role&_expand=position'
+        if(res == 'users') _url = baseUrl + '?_expand=department&_expand=role&_expand=position'
         return fetch.get(_url, {
             params: {
               ..._params

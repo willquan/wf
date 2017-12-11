@@ -11,7 +11,7 @@ export default {
                 total: this.total,
                 searchFields: this.searchFields,
                 loading: this.loading,
-                permissions: this.access[this.getApi().accessName]
+                permissions: this.access[this.getApi().res]
             },
             on: {
                 changePage: this.pageChanged,
@@ -39,7 +39,7 @@ export default {
                 render:(h, params) => {
                     return h(TableOpBtns,{
                         props: {
-                            permissions: this.access[this.getApi().accessName]
+                            permissions: this.access[this.getApi().res]
                         },
                         on: {
                             ViewBtnClicked: () => {
@@ -111,7 +111,7 @@ export default {
             }
         },
         addOptCol() {
-            const permissions = this.access[this.getApi().accessName]
+            const permissions = this.access[this.getApi().res]
             if(permissions && (permissions.detail || permissions.update || permissions.del)) {
                 this.cols.push(this.optCol)
             }

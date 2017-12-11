@@ -5,7 +5,7 @@
   "access": [
     {
       "id": 1,
-      "categery": "users",
+      "res": "users",
       "create": true,
       "del": true,
       "dels": true,
@@ -17,7 +17,7 @@
     },
     {
       "id": 2,
-      "categery": "departments",
+      "res": "departments",
       "create": true,
       "del": true,
       "dels": true,
@@ -29,7 +29,7 @@
     },
     {
       "id": 3,
-      "categery": "positions",
+      "res": "positions",
       "create": true,
       "del": true,
       "dels": true,
@@ -41,7 +41,7 @@
     },
     {
       "id": 4,
-      "categery": "roles",
+      "res": "roles",
       "create": true,
       "del": true,
       "dels": true,
@@ -88,7 +88,7 @@
     {
       "id": 5,
       "menuId": 2,
-      "name": "job"
+      "name": "position"
     },
     {
       "id": 6,

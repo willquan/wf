@@ -50,7 +50,7 @@ const user = {
           commit('SET_ROLES', data.role)
           let temp = {};
           data.access.forEach(element => {
-            temp[element.categery] = element
+            temp[element.res] = element
           });
           commit('SET_ACCESS', temp);
           commit('SET_NAME', data.name)
