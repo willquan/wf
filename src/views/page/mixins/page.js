@@ -12,19 +12,19 @@ export default {
         DataFormChanged() {
             this.getListRef().queryList()
         },
-        ViewBtnClicked(userid) {
+        ViewBtnClicked(id) {
             if(this.tabs.indexOf(this.view) == -1) {
                 this.tabs.push(this.view)
             }
             this.switchToTab('ViewTab')
-            this.viewItemId = userid
+            this.viewItemId = id
         },
-        EditBtnClicked(userid) {
+        EditBtnClicked(id) {
             if(this.tabs.indexOf(this.edit) == -1) {
                 this.tabs.push(this.edit)
             }
             this.switchToTab('EditTab')
-            this.editItemId = userid
+            this.editItemId = id
         },
         AddBtnClicked() {
             if(this.tabs.indexOf(this.add) == -1) {
