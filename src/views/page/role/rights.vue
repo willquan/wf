@@ -4,6 +4,7 @@
 
 <script>
 export default {
+    name: 'rightsTab',
     data() {
         return {
             data4: [

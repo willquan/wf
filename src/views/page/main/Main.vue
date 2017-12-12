@@ -111,8 +111,7 @@ export default {
     initMenu(){
       ApiMenu.queryList().then((data) => {
         this.menuList = this.filterRoutes(appRouter, data);
-      }).catch(error => {
-      });
+      }).catch(error => {});
     },
     filterRoutes(routers, menus) {
       var targetRoutes = [];
