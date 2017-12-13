@@ -7,12 +7,12 @@ export default {
             return ApiUser
         },
         hasPermission(name) {
-            return this.access[this.getApi().res] && this.access[this.getApi().res][name]
+            return this.rights[this.getApi().res] && this.rights[this.getApi().res][name]
         }
     },
     computed: {
         ...mapGetters([
-            'access',
+            'rights',
             'singlePageHeight'
         ])
     }

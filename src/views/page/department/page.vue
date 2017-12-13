@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         hasCreatePermission() {
-            return this.access.departments && this.access.departments.create
+            return this.rights.departments && this.rights.departments.create
         }
     }
 }

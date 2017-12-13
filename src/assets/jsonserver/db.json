@@ -2,7 +2,7 @@
   "login": {
     "token": "sldjfsljfdsljfslkd123123"
   },
-  "access": [
+  "rights": [
     {
       "id": 1,
       "res": "users",
@@ -69,11 +69,6 @@
       "id": 1,
       "menuId": 1,
       "name": "home_index"
-    },
-    {
-      "id": 2,
-      "menuId": 2,
-      "name": "access"
     },
     {
       "id": 3,

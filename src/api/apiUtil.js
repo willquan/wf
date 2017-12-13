@@ -5,3 +5,4 @@ export const ApiDep = createApi("departments");
 export const ApiPos = createApi("positions");
 export const ApiRole = createApi("roles");
 export const ApiMenu = createApi("menus");
+export const ApiRights = createApi("rights");

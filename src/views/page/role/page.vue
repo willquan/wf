@@ -10,7 +10,7 @@
     <item-form v-fix-height :slot="edit.name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
     <item-form v-fix-height :slot="view.name" :isEditable="false" :itemId="viewItemId"></item-form>
     <menuTab v-fix-height :slot="menu.name" :itemId="viewItemId"></menuTab>
-    <RightsTab v-fix-height :slot="rights.name" :itemId="viewItemId"></RightsTab>
+    <RightsTab v-fix-height :slot="right.name" :itemId="viewItemId"></RightsTab>
     <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" style="margin-right: 10px" v-if="hasPermission('create')">{{add.label}}</Button>
 </auto-tabs>
 </template>
@@ -39,7 +39,7 @@ export default {
             edit: {name:'EditTab', label: '编辑角色', closable: true, show: false},
             view: {name:'ViewTab', label: '查看信息', closable: true, show: false},
             menu: {name:'MenuTab', label: '菜单设置', closable: true, show: false},
-            rights: {name:'RightTab', label: '权限设置', closable: true, show: false},
+            right: {name:'RightTab', label: '权限设置', closable: true, show: false},
             tabs: [
                 {name:'ListTab', label: '角色列表', closable: false, show: true}
             ]
@@ -54,8 +54,8 @@ export default {
             this.editItemId = id
         },
         RightBtnClicked(id) {
-            if(this.tabs.indexOf(this.rights) == -1) {
-                this.tabs.push(this.rights)
+            if(this.tabs.indexOf(this.right) == -1) {
+                this.tabs.push(this.right)
             }
             this.switchToTab('RightTab')
             this.editItemId = id

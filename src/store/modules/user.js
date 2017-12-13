@@ -7,7 +7,7 @@ const user = {
     name: '',
     avatar: '',
     roles: '',
-    access: {}
+    rights: {}
   },
 
   mutations: {
@@ -23,8 +23,8 @@ const user = {
     SET_ROLES: (state, roles) => {
       state.roles = roles
     },
-    SET_ACCESS: (state, access) => {
-      state.access = access
+    SET_RIGHTS: (state, rights) => {
+      state.rights = rights
     }
   },
 
@@ -49,10 +49,10 @@ const user = {
         getInfo(state.token).then(data => {
           commit('SET_ROLES', data.role)
           let temp = {};
-          data.access.forEach(element => {
+          data.rights.forEach(element => {
             temp[element.res] = element
           });
-          commit('SET_ACCESS', temp);
+          commit('SET_RIGHTS', temp);
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           resolve(data)

@@ -4,7 +4,7 @@
             <Card>
                 <p slot="title">菜单权限设置</p>
                 <Tree :data="treeData" show-checkbox multiple></Tree>
-                <Button @click="handleSubmit" :loading="isLoading" type="primary" long>提交</Button>
+                <Button @click="handleSubmit" :loading="isLoading" style="margin-top: 32px" type="primary" long>提交</Button>
             </Card>
         </Col>
     </Row>
@@ -19,7 +19,10 @@ export default {
     mixins:[apiMixin],
     name: 'MenuTab',
     props: {
-        itemId: 0
+       itemId: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
@@ -28,13 +31,16 @@ export default {
         }
     },
     mounted: function() {
-      ApiMenu.queryList().then((data) => {
-        this.treeData = this.filterRoutes(appRouter, data);
-      }).catch(error => {});
+        this.queryMenu();
     },
     methods: {
         handleSubmit(){
             
+        },
+        queryMenu() {
+            ApiMenu.queryList().then((data) => {
+                this.treeData = this.filterRoutes(appRouter, data);
+            }).catch(error => {});
         },
         filterRoutes(routers, menus) {
             let tree = [];
@@ -65,7 +71,12 @@ export default {
             });
             return tree;
         },
-    }
+    },
+    watch: {
+        itemId: function(newId) {
+            this.queryMenu();
+        }
+    },
 }
 </script>
 

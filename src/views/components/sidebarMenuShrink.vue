@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         changeMenu (active) {
-            if (active !== 'accesstest_index') {
+            if (active !== 'rightstest_index') {
                 this.$router.push({
                     name: active
                 });

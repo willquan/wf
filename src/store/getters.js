@@ -3,7 +3,7 @@ const getters = {
   avatar: state => state.user.avatar,
   name: state => state.user.name,
   roles: state => state.user.roles,
-  access: state => state.user.access,
+  rights: state => state.user.rights,
   singlePageHeight: state => state.scroll.singlePageHeight,
 }
 export default getters

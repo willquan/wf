@@ -34,7 +34,7 @@ export default {
                     render:(h, params) => {
                         return h(TableRightBtns, {
                             props: {
-                                permissions: this.access[this.getApi().res]
+                                permissions: this.rights[this.getApi().res]
                             },
                             on: {
                                 MenuBtnClicked: () => {

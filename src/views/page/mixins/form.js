@@ -71,7 +71,7 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'access'
+            'rights'
         ])
     }
 }

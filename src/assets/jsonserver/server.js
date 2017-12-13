@@ -41,7 +41,7 @@ router.render = (req, res) => {
 server.use(jsonServer.rewriter({
   "/user/login" : "/login",
   "/menus" : "/menus?_embed=children",
-  "/user/info*" : "/users/5?_embed=access",
+  "/user/info*" : "/users/5?_embed=rights",
   "/*/total" : "/total"
 }))
 
