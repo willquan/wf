@@ -2,7 +2,7 @@
     <Row type="flex" justify="center">
         <Col span="20" :lg="15">
             <Card>
-                <p slot="title">菜单权限设置</p>
+                <p slot="title">菜单设置</p>
                 <Tree :data="treeData" show-checkbox multiple></Tree>
                 <Button @click="handleSubmit" :loading="isLoading" style="margin-top: 32px" type="primary" long>提交</Button>
             </Card>
@@ -35,10 +35,10 @@ export default {
     },
     methods: {
         handleSubmit(){
-            
+            this.$emit('FormDataChanged')
         },
         queryMenu() {
-            ApiMenu.queryList().then((data) => {
+            ApiMenu.queryList(/*{roleId: this.itemId}*/).then((data) => {
                 this.treeData = this.filterRoutes(appRouter, data);
             }).catch(error => {});
         },

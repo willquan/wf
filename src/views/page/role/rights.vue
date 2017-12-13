@@ -2,7 +2,7 @@
     <Row type="flex" justify="center">
         <Col span="20" :lg="15">
             <Card>
-                <p slot="title">菜单权限设置</p>
+                <p slot="title">权限设置</p>
                 <Tree :data="treeData" show-checkbox multiple></Tree>
                 <Button @click="handleSubmit" :loading="isLoading" style="margin-top: 32px" type="primary" long>提交</Button>
             </Card>
@@ -12,8 +12,7 @@
 
 <script>
 import apiMixin from './config';
-import {appRouter} from '@/router/router';
-import {ApiRights} from '@/api/apiUtil';
+import {ApiRights, resMap, rightsMap} from '@/api/apiUtil';
 
 export default {
     mixins:[apiMixin],
@@ -35,40 +34,34 @@ export default {
     },
     methods: {
         handleSubmit(){
-            
+            this.$emit('FormDataChanged')
         },
         queryRight() {
-            ApiRights.queryList().then((data) => {
-                console.log(data)
-                // this.treeData = this.filterRoutes(appRouter, data);
+            ApiRights.queryList({roleId: this.itemId}).then((data) => {
+                this.treeData = this.createTreeData(data);
             }).catch(error => {});
         },
-        filterRoutes(routers, menus) {
+        createTreeData(data) {
             let tree = [];
-            routers.forEach(router => {
+            data.forEach(right => {
                 let node = {
-                    name: router.name,
-                    title: router.meta.title,
-                    expand: true,
+                    res: right.res,
+                    title: resMap[right.res],
+                    expand: false,
                     children: []
                 }
-                tree.push(node);
-                router.children.forEach(rChild=>{
-                    node.children.push({
-                        title: rChild.meta.title,
-                        checked: false,
-                        name: rChild.name
-                    });
-                    menus.forEach(menu => {
-                        if(router.name == menu.name) {
-                            menu.children.forEach(mChild=>{
-                                if(rChild.name == mChild.name) {
-                                    node.checked = true;
-                                }
-                            });
+                for (const key in right) {
+                    if (right.hasOwnProperty(key) && rightsMap[key]) {
+                        const val = right[key];
+                        let cNode = {
+                            title: rightsMap[key],
+                            expand: true,
+                            checked: val
                         }
-                    });
-                });
+                        node.children.push(cNode);
+                    }
+                }
+                tree.push(node);
             });
             return tree;
         },
