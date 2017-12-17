@@ -2,7 +2,7 @@ import fetch from '@/libs/fetch'
 
 export function login(username, password) {
   return fetch({
-    url: '/user/login',
+    url: '/login',
     method: 'get',
     data: {
       username,
@@ -13,7 +13,7 @@ export function login(username, password) {
 
 export function getInfo(token) {
   return fetch({
-    url: '/user/info',
+    url: '/info',
     method: 'get',
     params: { token }
   })
@@ -21,14 +21,14 @@ export function getInfo(token) {
 
 export function logout() {
   return fetch({
-    url: '/user/logout',
+    url: '/logout',
     method: 'get'
   })
 }
 
 export function unlock(password) {
   return fetch({
-    url: '/user/unlock',
+    url: '/unlock',
     method: 'get',
     data: {
       password
