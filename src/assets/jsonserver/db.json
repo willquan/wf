@@ -60,6 +60,10 @@
       "name": "home"
     },
     {
+      "id": 3,
+      "name": "fault"
+    },
+    {
       "id": 2,
       "name": "manager"
     }
@@ -89,6 +93,11 @@
       "id": 6,
       "menuId": 2,
       "name": "employee"
+    },
+    {
+      "id": 7,
+      "menuId": 3,
+      "name": "manage"
     }
   ],
   "total": {

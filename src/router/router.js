@@ -65,6 +65,17 @@ export const appRouter = [
         ]
     },
     {
+        path: '/fault',
+        redirect: {name: 'home_index'},
+        icon: 'bug',
+        name: 'fault',
+        meta: {title: '缺陷管理'},
+        component: Main,
+        children: [
+            { path: 'manage', meta:{title: '缺陷办理'}, name: 'manage', component: resolve => { require(['@/views/page/fault/page.vue'], resolve); } },
+        ]
+    },
+    {
         path: '/manager',
         redirect: {name: 'home_index'},
         icon: 'briefcase',
