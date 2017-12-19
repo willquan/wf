@@ -17,7 +17,7 @@
                     </Col>
                     <Col span="12">
                         <FormItem prop="fgroup" label="消缺班组" v-if="isEditable">
-                            <Input v-model="form.fgroup" :maxlength="30" placeholder="请选择消缺班组" :disabled="true">
+                            <Input class="input-disabled-white-bg" v-model="form.fgroup" :maxlength="30" placeholder="请选择消缺班组" :disabled="true">
                                 <Button slot="append" icon="ios-search"></Button>
                             </Input>
                         </FormItem>
@@ -26,66 +26,105 @@
                 <Row>
                     <Col span="12">
                         <FormItem prop="fpos" label="功能位置">
-                            <Input v-model="form.fpos" :maxlength="30" placeholder="请选择功能位置" :disabled="true">
+                            <Input class="input-disabled-white-bg" v-model="form.fpos" :maxlength="30" placeholder="请选择功能位置" :disabled="true">
                                 <Button slot="append" icon="ios-search"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
                         <FormItem :label-width="40">
-                            <span>功能位置描述功能位置描述功能位置描述功能位置描述功能位置描述</span>
+                            <Input v-model="form.phone" placeholder="自动填充" disabled/>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
                         <FormItem prop="fpos" label="设备描述">
-                            <Input v-model="form.fpos" :maxlength="30" placeholder="请选择功能位置" :disabled="true"/>
+                            <Row>
+                                <Input v-model="form.phone" placeholder="自动填充" disabled/>
+                            </Row>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="主责任班组">
-                            <Input placeholder="自动填充" :disabled="true"/>
+                        <FormItem label="主责班组">
+                            <Input v-model="form.phone" placeholder="自动填充" disabled/>
                         </FormItem>
                     </Col>
                 </Row>
                 
                 <FormItem prop="fdesc" label="缺陷描述">
-                    <Input v-model="form.fdesc" :maxlength="30" placeholder="输入缺陷描述"/>
+                    <Input v-model="form.fdesc" :maxlength="200" placeholder="输入缺陷描述"/>
                 </FormItem>
-                <FormItem prop="ftype" label="缺陷现象类型" v-if="isEditable">
-                    <Select v-model="form.ftype" placeholder="选择缺陷现象类型" :disabled="!isEditable" transfer>
-                        <Option v-for="el in ftypes" :value="el.id" :key="el.id">{{ el.name }}</Option>
-                    </Select>
-                </FormItem>
-                <FormItem prop="finder" label="缺陷发现人" v-if="isEditable">
-                   <Input v-model="form.finder" :maxlength="30" placeholder="请选择缺陷发现人" :disabled="true">
-                        <Button slot="append" icon="ios-search"></Button>
-                    </Input>
-                </FormItem>
-                <FormItem prop="runGrounp" label="运行职别" v-if="isEditable">
-                   <Input v-model="form.runGrounp" :maxlength="30" placeholder="请选择运行职别" :disabled="true">
-                        <Button slot="append" icon="ios-search"></Button>
-                    </Input>
-                </FormItem>
-                <FormItem prop="fixMajor" label="检修专业" v-if="isEditable">
-                   <Input v-model="form.fixMajor" :maxlength="30" placeholder="请选择检修专业" :disabled="true">
-                        <Button slot="append" icon="ios-search"></Button>
-                    </Input>
-                </FormItem>
-                 <FormItem prop="phone" label="联系电话">
-                    <Input v-model="form.phone" :maxlength="30" placeholder="输入联系电话"/>
-                </FormItem>
-                 <FormItem prop="runfg" label="运行分工" v-if="isEditable">
-                   <Input v-model="form.runfg" :maxlength="30" placeholder="请选择运行分工" :disabled="true">
-                        <Button slot="append" icon="ios-search"></Button>
-                    </Input>
-                </FormItem>
+                <Row>
+                    <Col span="12">
+                        <FormItem prop="ftype" label="缺陷现象类型" v-if="isEditable">
+                            <Select v-model="form.ftype" placeholder="选择缺陷现象类型" :disabled="!isEditable" transfer>
+                                <Option v-for="el in ftypes" :value="el.id" :key="el.id">{{ el.name }}</Option>
+                            </Select>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                         <FormItem prop="finder" label="缺陷发现人" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="form.finder" :maxlength="30" placeholder="请选择缺陷发现人" :disabled="true">
+                                <Button slot="append" icon="ios-search"></Button>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                 <Row>
+                    <Col span="12">
+                        <FormItem prop="runGrounp" label="运行职别" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="form.runGrounp" :maxlength="30" placeholder="请选择运行职别" :disabled="true">
+                                <Button slot="append" icon="ios-search"></Button>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="fixMajor" label="检修专业" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="form.fixMajor" :maxlength="30" placeholder="请选择检修专业" :disabled="true">
+                                <Button slot="append" icon="ios-search"></Button>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12">
+                        <FormItem prop="phone" label="联系电话">
+                            <Input v-model="form.phone" :maxlength="30" placeholder="输入联系电话"/>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                         <FormItem prop="runfg" label="运行分工" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="form.runfg" :maxlength="30" placeholder="请选择运行分工" :disabled="true">
+                                <Button slot="append" icon="ios-search"></Button>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                 <Row>
+                    <Col span="12">
+                        <FormItem prop="phone" label="审核提交时间">
+                            <Input v-model="form.phone" :disabled="true"/>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                         <FormItem prop="runfg" label="要求结束时间" v-if="isEditable">
+                            <Input v-model="form.runfg" :disabled="true">
+                                 <Input v-model="form.phone" :maxlength="30" placeholder=""/>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                </Row>
                 <FormItem prop="comments" label="备注">
                     <Input v-model="form.comments" type="textarea" placeholder="输入备注信息"/>
                 </FormItem>
                 <FormItem  v-if="isEditable">
-                    <Button @click="handleSubmit" :loading="isLoading" type="primary" long>{{itemId==0 ? '添加' : '修改'}}</Button>
+                    <Row type="flex" justify="space-around">
+                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="ghost" long>保存</Button></Col>
+                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="default" long>提交</Button></Col>
+                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="warning" long>审核提交</Button></Col>
+                    </Row>
+                    
                 </FormItem>
             </Form>
         </Card>
