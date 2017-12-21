@@ -50,6 +50,18 @@
       "detail": true,
       "export": true,
       "userId": 5
+    },
+    {
+      "id": 5,
+      "res": "broles",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
     }
   ],
   "logout": {},
@@ -78,6 +90,11 @@
       "id": 3,
       "menuId": 2,
       "name": "department"
+    },
+    {
+      "id": 4,
+      "menuId": 2,
+      "name": "brole"
     },
     {
       "id": 4,
@@ -280,6 +297,48 @@
     }
   ],
   "roles": [
+    {
+      "id": 1,
+      "name": "值长"
+    },
+    {
+      "id": 2,
+      "name": "操作人"
+    },
+    {
+      "id": 3,
+      "name": "监护人"
+    },
+    {
+      "id": 4,
+      "name": "值班负责人"
+    },
+    {
+      "id": 5,
+      "name": "工作票签收人"
+    },
+    {
+      "id": 6,
+      "name": "工作票许可人"
+    },
+    {
+      "id": 7,
+      "name": "签发人"
+    },
+    {
+      "id": 8,
+      "name": "工作负责人"
+    },
+    {
+      "id": 9,
+      "name": "工作班成员"
+    },
+    {
+      "id": 10,
+      "name": "工作联系人"
+    }
+  ],
+  "broles": [
     {
       "id": 1,
       "name": "值长"
