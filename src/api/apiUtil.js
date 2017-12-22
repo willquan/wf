@@ -26,3 +26,4 @@ export const ApiRole = createApi("roles");
 export const ApiMenu = createApi("menus");
 export const ApiRights = createApi("rights");
 export const ApiBrole = createApi("broles");
+export const ApiKKS = createApi("kks");

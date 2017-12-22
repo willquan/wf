@@ -1,4 +1,5 @@
 <template>
+<div>
 <Row type="flex" justify="center" style="margin-bottom: 8px;">
     <Col span="20" :lg="20">
         <Card>
@@ -6,13 +7,12 @@
             <p slot="extra" style="color: green">
                 临时保存
             </p>
-            <Form ref="wfForm" :model="form" :rules="rules" label-position="right" :label-width="100">
-                
+            <Form ref="wfForm" :model="form" label-position="right" :label-width="100">
                 <Row>
                     <Col span="12">
                         <FormItem prop="fpos" label="功能位置">
                             <Input class="input-disabled-white-bg" v-model="form.fpos" :maxlength="30" placeholder="请选择功能位置" :disabled="true">
-                                <Button slot="append" icon="ios-search"></Button>
+                                <Button slot="append" icon="ios-search" @click="chooseFpos"></Button>
                             </Input>
                         </FormItem>
                     </Col>
@@ -69,15 +69,27 @@
                 </Row>
                  <Row>
                     <Col span="12">
-                        <FormItem prop="phone" label="审核提交时间">
-                            <Input v-model="form.phone" :disabled="true"/>
+                        <FormItem prop="phone" label="提交时间">
+                            <Row type="flex" justify="space-between">
+                                <Col span="12">
+                                    <Input v-model="form.phone" :disabled="true"/>
+                                </Col>
+                                <Col span="11">
+                                    <Input v-model="form.phone" :disabled="true"/>
+                                </Col>
+                            </Row>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                         <FormItem prop="runfg" label="要求结束时间" v-if="isEditable">
-                            <Input v-model="form.runfg" :disabled="true">
-                                 <Input v-model="form.phone" :maxlength="30" placeholder=""/>
-                            </Input>
+                        <FormItem prop="phone" label="要求结束时间">
+                            <Row type="flex" justify="space-between">
+                                <Col span="12">
+                                    <Input v-model="form.phone" :disabled="true"/>
+                                </Col>
+                                <Col span="11">
+                                    <Input v-model="form.phone" :disabled="true"/>
+                                </Col>
+                            </Row>
                         </FormItem>
                     </Col>
                 </Row>
@@ -90,24 +102,34 @@
                         <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="default" long>提交</Button></Col>
                         <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="warning" long>审核提交</Button></Col>
                     </Row>
-                    
                 </FormItem>
             </Form>
         </Card>
     </Col>
 </Row>
+<Modal
+    v-model="fposDlg"
+    title="Common Modal dialog box title"
+    width="768"
+    @on-ok="()=>{}"
+    @on-cancel="()=>{}">
+    <FposTree></FposTree>
+</Modal>
+</div>
 </template>
 
 <script>
 import formMixin from '@/views/page/mixins/form'
 import {ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
 import apiMixin from './config'
-
+import FposTree from './FposTree'
 export default {
     mixins:[formMixin, apiMixin],
-    name: 'employeeForm',
+    name: 'faultForm',
+    components: {FposTree},
     data() {
         return {
+            fposDlg : false,
             flevels:[],
             ftypes: [],
             departments: [],
@@ -125,35 +147,6 @@ export default {
                 phone: '',
                 runfg: '',
                 comments: ''
-            },
-            rules: {
-                username: [
-                    { required: true, message: '用户名不能为空', trigger: 'blur' }
-                ],
-                pwd: [
-                    { required: true, message: '密码不能为空', trigger: 'blur' }
-                ],
-                worknum: [
-                    { required: true, message: '工号不能为空', trigger: 'blur' }
-                ],
-                phone: [
-                    { required: true, message: '手机号码不能为空', trigger: 'blur' }
-                ],
-                name: [
-                    { required: true, message: '用户姓名不能为空', trigger: 'blur' }
-                ],
-                sex: [
-                    { required: true, message: '性别不能为空', trigger: 'change' }
-                ],
-                departmentId: [
-                    { type: "number", required: true, message: '请选择部门', trigger: 'change' }
-                ],
-                positionId: [
-                    { type: "number", required: true, message: '请选择职位', trigger: 'change' }
-                ],
-                roleId: [
-                    { type: "number", required: true, message: '请选择角色', trigger: 'change' }
-                ]
             }
         }
     },
@@ -171,6 +164,9 @@ export default {
         },
         getFormRef() {
             return this.$refs.wfForm
+        },
+        chooseFpos() {
+            this.fposDlg = !this.fposDlg;
         }
     }
 }

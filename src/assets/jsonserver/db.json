@@ -379,5 +379,35 @@
       "id": 10,
       "name": "工作联系人"
     }
+  ],
+  "kks": [
+    {
+      "id": 1,
+      "parentId": 0,
+      "name": "W025",
+      "desc": "北京电厂",
+      "sid": "HNJT"
+    },
+    {
+      "id": 2,
+      "parentId": 1,
+      "name": "W025 6",
+      "desc": "#6机组",
+      "sid": "HNJT"
+    },
+    {
+      "id": 3,
+      "parentId": 2,
+      "name": "W025 4 0QEB10 AA202",
+      "desc": "#4炉尿素喷枪无油空压机来雾化空气逆止阀",
+      "sid": "HNJT"
+    },
+    {
+      "id": 4,
+      "parentId": 2,
+      "name": "W025 6 0AEA01",
+      "desc": "#6主变压器6B高压侧开关间隔",
+      "sid": "HNJT"
+    }
   ]
 }
