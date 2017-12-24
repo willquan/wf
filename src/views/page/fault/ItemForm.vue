@@ -10,84 +10,86 @@
             <Form ref="wfForm" :model="form" label-position="right" :label-width="100">
                 <Row>
                     <Col span="12">
-                        <FormItem prop="fpos" label="功能位置">
-                            <Input class="input-disabled-white-bg" v-model="form.fpos" :maxlength="30" placeholder="请选择功能位置" :disabled="true">
-                                <Button slot="append" icon="ios-search" @click="chooseFpos"></Button>
+                        <FormItem prop="posName" label="功能位置">
+                            <Input class="input-disabled-white-bg" v-model="posName" placeholder="请选择功能位置" :disabled="true">
+                                <Button slot="append" icon="ios-search" @click="$refs.fPosModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
                         <FormItem :label-width="40">
-                            <Input v-model="form.phone" placeholder="自动填充" disabled/>
+                            <Input v-model="posDesc" placeholder="自动填充" disabled/>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
                         <FormItem prop="flevel" label="缺陷级别" v-if="isEditable">
-                            <Select v-model="form.flevel" placeholder="选择缺陷级别" :disabled="!isEditable" transfer>
+                            <Select v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="flevelChanged">
                                 <Option v-for="el in flevels" :value="el.id" :key="el.id">{{ el.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        
+                        <FormItem label="缺陷发现人" v-if="isEditable">
+                            <Input :value="$store.getters.name" :disabled="true"/>
+                        </FormItem>
                     </Col>
                 </Row>
-                <FormItem prop="fdesc" label="缺陷描述">
-                    <Input v-model="form.fdesc" :maxlength="200" type="textarea" placeholder="输入缺陷描述"/>
-                </FormItem>
                 <Row>
                     <Col span="12">
-                         <FormItem prop="finder" label="缺陷发现人" v-if="isEditable">
-                            <Input class="input-disabled-white-bg" v-model="form.finder" :maxlength="30" placeholder="请选择缺陷发现人" :disabled="true">
-                                <Button slot="append" icon="ios-search"></Button>
+                        <FormItem prop="group" label="运行值别" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="group" placeholder="请选择运行值别" :disabled="true">
+                                <Button slot="append" icon="ios-search" @click="$refs.groupModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
                          <FormItem prop="phone" label="联系电话">
-                            <Input v-model="form.phone" :maxlength="30" placeholder="输入联系电话"/>
+                            <Input v-model="form.phone" :maxlength="11" placeholder="输入联系电话"/>
+                        </FormItem>
+                    </Col>
+                </Row>
+                 <FormItem prop="desc" label="缺陷描述">
+                    <Input v-model="form.desc" :maxlength="300" type="textarea" placeholder="输入缺陷描述"/>
+                </FormItem>
+                 <Row>
+                    <Col span="12">
+                        <FormItem prop="major" label="检修专业" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="major" placeholder="请选择检修专业" :disabled="true">
+                                <Button slot="append" icon="ios-search" @click="$refs.majorModal.show()"></Button>
+                            </Input>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="team" label="消缺班组" v-if="isEditable">
+                            <Input class="input-disabled-white-bg" v-model="team" placeholder="请选择消缺班组" :disabled="true">
+                                <Button slot="append" icon="ios-search" @click="$refs.teamModal.show()"></Button>
+                            </Input>
                         </FormItem>
                     </Col>
                 </Row>
                  <Row>
                     <Col span="12">
-                        <FormItem prop="fixMajor" label="检修专业" v-if="isEditable">
-                            <Input class="input-disabled-white-bg" v-model="form.fixMajor" :maxlength="30" placeholder="请选择检修专业" :disabled="true">
-                                <Button slot="append" icon="ios-search"></Button>
-                            </Input>
-                        </FormItem>
-                    </Col>
-                    <Col span="12">
-                        <FormItem prop="fgroup" label="消缺班组" v-if="isEditable">
-                            <Input class="input-disabled-white-bg" v-model="form.fgroup" :maxlength="30" placeholder="请选择消缺班组" :disabled="true">
-                                <Button slot="append" icon="ios-search"></Button>
-                            </Input>
-                        </FormItem>
-                    </Col>
-                </Row>
-                 <Row>
-                    <Col span="12">
-                        <FormItem prop="phone" label="提交时间">
+                        <FormItem prop="date1" label="提交时间">
                             <Row type="flex" justify="space-between">
                                 <Col span="12">
-                                    <Input v-model="form.phone" :disabled="true"/>
+                                    <DatePicker type="date" :value="form.date1" disabled></DatePicker>
                                 </Col>
                                 <Col span="11">
-                                    <Input v-model="form.phone" :disabled="true"/>
+                                    <TimePicker type="time" :value="form.date1" disabled></TimePicker>
                                 </Col>
                             </Row>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem prop="phone" label="要求结束时间">
+                        <FormItem prop="date2" label="要求结束时间">
                             <Row type="flex" justify="space-between">
                                 <Col span="12">
-                                    <Input v-model="form.phone" :disabled="true"/>
+                                    <DatePicker type="date" :clearable="false" :value="form.date2" :options="options2" :disabled="form.flevelId<3"></DatePicker>
                                 </Col>
                                 <Col span="11">
-                                    <Input v-model="form.phone" :disabled="true"/>
+                                    <TimePicker type="time" :clearable="false" :steps="[1, 15]" format="HH:mm" :value="form.date2" :disabled="form.flevelId<3"></TimePicker>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -107,66 +109,94 @@
         </Card>
     </Col>
 </Row>
-<Modal
-    v-model="fposDlg"
-    title="Common Modal dialog box title"
-    width="768"
-    @on-ok="()=>{}"
-    @on-cancel="()=>{}">
-    <FposTree></FposTree>
-</Modal>
+<FposModal ref="fPosModal" @PosSelected="PosSelected"></FposModal>
+<MajorModal ref="majorModal" @ItemDidSelect="MajorDidSelect" title="请选择检修专业"></MajorModal>
+<TeamModal ref="teamModal" @ItemDidSelect="TeamDidSelect" title="请选择消缺班组"></TeamModal>
+<GroupModal ref="groupModal" @ItemDidSelect="GroupDidSelect" title="请选择运行值别"></GroupModal>
 </div>
 </template>
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
+import {ApiFlevels, ApiFaults} from '@/api/apiUtil'
 import apiMixin from './config'
-import FposTree from './FposTree'
+import FposModal from './FposModal'
+import MajorModal from './MajorModal'
+import TeamModal from './TeamModal'
+import GroupModal from './GroupModal'
 export default {
     mixins:[formMixin, apiMixin],
     name: 'faultForm',
-    components: {FposTree},
+    components: {FposModal, MajorModal, TeamModal, GroupModal},
     data() {
         return {
-            fposDlg : false,
+            posName: '',
+            posDesc: '',
             flevels:[],
-            ftypes: [],
-            departments: [],
+            major: '',
+            group: '',
+            team: '',
             form: {
-                fnumber: '',
-                fstatus: '',
-                flevel: '',
-                fgroup: '',
-                fpos: '',
-                fdesc: '',
-                ftype: '',
-                runGrounp: 'man',
-                finder: '',
-                fixMajor: '',
+                fposId: '',
+                flevelId: '',
+                date1: new Date(),
+                date2: new Date(),
+                teamId: '',
+                groupId: '',
+                desc: '',
+                majorId: '',
                 phone: '',
-                runfg: '',
                 comments: ''
+            },
+            options2: {
+                disabledDate (date) {
+                    return date && date.valueOf() < Date.now();
+                }
             }
         }
     },
     methods: {
         onFormComponentDataPrepare() {
-            ApiDep.queryList().then(data => {
-                this.departments = data;
-            });
-            ApiPos.queryList().then(data => {
-                this.positions = data;
-            });
-            ApiRole.queryList().then(data => {
-                this.roles = data;
+            ApiFlevels.queryList().then(data => {
+                this.flevels = data;
             });
         },
         getFormRef() {
             return this.$refs.wfForm
         },
-        chooseFpos() {
-            this.fposDlg = !this.fposDlg;
+        handleSubmit() {
+            ApiFaults.create(this.form).then(data => {
+                this.isLoading = false;
+                this.$Message.success('添加成功');
+                this.getFormRef().resetFields();
+                this.$emit('FormDataChanged')
+            }).catch(e => {
+                this.isLoading = false;
+                console.log(e);
+            });
+        },
+        PosSelected(fpos) {
+            this.posName = fpos.name;
+            this.posDesc = fpos.desc;
+            this.fposId = fpos.id;
+        },
+        flevelChanged(value) {
+            if(value > 3) value = 3;
+            let nowDate = new Date();
+            nowDate.setTime(this.form.date1.getTime() + 1000*60*60*24*value);
+            this.form.date2 = nowDate;
+        },
+        MajorDidSelect(value) {
+            this.form.majorId = value.id;
+            this.major = value.name;
+        },
+        TeamDidSelect(value) {
+            this.form.teamId = value.id;
+            this.team = value.name;
+        },
+        GroupDidSelect(value) {
+            this.form.groupId = value.id;
+            this.group = value.name;
         }
     }
 }
@@ -174,4 +204,7 @@ export default {
 
 <style>
 @import '../common.less';
+.ivu-date-picker {
+    display: block !important;
+}
 </style>
