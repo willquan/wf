@@ -62,7 +62,7 @@ export default {
                     key: 'kksId',
                     width: '150',
                     render:(h, params) => {
-                        return params.row.kksName || params.row.kks.name
+                        return params.row.kksDesc || params.row.kks.desc
                     }
                 },
                 {

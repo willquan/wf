@@ -113,7 +113,7 @@ export default {
         addOptCol() {
             const permissions = this.rights[this.getApi().res]
             if(permissions && (permissions.detail || permissions.update || permissions.del)) {
-                this.cols.push(this.optCol)
+                this.cols.splice(1, 0, this.optCol);
             }
         }
     },
