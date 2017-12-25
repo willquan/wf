@@ -9,16 +9,6 @@ export default {
         return {
             columns:[
                 {
-                    title: ' ',
-                    width: 30,
-                    key: 'checked',
-                    render(h, params) {
-                        return (
-                            <Checkbox disabled={!params.row.checked} value={params.row.checked}></Checkbox>
-                        )
-                    }
-                },
-                {
                     type: 'index',
                     title: ' ',
                     width: 50,
