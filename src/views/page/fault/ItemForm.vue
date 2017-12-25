@@ -3,44 +3,44 @@
 <Row type="flex" justify="center" style="margin-bottom: 8px;">
     <Col span="20" :lg="20">
         <Card>
-            <p slot="title">缺陷单编号：1234123423423</p>
+            <p slot="title">缺陷单编号：{{form.fnumber}}</p>
             <p slot="extra" style="color: green">
-                临时保存
+                {{form.fstate | mapFstate}}
             </p>
             <Form ref="wfForm" :model="form" label-position="right" :rules="rules" :label-width="100">
                 <Row>
                     <Col span="12">
-                        <FormItem prop="fposId" label="功能位置">
-                            <Input class="input-disabled-white-bg" v-model="posName" placeholder="请选择功能位置" :disabled="true">
-                                <Button slot="append" icon="ios-search" @click="$refs.fPosModal.show()"></Button>
+                        <FormItem prop="kksId" label="功能位置">
+                            <Input class="input-disabled-white-bg" v-model="kksName" placeholder="请选择功能位置" :disabled="true">
+                                <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.kksModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
                         <FormItem :label-width="40">
-                            <Input v-model="posDesc" placeholder="自动填充" disabled/>
+                            <Input v-model="kksDesc" placeholder="自动填充" disabled/>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem prop="flevelId" label="缺陷级别" v-if="isEditable">
+                        <FormItem prop="flevelId" label="缺陷级别">
                             <Select v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="flevelChanged">
                                 <Option v-for="el in flevels" :value="el.id" :key="el.id">{{ el.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="缺陷发现人" v-if="isEditable">
+                        <FormItem label="缺陷发现人">
                             <Input :value="$store.getters.name" :disabled="true"/>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem prop="groupId" label="运行值别" v-if="isEditable">
+                        <FormItem prop="groupId" label="运行值别">
                             <Input class="input-disabled-white-bg" v-model="group" placeholder="请选择运行值别" :disabled="true">
-                                <Button slot="append" icon="ios-search" @click="$refs.groupModal.show()"></Button>
+                                <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.groupModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
@@ -55,41 +55,41 @@
                 </FormItem>
                  <Row>
                     <Col span="12">
-                        <FormItem prop="major" label="检修专业" v-if="isEditable">
+                        <FormItem prop="majorId" label="检修专业">
                             <Input class="input-disabled-white-bg" v-model="major" placeholder="请选择检修专业" :disabled="true">
-                                <Button slot="append" icon="ios-search" @click="$refs.majorModal.show()"></Button>
+                                <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.majorModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem prop="team" label="消缺班组" v-if="isEditable">
+                        <FormItem prop="teamId" label="消缺班组">
                             <Input class="input-disabled-white-bg" v-model="team" placeholder="请选择消缺班组" :disabled="true">
-                                <Button slot="append" icon="ios-search" @click="$refs.teamModal.show()"></Button>
+                                <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.teamModal.show()"></Button>
                             </Input>
                         </FormItem>
                     </Col>
                 </Row>
                  <Row>
                     <Col span="12">
-                        <FormItem prop="date1" label="提交时间">
+                        <FormItem prop="tjDate" label="提交时间">
                             <Row type="flex" justify="space-between">
                                 <Col span="12">
-                                    <DatePicker type="date" :value="form.date1" disabled></DatePicker>
+                                    <DatePicker type="date" :value="form.tjDate" disabled></DatePicker>
                                 </Col>
                                 <Col span="11">
-                                    <TimePicker type="time" :value="form.date1" disabled></TimePicker>
+                                    <TimePicker type="time" :value="form.tjDate" disabled></TimePicker>
                                 </Col>
                             </Row>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem prop="date2" label="要求结束时间">
+                        <FormItem prop="yqjsDate" label="要求结束时间">
                             <Row type="flex" justify="space-between">
                                 <Col span="12">
-                                    <DatePicker type="date" :clearable="false" :value="form.date2" :options="options2" :disabled="form.flevelId<3"></DatePicker>
+                                    <DatePicker type="date" :clearable="false" :value="form.yqjsDate" :options="options2" :disabled="form.flevelId<3 && !isEditable"></DatePicker>
                                 </Col>
                                 <Col span="11">
-                                    <TimePicker type="time" :clearable="false" :steps="[1, 15]" format="HH:mm" :value="form.date2" :disabled="form.flevelId<3"></TimePicker>
+                                    <TimePicker type="time" :clearable="false" :steps="[1, 15]" format="HH:mm" :value="form.yqjsDate" :disabled="form.flevelId<3 && !isEditable"></TimePicker>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -100,16 +100,16 @@
                 </FormItem>
                 <FormItem  v-if="isEditable">
                     <Row type="flex" justify="space-around">
-                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="ghost" long>保存</Button></Col>
-                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="default" long>提交</Button></Col>
-                        <Col span="4"><Button @click="handleSubmit" :loading="isLoading" type="warning" long>审核提交</Button></Col>
+                        <Col span="4"><Button @click="handleSubmit(1)" :loading="isLoading" type="ghost" long>保存</Button></Col>
+                        <Col span="4"><Button @click="handleSubmit(2)" :loading="isLoading" type="default" long>提交</Button></Col>
+                        <Col span="4"><Button @click="handleSubmit(3)" :loading="isLoading" type="warning" long>审核提交</Button></Col>
                     </Row>
                 </FormItem>
             </Form>
         </Card>
     </Col>
 </Row>
-<FposModal ref="fPosModal" @PosSelected="PosSelected"></FposModal>
+<KksModal ref="kksModal" @KksSelected="KksSelected"></KksModal>
 <MajorModal ref="majorModal" @ItemDidSelect="MajorDidSelect" title="请选择检修专业"></MajorModal>
 <TeamModal ref="teamModal" @ItemDidSelect="TeamDidSelect" title="请选择消缺班组"></TeamModal>
 <GroupModal ref="groupModal" @ItemDidSelect="GroupDidSelect" title="请选择运行值别"></GroupModal>
@@ -120,27 +120,32 @@
 import formMixin from '@/views/page/mixins/form'
 import {ApiFlevels, ApiFaults} from '@/api/apiUtil'
 import apiMixin from './config'
-import FposModal from './FposModal'
+import KksModal from './KksModal'
 import MajorModal from './MajorModal'
 import TeamModal from './TeamModal'
 import GroupModal from './GroupModal'
+import {parseTime} from '@/libs/timeUtil.js'
+
 export default {
     mixins:[formMixin, apiMixin],
     name: 'faultForm',
-    components: {FposModal, MajorModal, TeamModal, GroupModal},
+    components: {KksModal, MajorModal, TeamModal, GroupModal},
     data() {
         return {
-            posName: '',
-            posDesc: '',
+            kksName: '',
+            kksDesc: '',
             flevels:[],
             major: '',
             group: '',
             team: '',
             form: {
-                fposId: '',
+                fnumber:'', //缺陷单编号
+                fstate:'', // 缺陷单状态 1保存 2提交 3审核提交
+                kksId: '',
                 flevelId: '',
-                date1: new Date(),
-                date2: new Date(),
+                userId: this.$store.getters.userId,
+                tjDate: new Date(),
+                yqjsDate: new Date(),
                 teamId: '',
                 groupId: '',
                 desc: '',
@@ -154,7 +159,7 @@ export default {
                 }
             },
             rules: {
-                fposId: [
+                kksId: [
                     { type: "number", required: true, message: '请选择功能位置', trigger: 'change' }
                 ],
                 flevelId: [
@@ -162,6 +167,12 @@ export default {
                 ],
                 groupId: [
                     { type: "number", required: true, message: '请选择运行职别', trigger: 'change' }
+                ],
+                majorId: [
+                    { type: "number", required: true, message: '请选择检修专业', trigger: 'change' }
+                ],
+                teamId: [
+                    { type: "number", required: true, message: '请选择消缺班组', trigger: 'change' }
                 ]
             }
         }
@@ -175,13 +186,16 @@ export default {
         getFormRef() {
             return this.$refs.wfForm
         },
-        handleSubmit() {
-            this.refs.wfForm.validate((valid) => {
+        handleSubmit(state) {
+            this.getFormRef().validate((valid) => {
                 if (valid) {
+                    this.form.tjDate = parseTime(this.form.tjDate);
+                    this.form.yqjsDate = parseTime(this.form.yqjsDate);
+                    this.form.fstate = state;
                     ApiFaults.create(this.form).then(data => {
                         this.isLoading = false;
                         this.$Message.success('添加成功');
-                        this.getFormRef().resetFields();
+                        this.resetFields();
                         this.$emit('FormDataChanged')
                     }).catch(e => {
                         this.isLoading = false;
@@ -190,16 +204,16 @@ export default {
                 }
             });
         },
-        PosSelected(fpos) {
-            this.posName = fpos.name;
-            this.posDesc = fpos.desc;
-            this.fposId = fpos.id;
+        KksSelected(kks) {
+            this.kksName = kks.name;
+            this.kksDesc = kks.desc;
+            this.form.kksId = kks.id;
         },
         flevelChanged(value) {
             if(value > 3) value = 3;
             let nowDate = new Date();
-            nowDate.setTime(this.form.date1.getTime() + 1000*60*60*24*value);
-            this.form.date2 = nowDate;
+            nowDate.setTime(this.form.tjDate.getTime() + 1000*60*60*24*value);
+            this.form.yqjsDate = nowDate;
         },
         MajorDidSelect(value) {
             this.form.majorId = value.id;
@@ -212,6 +226,18 @@ export default {
         GroupDidSelect(value) {
             this.form.groupId = value.id;
             this.group = value.name;
+        },
+        resetFields() {
+            this.kksName = '';
+            this.kksDesc = '';
+            this.major = '';
+            this.group = '';
+            this.team = '';
+            this.form.fnumber = '';
+            this.form.fstate = '';
+            this.getFormRef().resetFields();
+            this.form.tjDate = new Date();
+            this.form.yqjsDate = new Date();
         }
     }
 }

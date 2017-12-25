@@ -7,13 +7,21 @@
             <Button type="text" @click="isShow=!isShow">取消</Button>
             <Button type="primary" @click="onOk">确定</Button>
     </div>
-    <div style="padding-bottom: 150px">
+    <div style="padding-bottom: 150px;">
+        <Row type="flex" justify="center" style="margin-top: 8px; margin-bottom: 4px;">
+            <Col span="12" style="padding-left: 8px">
+               <Input type="text" v-model="desc" @on-enter="startSearch()" @on-click="desc=''" placeholder="请输入KKS描述" :icon="desc!='' ? 'close-circled' : '' "/>
+            </Col>
+            <Col span="12" style="padding-left: 16px">
+                <Button type="default" @click="startSearch()">搜索</Button>
+            </Col>
+        </Row>
         <Row type="flex" justify="center" align="middle"
             style="
                 background-color: #f8f8f9;
                 border-top: 1px solid #e9eaec;
                 border-bottom: 1px solid #e9eaec; 
-                height:30px;
+                height: 38px;
                 padding-left: 16px
             ">
             <Col span="9">
@@ -35,30 +43,41 @@
 import { ApiKKS } from '@/api/apiUtil'
 import { Icon, Row, Col } from 'iview'
 export default {
-    name: "FposModal",
+    name: "KksModal",
     mounted: function() {
-        ApiKKS.queryList({parentId: 0}).then(data => {
-            data.forEach(el => {
-                el.title = el.name + el.desc + el.sid,
-                el.loading = false,
-                el.expand = false,
-                el.hasChildren = true,
-                el.nodeLevel = 0,
-                el.children = []
-            });
-            this.treeData = data;
-        });
+        this.beginQuery();
     },
     data() {
         return {
             treeData: [],
             selectedItem: {},
-            isShow: false
+            isShow: false,
+            desc: '' //用于搜索
         }
     },
     methods: {
         show() {
             this.isShow = true;
+        },
+        startSearch() {
+            this.beginQuery();
+        },
+        beginQuery() {
+            let params = {parentId: 0};
+            if(this.desc && this.desc != '') {
+                params = {desc: this.desc}
+            }
+            ApiKKS.queryList(params).then(data => {
+                data.forEach(el => {
+                    el.title = el.name + el.desc + el.sid,
+                    el.loading = false,
+                    el.expand = false,
+                    el.hasChildren = true,
+                    el.nodeLevel = 0,
+                    el.children = []
+                });
+                this.treeData = data;
+            });
         },
         loadData(item, callback) {
             ApiKKS.queryList({parentId: item.id}).then(data => {
@@ -76,7 +95,7 @@ export default {
         renderContent(h, { root, node, data }) {
             return (
                 <Row type="flex" justify="center" align="middle" class={{'row-high-light': this.selectedItem.id==data.id}} nativeOnClick={()=>{this.selectedItem = data}}
-                    style="border-bottom: 1px solid #e9eaec; padding-left: 16px;height:30px;">
+                    style="border-bottom: 1px solid #e9eaec; padding-left: 16px; height: 38px;">
                     <Col span="9" style={{paddingLeft : data.nodeLevel*16 + 'px'}}>
                         <span onClick={(event)=>{event.stopPropagation();data.expand = !data.expand; this.loadData(data,(children)=>{
                             data.children=children;
@@ -99,9 +118,16 @@ export default {
         onOk() {
             if(this.selectedItem.id) {
                 this.isShow = !this.isShow;
-                this.$emit('PosSelected', this.selectedItem);
+                this.$emit('KksSelected', this.selectedItem);
             } else 
                 this.$Message.warning('请选择一个节点');
+        }
+    },
+    watch: {
+        desc: function(value) {
+            if(!value || value == '') {
+                this.beginQuery();
+            }
         }
     }
 }

@@ -62,6 +62,18 @@
       "detail": true,
       "export": true,
       "userId": 5
+    },
+    {
+      "id": 6,
+      "res": "faults",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
     }
   ],
   "logout": {},
@@ -193,6 +205,7 @@
       "name": "宋小宝",
       "sex": "man",
       "departmentId": 2,
+      "departmentName": "departmentName",
       "positionId": 4,
       "roleId": 2,
       "id": 11,
@@ -583,5 +596,54 @@
       "fatory": "北京电厂"
     }
   ],
-  "faults": []
+  "faults": [
+    {
+      "fnumber": "",
+      "fstate": 1,
+      "kksId": 2,
+      "flevelId": 2,
+      "userId": 5,
+      "tjDate": "2017-12-25 16:09:54",
+      "yqjsDate": "2017-12-27 16:09:54",
+      "teamId": 4,
+      "groupId": 4,
+      "desc": "缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述",
+      "majorId": 6,
+      "phone": "",
+      "comments": "备注备注备注备注备注备注备注备注",
+      "id": 1
+    },
+    {
+      "fnumber": "",
+      "fstate": 2,
+      "kksId": 1,
+      "flevelId": 3,
+      "userId": 5,
+      "tjDate": "2017-12-25 16:10:37",
+      "yqjsDate": "2017-12-28 16:10:37",
+      "teamId": 3,
+      "groupId": 2,
+      "desc": "",
+      "majorId": 4,
+      "phone": "",
+      "comments": "",
+      "id": 2
+    },
+    {
+      "fnumber": "",
+      "fstate": 3,
+      "kksId": 1,
+      "flevelId": 3,
+      "userId": 5,
+      "tjDate": "2017-12-25 16:11:07",
+      "yqjsDate": "2017-12-28 16:11:07",
+      "teamId": 1,
+      "groupId": 5,
+      "desc": "",
+      "majorId": 11,
+      "phone": "",
+      "comments": "",
+      "id": 3
+    }
+  ]
 }

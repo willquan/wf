@@ -3,6 +3,7 @@ import App from './app.vue';
 import store from './store';
 import {router} from './router/router';
 import '@/permission'; // 权限
+import wfUtil from '@/libs/wfUtil.js'
 
 Vue.directive('fix-height', function (el, binding) {
     el.style.overflow = 'auto'
@@ -10,6 +11,10 @@ Vue.directive('fix-height', function (el, binding) {
     el.style.paddingLeft = '10px'
     el.style.paddingBottom = '50px'
     el.style.height = store.getters.singlePageHeight + 'px'
+})
+
+Vue.filter('mapFstate', function(v) {
+    return wfUtil.mapFstate(v);
 })
 
 new Vue({

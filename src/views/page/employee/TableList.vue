@@ -33,14 +33,14 @@ export default {
                     title: '部门',
                     key: 'department',
                     render:(h, params) => {
-                        return params.row.department.name
+                        return params.row.departmentName || params.row.department.name
                     }
                 },
                 {
                     title: '职位',
                     key: 'position',
                     render:(h, params) => {
-                        return params.row.position.name
+                        return params.row.positionName || params.row.position.name
                     }
                 },
                 {
@@ -52,7 +52,7 @@ export default {
                     title: '角色',
                     key: 'role',
                     render:(h, params) => {
-                        return params.row.role.name
+                        return params.row.roleName || params.row.role.name
                     }
                 }
             ]
