@@ -4,6 +4,7 @@ import { getToken, setToken, removeToken } from '@/libs/auth'
 const user = {
   state: {
     token: getToken(),
+    userId: '',
     name: '',
     avatar: '',
     roles: '',
@@ -13,6 +14,9 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_USERID: (state, userId) => {
+      state.userId = userId
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -53,6 +57,7 @@ const user = {
             temp[element.res] = element
           });
           commit('SET_RIGHTS', temp);
+          commit('SET_USERID', data.id);
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           resolve(data)

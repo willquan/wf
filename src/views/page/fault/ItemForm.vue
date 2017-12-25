@@ -7,10 +7,10 @@
             <p slot="extra" style="color: green">
                 临时保存
             </p>
-            <Form ref="wfForm" :model="form" label-position="right" :label-width="100">
+            <Form ref="wfForm" :model="form" label-position="right" :rules="rules" :label-width="100">
                 <Row>
                     <Col span="12">
-                        <FormItem prop="posName" label="功能位置">
+                        <FormItem prop="fposId" label="功能位置">
                             <Input class="input-disabled-white-bg" v-model="posName" placeholder="请选择功能位置" :disabled="true">
                                 <Button slot="append" icon="ios-search" @click="$refs.fPosModal.show()"></Button>
                             </Input>
@@ -24,7 +24,7 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem prop="flevel" label="缺陷级别" v-if="isEditable">
+                        <FormItem prop="flevelId" label="缺陷级别" v-if="isEditable">
                             <Select v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="flevelChanged">
                                 <Option v-for="el in flevels" :value="el.id" :key="el.id">{{ el.name }}</Option>
                             </Select>
@@ -38,7 +38,7 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem prop="group" label="运行值别" v-if="isEditable">
+                        <FormItem prop="groupId" label="运行值别" v-if="isEditable">
                             <Input class="input-disabled-white-bg" v-model="group" placeholder="请选择运行值别" :disabled="true">
                                 <Button slot="append" icon="ios-search" @click="$refs.groupModal.show()"></Button>
                             </Input>
@@ -152,6 +152,17 @@ export default {
                 disabledDate (date) {
                     return date && date.valueOf() < Date.now();
                 }
+            },
+            rules: {
+                fposId: [
+                    { type: "number", required: true, message: '请选择功能位置', trigger: 'change' }
+                ],
+                flevelId: [
+                    { type: "number", required: true, message: '请选择缺陷级别', trigger: 'change' }
+                ],
+                groupId: [
+                    { type: "number", required: true, message: '请选择运行职别', trigger: 'change' }
+                ]
             }
         }
     },
@@ -165,14 +176,18 @@ export default {
             return this.$refs.wfForm
         },
         handleSubmit() {
-            ApiFaults.create(this.form).then(data => {
-                this.isLoading = false;
-                this.$Message.success('添加成功');
-                this.getFormRef().resetFields();
-                this.$emit('FormDataChanged')
-            }).catch(e => {
-                this.isLoading = false;
-                console.log(e);
+            this.refs.wfForm.validate((valid) => {
+                if (valid) {
+                    ApiFaults.create(this.form).then(data => {
+                        this.isLoading = false;
+                        this.$Message.success('添加成功');
+                        this.getFormRef().resetFields();
+                        this.$emit('FormDataChanged')
+                    }).catch(e => {
+                        this.isLoading = false;
+                        console.log(e);
+                    });
+                }
             });
         },
         PosSelected(fpos) {
