@@ -197,19 +197,6 @@
       "roleId": 2,
       "id": 11,
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
-    },
-    {
-      "username": "zhangxiao",
-      "pwd": "zhangxiao",
-      "worknum": "sssss",
-      "phone": "ss32323",
-      "name": "张晓",
-      "sex": "man",
-      "departmentId": 1,
-      "positionId": 2,
-      "roleId": 2,
-      "id": 12,
-      "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     }
   ],
   "departments": [
@@ -428,7 +415,7 @@
       "name": "其它缺陷"
     }
   ],
-  "majors" : [
+  "majors": [
     {
       "id": 1,
       "name": "检修部电检一班",
@@ -532,7 +519,7 @@
       "fatory": "北京电厂"
     }
   ],
-  "teams" : [
+  "teams": [
     {
       "id": 1,
       "name": "检修部电检一班",
@@ -564,7 +551,7 @@
       "fatory": "北京电厂"
     }
   ],
-  "groups" : [
+  "groups": [
     {
       "id": 1,
       "name": "燃机一值",
@@ -596,7 +583,5 @@
       "fatory": "北京电厂"
     }
   ],
-  "faults": [
-    
-  ]
+  "faults": []
 }
