@@ -791,38 +791,6 @@
     },
     {
       "fnumber": "",
-      "fstate": "",
-      "kksId": 2,
-      "flevelId": 1,
-      "userId": 6,
-      "tjDate": "2017-12-26T06:51:33.466Z",
-      "yqjsDate": "2017-12-26T06:51:33.466Z",
-      "teamId": 2,
-      "groupId": 2,
-      "desc": "离开手机登录水电费",
-      "majorId": 7,
-      "phone": "22323232223",
-      "comments": "离开介绍了东方闪电减肥",
-      "id": 5
-    },
-    {
-      "fnumber": "",
-      "fstate": "",
-      "kksId": 4,
-      "flevelId": 2,
-      "userId": 5,
-      "tjDate": "2017-12-26T06:51:33.466Z",
-      "yqjsDate": "2017-12-26T06:51:33.466Z",
-      "teamId": 1,
-      "groupId": 4,
-      "desc": "",
-      "majorId": 4,
-      "phone": "",
-      "comments": "",
-      "id": 6
-    },
-    {
-      "fnumber": "",
       "fstate": 2,
       "kksId": 2,
       "flevelId": 2,
@@ -852,6 +820,22 @@
       "phone": "",
       "comments": "",
       "id": 8
+    },
+    {
+      "fnumber": "",
+      "fstate": 3,
+      "kksId": 4,
+      "flevelId": 2,
+      "userId": 5,
+      "tjDate": "2017-12-26T13:38:18.258Z",
+      "yqjsDate": "2017-12-26T13:38:18.258Z",
+      "teamId": 3,
+      "groupId": 4,
+      "desc": "",
+      "majorId": 5,
+      "phone": "",
+      "comments": "",
+      "id": 9
     }
   ],
   "fstates": [

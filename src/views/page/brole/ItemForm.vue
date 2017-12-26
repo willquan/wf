@@ -91,22 +91,25 @@ export default {
             this.form.operateTicketStatesIds = this.form.operateTicketStatesIds.join();
         },
         onDataLoad(data) {
-            if(data && data.fstates) {
-                data.fstates = [];
-                data.forEach(el => {
-                    this.form.fstateIds.push(el.id);
+            if(data && data.fstateIds) {
+                let strArray = data.fstateIds.split(",");
+                data.fstateIds = [];
+                strArray.forEach((el, index) => {
+                    data.fstateIds.push(parseInt(el));
                 });
             }
-            if(data && data.workTicketStates) {
-                data.workTicketStates = [];
-                data.forEach(el => {
-                    this.form.workTicketStatesIds.push(el.id);
+            if(data && data.workTicketStatesIds) {
+                let strArray = data.workTicketStatesIds.split(",");
+                data.workTicketStatesIds = [];
+                strArray.forEach((el, index) => {
+                    data.workTicketStatesIds.push(parseInt(el));
                 });
             }
-            if(data && data.operateTicketStates) {
-                data.operateTicketStates = [];
-                data.forEach(el => {
-                    this.form.operateTicketStatesIds.push(el.id);
+            if(data && data.operateTicketStatesIds) {
+                let strArray = data.operateTicketStatesIds.split(",");
+                data.operateTicketStatesIds = [];
+                strArray.forEach((el, index) => {
+                    data.operateTicketStatesIds.push(parseInt(el));
                 });
             }
         }
