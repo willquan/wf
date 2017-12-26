@@ -23,16 +23,31 @@ export default {
         onFormDataPrepare(){
             this.query(this.itemId);
         },
+        onBeforeSubmit() {
+
+        },
+        onBeforeFormReset() {
+
+        },
+        onAfterFormReset() {
+
+        },
+        onDataLoad(data) {
+
+        },
         handleSubmit() {
             this.getFormRef().validate((valid) => {
                 if (valid) {
                     this.isLoading = true;
+                    this.onBeforeSubmit();
                     // 增加用户
                     if(this.itemId == 0) {
                         this.getApi().create(this.form).then(data => {
                             this.isLoading = false;
                             this.$Message.success('添加成功');
+                            this.onBeforeFormReset();
                             this.getFormRef().resetFields();
+                            this.onAfterFormReset();
                             this.$emit('FormDataChanged')
                         }).catch(e => {
                             this.isLoading = false;
@@ -59,6 +74,7 @@ export default {
             this.getFormRef().resetFields();
             if(uId != 0) {
                 this.getApi().query(uId).then(data => {
+                    this.onDataLoad(data);
                     this.form = data;
                 });
             }

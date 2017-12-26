@@ -1,5 +1,5 @@
 <script>
-import { ApiDep } from '@/api/apiUtil'
+import { ApiPos } from '@/api/apiUtil'
 import listmixin from '@/views/page/mixins/list'
 import apiMixin from './config'
 
@@ -18,7 +18,7 @@ export default {
                     align: 'center'
                 },
                 {
-                    title: '部门',
+                    title: '名称',
                     key: 'name',
                     able2search: true
                 }

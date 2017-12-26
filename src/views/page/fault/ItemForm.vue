@@ -18,21 +18,21 @@
                     </Col>
                     <Col span="12">
                         <FormItem :label-width="40">
-                            <Input v-model="kksDesc" placeholder="自动填充" disabled/>
+                            <Input class="input-disabled-white-bg" v-model="kksDesc" placeholder="自动填充" disabled/>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
                         <FormItem prop="flevelId" label="缺陷级别">
-                            <Select v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="flevelChanged">
+                            <Select class="input-disabled-white-bg" v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="()=>{this.flevelChanged}">
                                 <Option v-for="el in flevels" :value="el.id" :key="el.id">{{ el.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="12">
                         <FormItem label="缺陷发现人">
-                            <Input :value="$store.getters.name" :disabled="true"/>
+                            <Input class="input-disabled-white-bg" :value="userName" :disabled="true"/>
                         </FormItem>
                     </Col>
                 </Row>
@@ -100,9 +100,9 @@
                 </FormItem>
                 <FormItem  v-if="isEditable">
                     <Row type="flex" justify="space-around">
-                        <Col span="4"><Button @click="handleSubmit(1)" :loading="isLoading" type="ghost" long>保存</Button></Col>
-                        <Col span="4"><Button @click="handleSubmit(2)" :loading="isLoading" type="default" long>提交</Button></Col>
-                        <Col span="4"><Button @click="handleSubmit(3)" :loading="isLoading" type="warning" long>审核提交</Button></Col>
+                        <Col span="4"><Button @click="()=>{form.fstate = 1; handleSubmit(1)}" :loading="isLoading" type="ghost" long>保存</Button></Col>
+                        <Col span="4"><Button @click="()=>{form.fstate = 2; handleSubmit(1)}" :loading="isLoading" type="default" long>提交</Button></Col>
+                        <Col span="4"><Button @click="()=>{form.fstate = 3; handleSubmit(1)}" :loading="isLoading" type="warning" long>审核提交</Button></Col>
                     </Row>
                 </FormItem>
             </Form>
@@ -118,7 +118,7 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiFlevels, ApiFaults} from '@/api/apiUtil'
+import {ApiFlevels, ApiFaults, ApiKKS, ApiGroups, ApiMajors, ApiTeams, ApiUser} from '@/api/apiUtil'
 import apiMixin from './config'
 import KksModal from './KksModal'
 import MajorModal from './MajorModal'
@@ -138,6 +138,7 @@ export default {
             major: '',
             group: '',
             team: '',
+            userName: this.$store.getters.name,
             form: {
                 fnumber:'', //缺陷单编号
                 fstate:'', // 缺陷单状态 1保存 2提交 3审核提交
@@ -183,26 +184,30 @@ export default {
                 this.flevels = data;
             });
         },
+        onDataLoad(data) {
+            // 查询功能位置
+            ApiKKS.query(data.kksId).then((kks) => {
+                this.KksSelected(kks);
+            });
+            // 查询运行职别
+            ApiGroups.query(data.groupId).then((group) => {
+                this.GroupDidSelect(group);
+            });
+            // 查询检修专业
+            ApiMajors.query(data.majorId).then((major) => {
+                this.MajorDidSelect(major);
+            });
+            // 查询消缺班组
+            ApiTeams.query(data.teamId).then((team) => {
+                this.TeamDidSelect(team);
+            });
+            //缺陷发现人
+            ApiUser.query(data.userId).then((user) => {
+                this.UserDidSelect(user);
+            });
+        },
         getFormRef() {
             return this.$refs.wfForm
-        },
-        handleSubmit(state) {
-            this.getFormRef().validate((valid) => {
-                if (valid) {
-                    this.form.tjDate = parseTime(this.form.tjDate);
-                    this.form.yqjsDate = parseTime(this.form.yqjsDate);
-                    this.form.fstate = state;
-                    ApiFaults.create(this.form).then(data => {
-                        this.isLoading = false;
-                        this.$Message.success('添加成功');
-                        this.resetFields();
-                        this.$emit('FormDataChanged')
-                    }).catch(e => {
-                        this.isLoading = false;
-                        console.log(e);
-                    });
-                }
-            });
         },
         KksSelected(kks) {
             this.kksName = kks.name;
@@ -227,7 +232,13 @@ export default {
             this.form.groupId = value.id;
             this.group = value.name;
         },
-        resetFields() {
+        UserDidSelect(user) {
+            this.userName = user.name;
+            this.form.userId = user.id;
+        },
+        onBeforeFormReset() {
+            this.form.userId = this.$store.getters.userId;
+            this.userName = this.$store.getters.name,
             this.kksName = '';
             this.kksDesc = '';
             this.major = '';
@@ -235,7 +246,8 @@ export default {
             this.team = '';
             this.form.fnumber = '';
             this.form.fstate = '';
-            this.getFormRef().resetFields();
+        },
+        onAfterFormReset() {
             this.form.tjDate = new Date();
             this.form.yqjsDate = new Date();
         }

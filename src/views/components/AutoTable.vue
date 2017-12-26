@@ -17,7 +17,7 @@
         </Col>
     </Row>
    
-    <Table border :data="data" :columns="columns" stripe :loading="loading" @on-selection-change="selectChanged"></Table>
+    <Table border :data="data" :columns="columns" :loading="loading" @on-row-dblclick="this.onRowDbClick" @on-expand="onExpand" @on-selection-change="selectChanged"></Table>
     <Row type="flex" justify="center" align="middle" style="margin-top: 8px;">
         <Col span="12">
             <Poptip v-if="permissions && permissions.del && permissions.dels" confirm title="您确定要删除这条数据吗?" transfer placement="top" @on-ok="()=>{$emit('DelBtnClicked', selectedArray)}">
@@ -88,6 +88,12 @@
                 } else {
                     this.$emit('SearchClicked', undefined)
                 }
+            },
+            onExpand(row, status) {
+                this.$emit('onExpand', row)
+            },
+            onRowDbClick(row, index) {
+                this.$emit('onRowDbClick', row)
             }
         }
     }

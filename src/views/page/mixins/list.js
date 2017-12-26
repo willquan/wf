@@ -17,7 +17,9 @@ export default {
                 changePage: this.pageChanged,
                 DelBtnClicked: this.deleteItemById,
                 RefreshTable: this.refreshTable,
-                SearchClicked: this.startSearch
+                SearchClicked: this.startSearch,
+                onExpand: this.onExpand,
+                onRowDbClick: this.onRowDbClick
             }
         });
     },
@@ -67,6 +69,9 @@ export default {
             this.getApi().queryListTotal(params).then(d => {
                 this.getApi().queryList(params).then(data => {
                     this.total = d.total;
+                    data.forEach(element => {
+                        element._expanded = false;
+                    });
                     this.tableData = data;
                     this.loading = false;
                     if(this.showLoadFinish) {
@@ -113,8 +118,22 @@ export default {
         addOptCol() {
             const permissions = this.rights[this.getApi().res]
             if(permissions && (permissions.detail || permissions.update || permissions.del)) {
-                this.cols.splice(1, 0, this.optCol);
+                let btnNum = 0;
+                if(permissions.detail) btnNum = btnNum + 1;
+                if(permissions.update) btnNum = btnNum + 1;
+                if(permissions.del) btnNum = btnNum + 1;
+                let colWidth = 80;
+                if(btnNum == 2) colWidth = 130;
+                if(btnNum == 3) colWidth = 180;
+                this.optCol.width = colWidth;
+                this.cols.splice(2, 0, this.optCol);
             }
+        },
+        onExpand(row) {
+            this.expendRow(row)
+        },
+        onRowDbClick(row) {
+            this.$emit('ViewBtnClicked', row.id);
         }
     },
     computed: {

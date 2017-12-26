@@ -9,9 +9,8 @@ export default {
         return {
             cols: [
                 {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
+                    type: 'index',
+                    width: '60',
                 },
                 {
                     title: '姓名',
@@ -52,7 +51,15 @@ export default {
                     title: '角色',
                     key: 'role',
                     render:(h, params) => {
-                        return params.row.roleName || params.row.role.name
+                        let content = params.row.roleIds;
+                        if(params.row.roles && params.row.roles.length > 0) {
+                            content = '';
+                            params.row.roles.forEach(role => {
+                                content = content + role.name + ' | ';
+                            });
+                            content = content.substring(0, content.length - 2)
+                        }
+                        return content
                     }
                 }
             ]

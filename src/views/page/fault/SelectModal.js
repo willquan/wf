@@ -12,7 +12,7 @@ export default {
                      <Button type="text" onClick={this.cancel}>取消</Button>
                      <Button type="primary" onClick={this.ok}>确定</Button>
                 </div>
-                <Table onOn-current-change={this.onSelected} height="500" highlight-row columns={this.icolumns} data={this.data}></Table>
+                <Table onOn-row-dblclick={(row)=>{this.currentRow=row; this.ok()}} onOn-current-change={this.onSelected} height="500" highlight-row columns={this.icolumns} data={this.data}></Table>
             </Modal>
         );
     },

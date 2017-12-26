@@ -1,52 +1,76 @@
 <template>
 <Row type="flex" justify="center" style="margin-bottom: 8px;">
-    <Col span="20" :lg="15">
+    <Col span="20" :lg="20">
         <Card>
             <p slot="title">员工信息</p>
             <a href="#" v-if="isEditable" slot="extra" @click.prevent="$refs.wfForm.resetFields()">
                 <Icon type="ios-loop-strong"></Icon>
                 清空表单
             </a>
-            <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="100">
-                <FormItem prop="username" label="登录名">
-                    <Input v-model="form.username" :maxlength="30" placeholder="登录时使用" :disabled="!isEditable"></Input>
-                </FormItem>
-                <FormItem prop="pwd" label="密码" v-if="isEditable">
-                    <Input type="text" v-model="form.pwd" :maxlength="50" placeholder="请输入登录密码"></Input>
-                </FormItem>
-                <FormItem prop="name" label="姓名">
-                    <Input v-model="form.name" :maxlength="10" placeholder="请输入姓名" :disabled="!isEditable"  class="check-input"></Input>
-                </FormItem>
-                <FormItem prop="sex" label="性别">
-                    <RadioGroup v-model="form.sex">
-                        <Radio label="man" :disabled="!isEditable">
-                            <Icon type="man"></Icon>
-                            <span>男士</span>
-                        </Radio>
-                        <Radio label="woman" :disabled="!isEditable">
-                            <Icon type="woman"></Icon>
-                            <span>女士</span>
-                        </Radio>
-                    </RadioGroup>
-                </FormItem>
-                <FormItem prop="worknum" label="工号">
-                    <Input v-model="form.worknum" :maxlength="20" placeholder="请输入工号" :disabled="!isEditable"></Input>
-                </FormItem>
-                <FormItem prop="phone" label="手机号">
-                    <Input v-model="form.phone" :maxlength="11" placeholder="请输入手机号" :disabled="!isEditable"></Input>
-                </FormItem>
-                <FormItem prop="departmentId" label="部门">
-                    <Select v-model="form.departmentId" placeholder="选择部门" :disabled="!isEditable" transfer>
-                        <Option v-for="d in departments" :value="d.id" :key="d.id">{{ d.name }}</Option>
-                    </Select>
-                </FormItem>
-                <FormItem prop="positionId" label="职位">
-                    <Select v-model="form.positionId" placeholder="选择职位" :disabled="!isEditable" transfer>
-                        <Option v-for="p in positions" :value="p.id" :key="p.id">{{ p.name }}</Option>
-                    </Select>
-                </FormItem>
-                <FormItem  prop="roleId" label="角色">
-                    <Select v-model="form.roleId" placeholder="选择角色" :disabled="!isEditable" transfer>
+            <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="60">
+                <Row type="flex" :gutter="32">
+                    <Col span="12">
+                        <FormItem prop="username" label="登录名">
+                            <Input v-model="form.username" :maxlength="30" placeholder="登录时使用" :disabled="!isEditable"></Input>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="pwd" label="密码" v-if="isEditable">
+                            <Input type="text" v-model="form.pwd" :maxlength="50" placeholder="请输入登录密码"></Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                 <Row type="flex" :gutter="32">
+                    <Col span="12">
+                         <FormItem prop="name" label="姓名">
+                            <Input v-model="form.name" :maxlength="10" placeholder="请输入姓名" :disabled="!isEditable"  class="check-input"></Input>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                       <FormItem prop="sex" label="性别">
+                            <RadioGroup v-model="form.sex">
+                                <Radio label="man" :disabled="!isEditable">
+                                    <Icon type="man"></Icon>
+                                    <span>男士</span>
+                                </Radio>
+                                <Radio label="woman" :disabled="!isEditable">
+                                    <Icon type="woman"></Icon>
+                                    <span>女士</span>
+                                </Radio>
+                            </RadioGroup>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row type="flex" :gutter="32">
+                    <Col span="12">
+                        <FormItem prop="worknum" label="工号">
+                            <Input v-model="form.worknum" :maxlength="20" placeholder="请输入工号" :disabled="!isEditable"></Input>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="phone" label="手机号">
+                            <Input v-model="form.phone" :maxlength="11" placeholder="请输入手机号" :disabled="!isEditable"></Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row type="flex" :gutter="32">
+                    <Col span="12">
+                        <FormItem prop="departmentId" label="部门">
+                            <Select v-model="form.departmentId" placeholder="选择部门" :disabled="!isEditable" transfer>
+                                <Option v-for="d in departments" :value="d.id" :key="d.id">{{ d.name }}</Option>
+                            </Select>
+                        </FormItem>
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="positionId" label="岗位">
+                            <Select v-model="form.positionId" placeholder="选择职位" :disabled="!isEditable" transfer>
+                                <Option v-for="p in positions" :value="p.id" :key="p.id">{{ p.name }}</Option>
+                            </Select>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <FormItem  prop="roleIds" label="角色">
+                    <Select v-model="form.roleIds" multiple placeholder="选择角色" :disabled="!isEditable">
                         <Option v-for="r in roles" :value="r.id" :key="r.id">{{ r.name }}</Option>
                     </Select>
                 </FormItem>
@@ -81,7 +105,7 @@ export default {
                 sex: 'man',
                 departmentId: '',
                 positionId: '',
-                roleId: ''
+                roleIds: []
             },
             rules: {
                 username: [
@@ -108,8 +132,8 @@ export default {
                 positionId: [
                     { type: "number", required: true, message: '请选择职位', trigger: 'change' }
                 ],
-                roleId: [
-                    { type: "number", required: true, message: '请选择角色', trigger: 'change' }
+                roleIds: [
+                    { type: "array", required: true, message: '请选择角色', trigger: 'change' }
                 ]
             }
         }
@@ -128,6 +152,17 @@ export default {
         },
         getFormRef() {
             return this.$refs.wfForm
+        },
+        onBeforeSubmit() {
+            this.form.roleIds = this.form.roleIds.join();
+        },
+        onDataLoad(data) {
+            if(data && data.roles) {
+                data.roleIds = [];
+                data.roles.forEach(el => {
+                    data.roleIds.push(el.id);
+                });
+            }
         }
     }
 }

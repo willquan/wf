@@ -35,7 +35,7 @@ export default function createApi(res) {
     api.queryList = function (_params) {
         if(!_params) _params = {}
         let _url = baseUrl + '/query'
-        if(res == 'users') _url = baseUrl + '?_expand=department&_expand=role&_expand=position'
+        if(res == 'users') _url = baseUrl + '?_expand=department&_expand=position'
         if(res == 'faults') _url = baseUrl + '?_expand=team&_expand=major&_expand=group&_expand=user&_expand=flevel&_expand=kks'
         return fetch.get(_url, {
             params: {

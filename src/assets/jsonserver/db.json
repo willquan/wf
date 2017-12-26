@@ -74,6 +74,42 @@
       "detail": true,
       "export": true,
       "userId": 5
+    },
+    {
+      "id": 7,
+      "res": "fstates",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    },
+    {
+      "id": 8,
+      "res": "workTicketStates",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    },
+    {
+      "id": 9,
+      "res": "operateTicketStates",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
     }
   ],
   "logout": {},
@@ -124,6 +160,21 @@
       "name": "employee"
     },
     {
+      "id": 8,
+      "menuId": 2,
+      "name": "fstate"
+    },
+    {
+      "id": 9,
+      "menuId": 2,
+      "name": "workTicketState"
+    },
+    {
+      "id": 10,
+      "menuId": 2,
+      "name": "operateTicketState"
+    },
+    {
       "id": 7,
       "menuId": 3,
       "name": "manage"
@@ -144,6 +195,20 @@
       "positionId": 15,
       "roleId": 2,
       "id": 5,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
@@ -157,6 +222,20 @@
       "positionId": 2,
       "roleId": 1,
       "id": 7,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
@@ -170,6 +249,20 @@
       "positionId": 2,
       "roleId": 2,
       "id": 8,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
@@ -183,6 +276,20 @@
       "positionId": 2,
       "roleId": 2,
       "id": 9,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
     },
     {
@@ -195,6 +302,20 @@
       "departmentId": 1,
       "positionId": 2,
       "roleId": 2,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "id": 10
     },
     {
@@ -209,7 +330,47 @@
       "positionId": 4,
       "roleId": 2,
       "id": 11,
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
       "avatar": "https://apic.douyucdn.cn/upload/avatar/face/201607/24/71fdc2fdb425fa36ba40e6458466c90c_big.jpg"
+    },
+    {
+      "username": "caichen",
+      "pwd": "chaichen",
+      "worknum": "223232",
+      "phone": "23232323",
+      "name": "宁采臣",
+      "sex": "man",
+      "departmentId": 1,
+      "positionId": 2,
+      "roleIds": "2,5,3",
+      "roles": [
+        {
+          "id": 1,
+          "name": "电气主管"
+        },
+        {
+          "id": 2,
+          "name": "机务主责"
+        },
+        {
+          "id": 3,
+          "name": "集控主值"
+        }
+      ],
+      "id": 12
     }
   ],
   "departments": [
@@ -340,44 +501,11 @@
   ],
   "broles": [
     {
-      "id": 1,
-      "name": "值长"
-    },
-    {
-      "id": 2,
-      "name": "操作人"
-    },
-    {
-      "id": 3,
-      "name": "监护人"
-    },
-    {
-      "id": 4,
-      "name": "值班负责人"
-    },
-    {
-      "id": 5,
-      "name": "工作票签收人"
-    },
-    {
-      "id": 6,
-      "name": "工作票许可人"
-    },
-    {
-      "id": 7,
-      "name": "签发人"
-    },
-    {
-      "id": 8,
-      "name": "工作负责人"
-    },
-    {
-      "id": 9,
-      "name": "工作班成员"
-    },
-    {
-      "id": 10,
-      "name": "工作联系人"
+      "name": "值长",
+      "fstateIds": "1,2",
+      "workTicketStatesIds": "1",
+      "operateTicketStatesIds": "2",
+      "id": 1
     }
   ],
   "kks": [
@@ -660,6 +788,112 @@
       "phone": "22",
       "comments": "更胜一层楼",
       "id": 4
+    },
+    {
+      "fnumber": "",
+      "fstate": "",
+      "kksId": 2,
+      "flevelId": 1,
+      "userId": 6,
+      "tjDate": "2017-12-26T06:51:33.466Z",
+      "yqjsDate": "2017-12-26T06:51:33.466Z",
+      "teamId": 2,
+      "groupId": 2,
+      "desc": "离开手机登录水电费",
+      "majorId": 7,
+      "phone": "22323232223",
+      "comments": "离开介绍了东方闪电减肥",
+      "id": 5
+    },
+    {
+      "fnumber": "",
+      "fstate": "",
+      "kksId": 4,
+      "flevelId": 2,
+      "userId": 5,
+      "tjDate": "2017-12-26T06:51:33.466Z",
+      "yqjsDate": "2017-12-26T06:51:33.466Z",
+      "teamId": 1,
+      "groupId": 4,
+      "desc": "",
+      "majorId": 4,
+      "phone": "",
+      "comments": "",
+      "id": 6
+    },
+    {
+      "fnumber": "",
+      "fstate": 2,
+      "kksId": 2,
+      "flevelId": 2,
+      "userId": 7,
+      "tjDate": "2017-12-26T07:45:31.064Z",
+      "yqjsDate": "2017-12-26T07:45:31.064Z",
+      "teamId": 2,
+      "groupId": 1,
+      "desc": "啥的发就离开的房间",
+      "majorId": 6,
+      "phone": "15010801461",
+      "comments": "商乐贷开发商乐贷",
+      "id": 7
+    },
+    {
+      "fnumber": "",
+      "fstate": 3,
+      "kksId": 2,
+      "flevelId": 1,
+      "userId": 8,
+      "tjDate": "2017-12-26T07:51:16.211Z",
+      "yqjsDate": "2017-12-26T07:51:16.211Z",
+      "teamId": 2,
+      "groupId": 3,
+      "desc": "",
+      "majorId": 5,
+      "phone": "",
+      "comments": "",
+      "id": 8
+    }
+  ],
+  "fstates": [
+    {
+      "name": "已保存",
+      "id": 1
+    },
+    {
+      "name": "审核中",
+      "id": 2
+    },
+    {
+      "name": "已审核",
+      "id": 3
+    }
+  ],
+  "workTicketStates": [
+    {
+      "name": "状态1",
+      "id": 1
+    },
+    {
+      "name": "状态2",
+      "id": 2
+    },
+    {
+      "name": "状态3",
+      "id": 3
+    }
+  ],
+  "operateTicketStates": [
+    {
+      "name": "状态1",
+      "id": 1
+    },
+    {
+      "name": "状态2",
+      "id": 2
+    },
+    {
+      "name": "状态3",
+      "id": 3
     }
   ]
 }

@@ -10,6 +10,10 @@ export default {
         return {
             cols: [
                 {
+                    type: 'index',
+                    width: '60',
+                },
+                {
                     type: 'selection',
                     width: 60,
                     align: 'center'
