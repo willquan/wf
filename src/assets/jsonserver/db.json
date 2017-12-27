@@ -126,6 +126,10 @@
     {
       "id": 2,
       "name": "manager"
+    },
+    {
+      "id": 4,
+      "name": "state"
     }
   ],
   "children": [
@@ -161,17 +165,17 @@
     },
     {
       "id": 8,
-      "menuId": 2,
+      "menuId": 4,
       "name": "fstate"
     },
     {
       "id": 9,
-      "menuId": 2,
+      "menuId": 4,
       "name": "workTicketState"
     },
     {
       "id": 10,
-      "menuId": 2,
+      "menuId": 4,
       "name": "operateTicketState"
     },
     {
@@ -190,7 +194,7 @@
       "worknum": "3423423",
       "mobile": "2342342",
       "name": "李四光",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 1,
       "positionId": 15,
       "roleId": 2,
@@ -217,7 +221,7 @@
       "worknum": "23423",
       "mobile": "234234",
       "name": "赵六",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 2,
       "positionId": 2,
       "roleId": 1,
@@ -244,7 +248,7 @@
       "worknum": "sdfsd",
       "mobile": "sdfsdf",
       "name": "王五",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 2,
       "positionId": 2,
       "roleId": 2,
@@ -271,7 +275,7 @@
       "worknum": "sdf",
       "mobile": "sdff",
       "name": "宋八",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 2,
       "positionId": 2,
       "roleId": 2,
@@ -298,7 +302,7 @@
       "worknum": "22323",
       "mobile": "232323",
       "name": "田七",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 1,
       "positionId": 2,
       "roleId": 2,
@@ -324,7 +328,7 @@
       "worknum": "2323",
       "mobile": "23232",
       "name": "宋小宝",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 2,
       "departmentName": "departmentName",
       "positionId": 4,
@@ -352,7 +356,7 @@
       "worknum": "223232",
       "mobile": "23232323",
       "name": "宁采臣",
-      "sex": "man",
+      "sex": "1",
       "departmentId": 1,
       "positionId": 2,
       "roleIds": "2,5,3",

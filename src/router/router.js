@@ -88,6 +88,16 @@ export const appRouter = [
             { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department/page.vue'], resolve); } },
             { path: 'brole', meta:{title: '业务角色'}, name: 'brole', component: resolve => { require(['@/views/page/brole/page.vue'], resolve); } },
             { path: 'role', meta:{title: '系统角色'}, name: 'role', component: resolve => { require(['@/views/page/role/page.vue'], resolve); } },
+        ]
+    },
+    {
+        path: '/state',
+        redirect: {name: 'home_index'},
+        icon: 'star',
+        name: 'state',
+        meta: {title: '状态管理'},
+        component: Main,
+        children: [
             { path: 'fstate', meta:{title: '缺陷状态'}, name: 'fstate', component: resolve => { require(['@/views/page/fstate/page.vue'], resolve); } },
             { path: 'workTicketState', meta:{title: '工作票状态'}, name: 'workTicketState', component: resolve => { require(['@/views/page/workTicketState/page.vue'], resolve); } },
             { path: 'operateTicketState', meta:{title: '操作票状态'}, name: 'operateTicketState', component: resolve => { require(['@/views/page/operateTicketState/page.vue'], resolve); } }

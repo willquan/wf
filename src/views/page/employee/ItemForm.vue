@@ -29,11 +29,11 @@
                     <Col span="12">
                        <FormItem prop="sex" label="性别">
                             <RadioGroup v-model="form.sex">
-                                <Radio label="man" :disabled="!isEditable">
+                                <Radio label="1" :disabled="!isEditable">
                                     <Icon type="man"></Icon>
                                     <span>男士</span>
                                 </Radio>
-                                <Radio label="woman" :disabled="!isEditable">
+                                <Radio label="0" :disabled="!isEditable">
                                     <Icon type="woman"></Icon>
                                     <span>女士</span>
                                 </Radio>
@@ -102,7 +102,7 @@ export default {
                 worknum: '',
                 mobile: '',
                 name: '',
-                sex: 'man',
+                sex: '1',
                 departmentId: '',
                 positionId: '',
                 roleIds: []

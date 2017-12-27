@@ -25,7 +25,7 @@ export default {
                     title: '性别',
                     key: 'sex',
                     render:(h, params) => {
-                        return params.row.sex == 'man' ? '男' : '女'
+                        return params.row.sex == '1' ? '男' : '女'
                     }
                 },
                 {
