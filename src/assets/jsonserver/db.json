@@ -154,6 +154,11 @@
       "name": "role"
     },
     {
+      "id": 12,
+      "menuId": 2,
+      "name": "dep"
+    },
+    {
       "id": 5,
       "menuId": 2,
       "name": "position"
@@ -380,11 +385,45 @@
   "departments": [
     {
       "id": 1,
-      "name": "运行部"
+      "name": "运行部",
+      "type": "部门",
+      "parentId": 0
     },
     {
       "id": 2,
-      "name": "检修部"
+      "name": "检修部",
+      "type": "部门",
+      "parentId": 0
+    },
+    {
+      "id": 1,
+      "name": "燃机一值",
+      "type": "值别",
+      "parentId": 1
+    },
+    {
+      "id": 2,
+      "name": "燃机二值",
+      "type": "值别",
+      "parentId": 1
+    },
+    {
+      "id": 3,
+      "name": "燃机三值",
+      "type": "值别",
+      "parentId": 1
+    },
+    {
+      "id": 4,
+      "name": "燃机四值",
+      "type": "值别",
+      "parentId": 1
+    },
+    {
+      "id": 5,
+      "name": "燃机五值",
+      "type": "值别",
+      "parentId": 1
     }
   ],
   "positions": [
