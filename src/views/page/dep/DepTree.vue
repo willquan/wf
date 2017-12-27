@@ -39,9 +39,6 @@ export default {
     methods: {
         beginQuery() {
             let params = {parentId: 0};
-            if(this.desc && this.desc != '') {
-                params = {desc: this.desc}
-            }
             ApiDep.queryList(params).then(data => {
                 data.forEach(el => {
                     el.title = el.name + el.desc + el.sid,
@@ -74,7 +71,7 @@ export default {
                         style="border-bottom: 1px solid #e9eaec; padding-left: 16px; height: 38px;">
                         <Col span="9" style={{paddingLeft : data.nodeLevel*16 + 'px'}}>
                             <span onClick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
-                            <Icon v-show={data.hasChildren} type={data.expand ? "chevron-down" : "chevron-right"} style="margin-right:8px; width: 11px"></Icon>
+                                <Icon color={data.hasChildren ? '' : 'white'} type={data.expand ? "chevron-down" : "chevron-right"} style="margin-right:4px; width: 11px"></Icon>
                             </span>
                             {data.name}
                         </Col>

@@ -396,31 +396,31 @@
       "parentId": 0
     },
     {
-      "id": 1,
+      "id": 3,
       "name": "燃机一值",
       "type": "值别",
       "parentId": 1
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "燃机二值",
       "type": "值别",
       "parentId": 1
     },
     {
-      "id": 3,
+      "id": 5,
       "name": "燃机三值",
       "type": "值别",
       "parentId": 1
     },
     {
-      "id": 4,
+      "id": 6,
       "name": "燃机四值",
       "type": "值别",
       "parentId": 1
     },
     {
-      "id": 5,
+      "id": 7,
       "name": "燃机五值",
       "type": "值别",
       "parentId": 1
