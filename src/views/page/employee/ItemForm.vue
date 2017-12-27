@@ -48,8 +48,8 @@
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem prop="phone" label="手机号">
-                            <Input v-model="form.phone" :maxlength="11" placeholder="请输入手机号" :disabled="!isEditable"></Input>
+                        <FormItem prop="mobile" label="手机号">
+                            <Input v-model="form.mobile" :maxlength="11" placeholder="请输入手机号" :disabled="!isEditable"></Input>
                         </FormItem>
                     </Col>
                 </Row>
@@ -100,7 +100,7 @@ export default {
                 username: '',
                 pwd: '',
                 worknum: '',
-                phone: '',
+                mobile: '',
                 name: '',
                 sex: 'man',
                 departmentId: '',
@@ -117,7 +117,7 @@ export default {
                 worknum: [
                     { required: true, message: '工号不能为空', trigger: 'blur' }
                 ],
-                phone: [
+                mobile: [
                     { required: true, message: '手机号码不能为空', trigger: 'blur' }
                 ],
                 name: [
