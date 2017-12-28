@@ -486,6 +486,18 @@
       "parentId": 9,
       "name": "检修部电检五班",
       "type": "班组"
+    },
+    {
+      "id": 17,
+      "parentId": 1,
+      "name": "电气",
+      "type": "专业"
+    },
+    {
+      "id": 18,
+      "parentId": 7,
+      "name": "主值",
+      "type": "班组"
     }
   ],
   "positions": [

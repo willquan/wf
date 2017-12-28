@@ -1,5 +1,5 @@
 <template>
-  <Cascader @on-change="onChange" :data="departments" :load-data="loadTeams" v-model="values" change-on-select></Cascader>
+  <Cascader @on-change="onChange" :data="departments" :load-data="loadTeams" v-model="depData" change-on-select></Cascader>
 </template>
 
 <script>
@@ -12,12 +12,16 @@ export default {
             default: function() {
                 return []
             }
-        }
+        },
     },
     data() {
         return {
-            departments: [],
+            depData: [],
+            departments: []
         }
+    },
+    created: function(){
+       console.log(this.values)
     },
     mounted: function () {
         ApiDep.queryList({parentId: 0}).then(data => {
@@ -31,13 +35,13 @@ export default {
         })
 
         //如果有默认值，则初始化默认值层级
-        this.values.forEach((v, index) => {
-            this.departments.forEach(el => {
-                if(v == el.id) {
-                    this.initChildNode(el, index + 1);
-                }
-            });
-        });
+        // this.depData.forEach((v, index) => {
+        //     this.departments.forEach(el => {
+        //         if(v == el.id) {
+        //             this.initChildNode(el, index + 1);
+        //         }
+        //     });
+        // });
     },
     methods: {
         initChildNode(node, curValueIndex) {
@@ -74,6 +78,7 @@ export default {
             node.children = children;
         },
         onChange(value, selectedData) {
+            // console.log(value)
             this.$emit('departmentsDidSelect', value)
         }
     }

@@ -257,7 +257,6 @@ export default {
                     data.teamIds.push(parseInt(el));
                 });
             }
-
             console.log(data)
         }
     }
