@@ -448,14 +448,14 @@
       "parentId": 2,
       "name": "检修部锅炉专业",
       "type": "专业",
-      "hasChildren": true
+      "hasChildren": false
     },
     {
       "id": 11,
       "parentId": 2,
       "name": "检修部汽机专业",
       "type": "专业",
-      "hasChildren": true
+      "hasChildren": false
     },
     {
       "id": 12,
@@ -661,286 +661,21 @@
       "name": "其它缺陷"
     }
   ],
-  "majors": [
-    {
-      "id": 1,
-      "name": "检修部电检一班",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 3,
-      "name": "运行部除尘专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 4,
-      "name": "运行部电气专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 5,
-      "name": "运行部锅炉专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 6,
-      "name": "运行部化学运行",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 7,
-      "name": "运行部化学化验",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 8,
-      "name": "运行部集控专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 9,
-      "name": "运行部汽机专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 10,
-      "name": "运行部燃机电气专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 11,
-      "name": "运行部燃机热机专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 2,
-      "name": "运行部热网泵及热水炉专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 12,
-      "name": "运行部脱硫专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 13,
-      "name": "检修部电气专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 14,
-      "name": "检修部锅炉专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 15,
-      "name": "检修部汽机专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 16,
-      "name": "检修部热控专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 17,
-      "name": "检修部外围专业",
-      "type": "专业",
-      "fatory": "北京电厂"
-    }
-  ],
-  "teams": [
-    {
-      "id": 1,
-      "name": "检修部电检一班",
-      "type": "班组",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 2,
-      "name": "检修部电检二班",
-      "type": "班组",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 3,
-      "name": "检修部电检三班",
-      "type": "班组",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 4,
-      "name": "检修部电检四班",
-      "type": "班组",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 5,
-      "name": "检修部电检五班",
-      "type": "班组",
-      "fatory": "北京电厂"
-    }
-  ],
-  "groups": [
-    {
-      "id": 1,
-      "name": "燃机一值",
-      "type": "值别",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 2,
-      "name": "燃机二值",
-      "type": "值别",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 3,
-      "name": "燃机三值",
-      "type": "值别",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 4,
-      "name": "燃机四值",
-      "type": "值别",
-      "fatory": "北京电厂"
-    },
-    {
-      "id": 5,
-      "name": "燃机五值",
-      "type": "值别",
-      "fatory": "北京电厂"
-    }
-  ],
   "faults": [
     {
       "fnumber": "",
-      "fstate": 1,
+      "fstate": 2,
       "kksId": 2,
-      "flevelId": 2,
+      "flevelId": 1,
       "userId": 5,
-      "tjDate": "2017-12-25 16:09:54",
-      "yqjsDate": "2017-12-27 16:09:54",
-      "teamId": 4,
-      "groupId": 4,
-      "desc": "缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述缺陷描述",
-      "majorId": 6,
-      "mobile": "",
-      "comments": "备注备注备注备注备注备注备注备注",
+      "tjDate": "2017-12-28 17:45:33",
+      "yqjsDate": "2017-12-28 17:45:33",
+      "desc": "aaa",
+      "groupIds": "1,3",
+      "teamIds": "2,9,12",
+      "phone": "",
+      "comments": "ddddd",
       "id": 1
-    },
-    {
-      "fnumber": "",
-      "fstate": 2,
-      "kksId": 1,
-      "flevelId": 3,
-      "userId": 5,
-      "tjDate": "2017-12-25 16:10:37",
-      "yqjsDate": "2017-12-28 16:10:37",
-      "teamId": 3,
-      "groupId": 2,
-      "desc": "",
-      "majorId": 4,
-      "mobile": "",
-      "comments": "",
-      "id": 2
-    },
-    {
-      "fnumber": "",
-      "fstate": 3,
-      "kksId": 1,
-      "flevelId": 3,
-      "userId": 5,
-      "tjDate": "2017-12-25 16:11:07",
-      "yqjsDate": "2017-12-28 16:11:07",
-      "teamId": 1,
-      "groupId": 5,
-      "desc": "",
-      "majorId": 11,
-      "mobile": "",
-      "comments": "",
-      "id": 3
-    },
-    {
-      "fnumber": "",
-      "fstate": 2,
-      "kksId": 4,
-      "flevelId": 1,
-      "userId": 5,
-      "tjDate": "2017-12-25 21:11:19",
-      "yqjsDate": "2017-12-26 21:11:19",
-      "teamId": 2,
-      "groupId": 5,
-      "desc": "白日依山尽，黄河入海流",
-      "majorId": 8,
-      "mobile": "22",
-      "comments": "更胜一层楼",
-      "id": 4
-    },
-    {
-      "fnumber": "",
-      "fstate": 2,
-      "kksId": 2,
-      "flevelId": 2,
-      "userId": 7,
-      "tjDate": "2017-12-26T07:45:31.064Z",
-      "yqjsDate": "2017-12-26T07:45:31.064Z",
-      "teamId": 2,
-      "groupId": 1,
-      "desc": "啥的发就离开的房间",
-      "majorId": 6,
-      "mobile": "15010801461",
-      "comments": "商乐贷开发商乐贷",
-      "id": 7
-    },
-    {
-      "fnumber": "",
-      "fstate": 3,
-      "kksId": 2,
-      "flevelId": 1,
-      "userId": 8,
-      "tjDate": "2017-12-26T07:51:16.211Z",
-      "yqjsDate": "2017-12-26T07:51:16.211Z",
-      "teamId": 2,
-      "groupId": 3,
-      "desc": "",
-      "majorId": 5,
-      "mobile": "",
-      "comments": "",
-      "id": 8
-    },
-    {
-      "fnumber": "",
-      "fstate": 3,
-      "kksId": 4,
-      "flevelId": 2,
-      "userId": 5,
-      "tjDate": "2017-12-26T13:38:18.258Z",
-      "yqjsDate": "2017-12-26T13:38:18.258Z",
-      "teamId": 3,
-      "groupId": 4,
-      "desc": "",
-      "majorId": 5,
-      "mobile": "",
-      "comments": "",
-      "id": 9
     }
   ],
   "fstates": [

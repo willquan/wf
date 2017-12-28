@@ -38,10 +38,8 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem prop="groupId" label="运行值别">
-                            <Input class="input-disabled-white-bg" v-model="group" placeholder="请选择运行值别" :disabled="true">
-                                <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.groupModal.show()"></Button>
-                            </Input>
+                        <FormItem prop="groupIds" label="运行值别">
+                            <dep-cascader :values="form.groupIds" @departmentsDidSelect="GroupDidSelect"></dep-cascader>
                         </FormItem>
                     </Col>
                     <Col span="12">
@@ -58,12 +56,12 @@
                         
                     </Col>
                     <Col span="12">
-                        <FormItem prop="" label="消缺班组">
-                            <Cascader :data="teams" :load-data="loadTeams"></Cascader>
+                        <FormItem prop="teamIds" label="消缺班组">
+                            <dep-cascader :values="form.teamIds" @departmentsDidSelect="TeamDidSelect"></dep-cascader>
                         </FormItem>
                     </Col>
                 </Row>
-                 <Row>
+                 <!-- <Row>
                     <Col span="12">
                         <FormItem prop="majorId" label="检修专业">
                             <Input class="input-disabled-white-bg" v-model="major" placeholder="请选择检修专业" :disabled="true">
@@ -78,7 +76,7 @@
                             </Input>
                         </FormItem>
                     </Col>
-                </Row>
+                </Row> -->
                  <Row>
                     <Col span="12">
                         <FormItem prop="tjDate" label="提交时间">
@@ -120,35 +118,36 @@
     </Col>
 </Row>
 <KksModal ref="kksModal" @KksSelected="KksSelected"></KksModal>
+<!-- 
 <MajorModal ref="majorModal" @ItemDidSelect="MajorDidSelect" title="请选择检修专业"></MajorModal>
 <TeamModal ref="teamModal" @ItemDidSelect="TeamDidSelect" title="请选择消缺班组"></TeamModal>
-<GroupModal ref="groupModal" @ItemDidSelect="GroupDidSelect" title="请选择运行值别"></GroupModal>
+<GroupModal ref="groupModal" @ItemDidSelect="GroupDidSelect" title="请选择运行值别"></GroupModal> 
+-->
 </div>
 </template>
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiFlevels, ApiFaults, ApiKKS, ApiGroups, ApiMajors, ApiTeams, ApiUser, ApiDep} from '@/api/apiUtil'
+import {ApiFlevels, ApiFaults, ApiKKS, ApiUser, ApiDep} from '@/api/apiUtil'
 import apiMixin from './config'
 import KksModal from './KksModal'
-import MajorModal from './MajorModal'
-import TeamModal from './TeamModal'
-import GroupModal from './GroupModal'
+// import MajorModal from './MajorModal'
+// import TeamModal from './TeamModal'
+// import GroupModal from './GroupModal'
 import {parseTime} from '@/libs/timeUtil.js'
+import DepCascader from '@/views/components/DepCascader'
 
 export default {
     mixins:[formMixin, apiMixin],
     name: 'faultForm',
-    components: {KksModal, MajorModal, TeamModal, GroupModal},
+    components: {KksModal, DepCascader},
     data() {
         return {
-            teams: [],
             kksName: '',
             kksDesc: '',
             flevels:[],
-            major: '',
-            group: '',
-            team: '',
+            group: '', //值别名称
+            team: '', //检修专业名称
             userName: this.$store.getters.name,
             form: {
                 fnumber:'', //缺陷单编号
@@ -158,10 +157,9 @@ export default {
                 userId: this.$store.getters.userId,
                 tjDate: new Date(),
                 yqjsDate: new Date(),
-                teamId: '',
-                groupId: '',
                 desc: '',
-                majorId: '',
+                groupIds: [],
+                teamIds: [],
                 phone: '',
                 comments: ''
             },
@@ -177,69 +175,30 @@ export default {
                 flevelId: [
                     { type: "number", required: true, message: '请选择缺陷级别', trigger: 'change' }
                 ],
-                groupId: [
-                    { type: "number", required: true, message: '请选择运行职别', trigger: 'change' }
+                groupIds: [
+                    { type: "array", required: true, message: '请选择运行职别', trigger: 'change' }
                 ],
-                majorId: [
-                    { type: "number", required: true, message: '请选择检修专业', trigger: 'change' }
-                ],
-                teamId: [
-                    { type: "number", required: true, message: '请选择消缺班组', trigger: 'change' }
+                teamIds: [
+                    { type: "array", required: true, message: '请选择检修专业', trigger: 'change' }
                 ]
             }
         }
     },
     methods: {
-        loadTeams(item, callback) {
-            item.loading = true;
-            ApiDep.queryList({parentId: item.id}).then(data => {
-                data.forEach(el => {
-                    if(el.hasChildren) {
-                        el.children = [];
-                        el.loading = false;
-                    }
-                    el.value = el.id;
-                    el.label = el.name;
-                });
-                item.loading = false;
-                item.children = data;
-                callback();
-            })
-        },
         onFormComponentDataPrepare() {
             ApiFlevels.queryList().then(data => {
                 this.flevels = data;
             });
-            ApiDep.queryList({parentId: 0}).then(data => {
-                data.forEach(el => {
-                    if(el.hasChildren) el.children = [];
-                    el.loading = false;
-                    el.value = el.id;
-                    el.label = el.name;
-                });
-                this.teams = data;
-            })
         },
         onDataLoad(data) {
             // 查询功能位置
             ApiKKS.query(data.kksId).then((kks) => {
                 this.KksSelected(kks);
             });
-            // 查询运行职别
-            ApiGroups.query(data.groupId).then((group) => {
-                this.GroupDidSelect(group);
-            });
-            // 查询检修专业
-            ApiMajors.query(data.majorId).then((major) => {
-                this.MajorDidSelect(major);
-            });
-            // 查询消缺班组
-            ApiTeams.query(data.teamId).then((team) => {
-                this.TeamDidSelect(team);
-            });
             //缺陷发现人
             ApiUser.query(data.userId).then((user) => {
-                this.UserDidSelect(user);
+                this.userName = user.name;
+                this.form.userId = user.id;
             });
         },
         getFormRef() {
@@ -256,28 +215,17 @@ export default {
             nowDate.setTime(this.form.tjDate.getTime() + 1000*60*60*24*value);
             this.form.yqjsDate = nowDate;
         },
-        MajorDidSelect(value) {
-            this.form.majorId = value.id;
-            this.major = value.name;
-        },
         TeamDidSelect(value) {
-            this.form.teamId = value.id;
-            this.team = value.name;
+            this.form.teamIds = value;
         },
         GroupDidSelect(value) {
-            this.form.groupId = value.id;
-            this.group = value.name;
-        },
-        UserDidSelect(user) {
-            this.userName = user.name;
-            this.form.userId = user.id;
+            this.form.groupIds = value;
         },
         onBeforeFormReset() {
             this.form.userId = this.$store.getters.userId;
             this.userName = this.$store.getters.name,
             this.kksName = '';
             this.kksDesc = '';
-            this.major = '';
             this.group = '';
             this.team = '';
             this.form.fnumber = '';
@@ -286,6 +234,31 @@ export default {
         onAfterFormReset() {
             this.form.tjDate = new Date();
             this.form.yqjsDate = new Date();
+        },
+        onBeforeSubmit() {
+            this.form.teamIds = this.form.teamIds.join();
+            this.form.groupIds = this.form.groupIds.join();
+            this.form.tjDate = parseTime(this.form.tjDate);
+            this.form.yqjsDate = parseTime(this.form.yqjsDate);
+        },
+        onDataLoad(data) {
+            if(data && data.groupIds) {
+                let strArray = data.groupIds.split(",");
+                let groupIds = []
+                strArray.forEach((el, index) => {
+                    groupIds.push(parseInt(el));
+                });
+                data.groupIds = groupIds;
+            }
+            if(data && data.teamIds) {
+                let strArray = data.teamIds.split(",");
+                data.teamIds = [];
+                strArray.forEach((el, index) => {
+                    data.teamIds.push(parseInt(el));
+                });
+            }
+
+            console.log(data)
         }
     }
 }

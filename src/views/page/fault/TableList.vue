@@ -85,7 +85,7 @@ export default {
                     key: 'groupId',
                     ellipsis: true,
                     render:(h, params) => {
-                        return params.row.groupName || params.row.group.name
+                        return params.row.teamName || params.row.groupIds
                     }
                 },
                 {
