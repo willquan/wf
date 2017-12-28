@@ -53,6 +53,16 @@
                  <FormItem prop="desc" label="缺陷描述">
                     <Input v-model="form.desc" :maxlength="300" type="textarea" placeholder="输入缺陷描述"/>
                 </FormItem>
+                <Row>
+                    <Col span="12">
+                        
+                    </Col>
+                    <Col span="12">
+                        <FormItem prop="" label="消缺班组">
+                            <Cascader :data="teams" :load-data="loadTeams"></Cascader>
+                        </FormItem>
+                    </Col>
+                </Row>
                  <Row>
                     <Col span="12">
                         <FormItem prop="majorId" label="检修专业">
@@ -118,7 +128,7 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiFlevels, ApiFaults, ApiKKS, ApiGroups, ApiMajors, ApiTeams, ApiUser} from '@/api/apiUtil'
+import {ApiFlevels, ApiFaults, ApiKKS, ApiGroups, ApiMajors, ApiTeams, ApiUser, ApiDep} from '@/api/apiUtil'
 import apiMixin from './config'
 import KksModal from './KksModal'
 import MajorModal from './MajorModal'
@@ -132,6 +142,7 @@ export default {
     components: {KksModal, MajorModal, TeamModal, GroupModal},
     data() {
         return {
+            teams: [],
             kksName: '',
             kksDesc: '',
             flevels:[],
@@ -179,10 +190,35 @@ export default {
         }
     },
     methods: {
+        loadTeams(item, callback) {
+            item.loading = true;
+            ApiDep.queryList({parentId: item.id}).then(data => {
+                data.forEach(el => {
+                    if(el.hasChildren) {
+                        el.children = [];
+                        el.loading = false;
+                    }
+                    el.value = el.id;
+                    el.label = el.name;
+                });
+                item.loading = false;
+                item.children = data;
+                callback();
+            })
+        },
         onFormComponentDataPrepare() {
             ApiFlevels.queryList().then(data => {
                 this.flevels = data;
             });
+            ApiDep.queryList({parentId: 0}).then(data => {
+                data.forEach(el => {
+                    if(el.hasChildren) el.children = [];
+                    el.loading = false;
+                    el.value = el.id;
+                    el.label = el.name;
+                });
+                this.teams = data;
+            })
         },
         onDataLoad(data) {
             // 查询功能位置

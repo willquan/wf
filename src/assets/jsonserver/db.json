@@ -387,43 +387,105 @@
       "id": 1,
       "name": "运行部",
       "type": "部门",
-      "parentId": 0
+      "parentId": 0,
+      "hasChildren": true
     },
     {
       "id": 2,
       "name": "检修部",
       "type": "部门",
-      "parentId": 0
+      "parentId": 0,
+      "hasChildren": true
     },
     {
       "id": 3,
       "name": "燃机一值",
       "type": "值别",
-      "parentId": 1
+      "parentId": 1,
+      "hasChildren": false
     },
     {
       "id": 4,
       "name": "燃机二值",
       "type": "值别",
-      "parentId": 1
+      "parentId": 1,
+      "hasChildren": false
     },
     {
       "id": 5,
       "name": "燃机三值",
       "type": "值别",
-      "parentId": 1
+      "parentId": 1,
+      "hasChildren": false
     },
     {
       "id": 6,
       "name": "燃机四值",
       "type": "值别",
-      "parentId": 1
+      "parentId": 1,
+      "hasChildren": false
     },
     {
       "id": 7,
       "name": "燃机五值",
       "type": "值别",
-      "parentId": 1
+      "parentId": 1,
+      "hasChildren": false
+    },
+    {
+      "id": 9,
+      "parentId": 2,
+      "name": "检修部电气专业",
+      "type": "专业",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 1,
+      "nodeKey": 3,
+      "hasChildren": true
+    },
+    {
+      "id": 10,
+      "parentId": 2,
+      "name": "检修部锅炉专业",
+      "type": "专业",
+      "hasChildren": true
+    },
+    {
+      "id": 11,
+      "parentId": 2,
+      "name": "检修部汽机专业",
+      "type": "专业",
+      "hasChildren": true
+    },
+    {
+      "id": 12,
+      "parentId": 9,
+      "name": "检修部电检一班",
+      "type": "班组"
+    },
+    {
+      "id": 13,
+      "parentId": 9,
+      "name": "检修部电检二班",
+      "type": "班组"
+    },
+    {
+      "id": 14,
+      "parentId": 9,
+      "name": "检修部电检三班",
+      "type": "班组"
+    },
+    {
+      "id": 15,
+      "parentId": 9,
+      "name": "检修部电检四班",
+      "type": "班组"
+    },
+    {
+      "id": 16,
+      "parentId": 9,
+      "name": "检修部电检五班",
+      "type": "班组"
     }
   ],
   "positions": [

@@ -86,7 +86,7 @@ export const appRouter = [
             { path: 'employee', meta:{title: '人员管理'}, name: 'employee', component: resolve => { require(['@/views/page/employee/page.vue'], resolve); } },
             { path: 'position', meta:{title: '岗位管理'}, name: 'position', component: resolve => { require(['@/views/page/position/page.vue'], resolve); } },
             { path: 'department', meta:{title: '部门管理'}, name: 'department', component: resolve => { require(['@/views/page/department/page.vue'], resolve); } },
-            { path: 'dep', meta:{title: '组织架构'}, name: 'dep', component: resolve => { require(['@/views/page/dep/page.vue'], resolve); } },
+            { path: 'dep', meta:{title: '部门架构'}, name: 'dep', component: resolve => { require(['@/views/page/dep/page.vue'], resolve); } },
             { path: 'brole', meta:{title: '业务角色'}, name: 'brole', component: resolve => { require(['@/views/page/brole/page.vue'], resolve); } },
             { path: 'role', meta:{title: '系统角色'}, name: 'role', component: resolve => { require(['@/views/page/role/page.vue'], resolve); } },
         ]

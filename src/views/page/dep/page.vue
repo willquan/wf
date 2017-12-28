@@ -1,6 +1,7 @@
 <template>
 <auto-tabs ref="autotabs" :tabs.sync="tabs">
-    <dep-tree v-fix-height slot="TreeTab"></dep-tree>
+    <dep-tree ref="depTree" v-fix-height slot="TreeTab"></dep-tree>
+    <Button type="primary" @click="addDepartment" size="small" slot="extra" style="margin-right: 10px" v-if="hasPermission('create')">添加部门</Button>
 </auto-tabs>
 </template>
 
@@ -18,13 +19,13 @@ export default {
     data() {
         return {
             tabs: [
-                {name:'TreeTab', label: '组织架构', closable: false, show: true}, 
+                {name:'TreeTab', label: '部门架构', closable: false, show: true}, 
             ]
         }
     },
     methods: {
-        hasCreatePermission() {
-            return this.rights.departments && this.rights.departments.create
+        addDepartment() {
+            this.$refs.depTree.addRootNode();
         }
     }
 }

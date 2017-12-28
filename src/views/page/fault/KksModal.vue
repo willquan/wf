@@ -100,7 +100,7 @@ export default {
                         style="border-bottom: 1px solid #e9eaec; padding-left: 16px; height: 38px;">
                         <Col span="9" style={{paddingLeft : data.nodeLevel*16 + 'px'}}>
                             <span onClick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
-                            <Icon v-show={data.hasChildren} type={data.expand ? "arrow-down-b" : "arrow-right-b"} style="padding-right:4px"></Icon>
+                            <Icon color={data.hasChildren ? '' : 'white'} type={data.expand ? "arrow-down-b" : "arrow-right-b"} style="margin-right:4px; width: 11px"></Icon>
                             <Icon size="16" type={data.expand||!data.hasChildren ? "android-folder-open" : "android-folder"} style="padding-right:4px"></Icon>
                             </span>
                             {data.name}
@@ -153,7 +153,7 @@ export default {
 .table-tree .row-high-light {
     background-color: #ebf7ff;
 }
-.table-tree .ivu-tree ul li {
+.table-tree.ivu-tree ul li {
     margin: 0px !important;
 }
 </style>
