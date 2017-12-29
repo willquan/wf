@@ -52,10 +52,7 @@
                     <Input v-model="form.desc" :maxlength="300" type="textarea" placeholder="输入缺陷描述"/>
                 </FormItem>
                 <Row>
-                    <Col span="12">
-                        
-                    </Col>
-                    <Col span="12">
+                    <Col span="24">
                         <FormItem prop="teamIds" label="消缺班组">
                             <dep-cascader :values="form.teamIds" @departmentsDidSelect="TeamDidSelect"></dep-cascader>
                         </FormItem>
@@ -257,7 +254,6 @@ export default {
                     data.teamIds.push(parseInt(el));
                 });
             }
-            console.log(data)
         }
     }
 }

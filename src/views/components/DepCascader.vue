@@ -1,8 +1,10 @@
 <template>
-  <Cascader @on-change="onChange" :data="departments" :load-data="loadTeams" v-model="depData" change-on-select></Cascader>
+  <Cascader :render-format="format" @on-change="onChange" :data="departments" :load-data="loadTeams" v-model="depData" change-on-select></Cascader>
 </template>
-
 <script>
+/**
+ * 异步加载反显有问题
+ */
 import {ApiDep} from '@/api/apiUtil'
 export default {
     name: 'DepCascader',
@@ -16,12 +18,9 @@ export default {
     },
     data() {
         return {
-            depData: [],
-            departments: []
+            isDataReady: false,
+            departments: [],
         }
-    },
-    created: function(){
-       console.log(this.values)
     },
     mounted: function () {
         ApiDep.queryList({parentId: 0}).then(data => {
@@ -31,32 +30,45 @@ export default {
                 el.value = el.id;
                 el.label = el.name;
             });
+
             this.departments = data;
         })
+    },
+    watch: {
+        departments: function(deps) {
+            this.isDataReady = true;
+        }
+    },
+    computed: {
+        depData: {
+            get: function() {
+                return this.values
+            },
+            set: function() {
 
-        //如果有默认值，则初始化默认值层级
-        // this.depData.forEach((v, index) => {
-        //     this.departments.forEach(el => {
-        //         if(v == el.id) {
-        //             this.initChildNode(el, index + 1);
-        //         }
-        //     });
-        // });
+            }
+        }
     },
     methods: {
-        initChildNode(node, curValueIndex) {
-            if(node.hasChildren) {
-                ApiDep.queryList({parentId: node.id}).then(data => {
-                    this.convertNode(node, data);
-                    if(node.hasChildren) {
-                        node.children.forEach(data2 => {
-                            if(data2.id == curValueIndex) {
-                                this.initChildNode(data2, curValueIndex + 1);
-                            }
-                        });
-                    }
-                });
+        format (labels, selectedData) {
+            // 解决反显的bug
+            if(this.isDataReady && this.depData.length > 0) {
+                let newLabels = [];
+                this.findNodeWithValue(this.departments, 0, newLabels);
+                labels = newLabels;
             }
+            return labels.join(' / ')
+        },
+        findNodeWithValue(nodes, depDataIndex, rs) {
+            let val = this.depData[depDataIndex]
+            nodes.forEach(el => {
+                if(el.value == val) {
+                    rs.push(el.label);
+                    if(el.children && el.children.length > 0) {
+                        this.findNodeWithValue(el.children, depDataIndex + 1, rs);
+                    }
+                }
+            });
         },
         loadTeams(node, callback) {
             node.loading = true;
@@ -78,8 +90,8 @@ export default {
             node.children = children;
         },
         onChange(value, selectedData) {
-            // console.log(value)
-            this.$emit('departmentsDidSelect', value)
+            // if(this.isDataReady)
+                // this.$emit('departmentsDidSelect', value);
         }
     }
 }
