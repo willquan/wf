@@ -25,7 +25,7 @@
                 <Row>
                     <Col span="12">
                         <FormItem prop="flevelId" label="缺陷级别">
-                            <Select class="input-disabled-white-bg" v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="()=>{this.flevelChanged}">
+                            <Select class="input-disabled-white-bg" v-model="form.flevelId" placeholder="选择缺陷级别" :disabled="!isEditable" transfer @on-change="flevelChanged">
                                 <Option v-for="el in flevels" :value="el.id" :key="el.id">{{ el.name }}</Option>
                             </Select>
                         </FormItem>
@@ -91,10 +91,10 @@
                         <FormItem prop="yqjsDate" label="要求结束时间">
                             <Row type="flex" justify="space-between">
                                 <Col span="12">
-                                    <DatePicker type="date" :clearable="false" :value="form.yqjsDate" :options="options2" :disabled="form.flevelId<3 && !isEditable"></DatePicker>
+                                    <DatePicker type="date" :clearable="false" :value="form.yqjsDate" :options="options2" :disabled="form.flevelId == '' || form.flevelId<3 || !isEditable"></DatePicker>
                                 </Col>
                                 <Col span="11">
-                                    <TimePicker type="time" :clearable="false" :steps="[1, 15]" format="HH:mm" :value="form.yqjsDate" :disabled="form.flevelId<3 && !isEditable"></TimePicker>
+                                    <TimePicker type="time" :clearable="false" :steps="[1, 15]" format="HH:mm" :value="form.yqjsDate" :disabled="form.flevelId == '' || form.flevelId<3 || !isEditable"></TimePicker>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -188,7 +188,8 @@ export default {
             });
         },
         onDataLoad(data) {
-
+            data.tjDate = new Date(data.tjDate);
+            data.yqjsDate = new Date(data.yqjsDate);
             // 查询功能位置
             ApiKKS.query(data.kksId).then((kks) => {
                 this.KksSelected(kks);
