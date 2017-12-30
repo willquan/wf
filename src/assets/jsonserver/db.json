@@ -110,6 +110,18 @@
       "detail": true,
       "export": true,
       "userId": 5
+    },
+    {
+      "id": 10,
+      "res": "kks",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
     }
   ],
   "logout": {},
@@ -157,6 +169,11 @@
       "id": 12,
       "menuId": 2,
       "name": "dep"
+    },
+    {
+      "id": 13,
+      "menuId": 2,
+      "name": "kks"
     },
     {
       "id": 5,
@@ -380,6 +397,18 @@
         }
       ],
       "id": 12
+    },
+    {
+      "username": "luxiaofeng",
+      "pwd": "luxiaofeng",
+      "worknum": "234234",
+      "mobile": "12343123123",
+      "name": "陆小凤",
+      "sex": "1",
+      "departmentIds": "1,3",
+      "roleIds": "2,8",
+      "broleIds": "1",
+      "id": 13
     }
   ],
   "departments": [
@@ -623,6 +652,13 @@
       "workTicketStatesIds": "1",
       "operateTicketStatesIds": "2",
       "id": 1
+    },
+    {
+      "name": "操作人",
+      "fstateIds": "2,3",
+      "workTicketStatesIds": "1,3",
+      "operateTicketStatesIds": "1",
+      "id": 2
     }
   ],
   "kks": [
@@ -631,27 +667,46 @@
       "parentId": 0,
       "name": "W025",
       "desc": "北京电厂",
-      "sid": "HNJT"
+      "sid": "HNJT",
+      "hasChildren": true
     },
     {
       "id": 2,
       "parentId": 1,
       "name": "W025 6",
       "desc": "#6机组",
-      "sid": "HNJT"
+      "sid": "HNJT",
+      "hasChildren": true
     },
     {
       "id": 3,
       "parentId": 2,
       "name": "W025 4 0QEB10 AA202",
       "desc": "#4炉尿素喷枪无油空压机来雾化空气逆止阀",
-      "sid": "HNJT"
+      "sid": "HNJT",
+      "hasChildren": false
     },
     {
       "id": 4,
       "parentId": 2,
       "name": "W025 6 0AEA01",
       "desc": "#6主变压器6B高压侧开关间隔",
+      "sid": "HNJT",
+      "hasChildren": false
+    },
+    {
+      "id": 5,
+      "parentId": 1,
+      "name": "W025 5",
+      "type": "",
+      "sid": "HNJT",
+      "desc": "#6机组"
+    },
+    {
+      "id": 6,
+      "parentId": 1,
+      "name": "W025 4",
+      "desc": "#4机组",
       "sid": "HNJT"
     }
   ],

@@ -7,7 +7,7 @@
                 <Icon type="ios-loop-strong"></Icon>
                 清空表单
             </a>
-            <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="60">
+            <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="80">
                 <Row type="flex" :gutter="32">
                     <Col span="12">
                         <FormItem prop="username" label="登录名">
@@ -54,22 +54,18 @@
                     </Col>
                 </Row>
                 <Row type="flex" :gutter="32">
-                    <Col span="12">
-                        <FormItem prop="departmentId" label="部门">
-                            <Select v-model="form.departmentId" placeholder="选择部门" :disabled="!isEditable" transfer>
-                                <Option v-for="d in departments" :value="d.id" :key="d.id">{{ d.name }}</Option>
-                            </Select>
-                        </FormItem>
-                    </Col>
-                    <Col span="12">
-                        <FormItem prop="positionId" label="岗位">
-                            <Select v-model="form.positionId" placeholder="选择职位" :disabled="!isEditable" transfer>
-                                <Option v-for="p in positions" :value="p.id" :key="p.id">{{ p.name }}</Option>
-                            </Select>
+                    <Col span="24">
+                        <FormItem prop="departmentIds" label="部门">
+                            <dep-cascader :values="form.departmentIds" @departmentsDidSelect="departmentDidSelect"></dep-cascader>
                         </FormItem>
                     </Col>
                 </Row>
-                <FormItem  prop="roleIds" label="角色">
+                <FormItem  prop="broleIds" label="业务角色">
+                    <Select v-model="form.broleIds" multiple placeholder="选择角色" :disabled="!isEditable">
+                        <Option v-for="r in broles" :value="r.id" :key="r.id">{{ r.name }}</Option>
+                    </Select>
+                </FormItem>
+                <FormItem  prop="roleIds" label="系统角色">
                     <Select v-model="form.roleIds" multiple placeholder="选择角色" :disabled="!isEditable">
                         <Option v-for="r in roles" :value="r.id" :key="r.id">{{ r.name }}</Option>
                     </Select>
@@ -85,15 +81,18 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiDep, ApiPos, ApiRole} from '@/api/apiUtil'
+import {ApiDep, ApiPos, ApiRole, ApiBrole} from '@/api/apiUtil'
 import apiMixin from './config'
+import DepCascader from '@/views/components/DepCascader'
 
 export default {
     mixins:[formMixin, apiMixin],
     name: 'employeeForm',
+    components: {DepCascader},
     data() {
         return {
             roles:[],
+            broles:[],
             positions: [],
             departments: [],
             form: {
@@ -103,9 +102,9 @@ export default {
                 mobile: '',
                 name: '',
                 sex: '1',
-                departmentId: '',
-                positionId: '',
-                roleIds: []
+                departmentIds: [],
+                roleIds: [],
+                broleIds: []
             },
             rules: {
                 username: [
@@ -126,14 +125,17 @@ export default {
                 sex: [
                     { required: true, message: '性别不能为空', trigger: 'change' }
                 ],
-                departmentId: [
-                    { type: "number", required: true, message: '请选择部门', trigger: 'change' }
+                departmentIds: [
+                    { type: "array", required: true, message: '请选择部门', trigger: 'change' }
                 ],
                 positionId: [
                     { type: "number", required: true, message: '请选择职位', trigger: 'change' }
                 ],
                 roleIds: [
-                    { type: "array", required: true, message: '请选择角色', trigger: 'change' }
+                    { type: "array", required: true, message: '请选择系统角色', trigger: 'change' }
+                ],
+                broleIds: [
+                    { type: "array", required: true, message: '请选择业务角色', trigger: 'change' }
                 ]
             }
         }
@@ -149,19 +151,45 @@ export default {
             ApiRole.queryList().then(data => {
                 this.roles = data;
             });
+             ApiBrole.queryList().then(data => {
+                this.broles = data;
+            });
         },
         getFormRef() {
             return this.$refs.wfForm
         },
+        departmentDidSelect(value) {
+            this.form.departmentIds = value;
+        },
         onBeforeSubmit() {
             this.form.roleIds = this.form.roleIds.join();
+            this.form.broleIds = this.form.broleIds.join();
+            this.form.departmentIds = this.form.departmentIds.join();
         },
         onDataLoad(data) {
-            if(data && data.roles) {
-                data.roleIds = [];
-                data.roles.forEach(el => {
-                    data.roleIds.push(el.id);
+            if(data && data.roleIds) {
+                let strArray = data.roleIds.split(",");
+                let roleIds = []
+                strArray.forEach((el, index) => {
+                    roleIds.push(parseInt(el));
                 });
+                data.roleIds = roleIds;
+            }
+           if(data && data.broleIds) {
+                let strArray = data.broleIds.split(",");
+                let broleIds = []
+                strArray.forEach((el, index) => {
+                    broleIds.push(parseInt(el));
+                });
+                data.broleIds = broleIds;
+            }
+            if(data && data.departmentIds) {
+                let strArray = data.departmentIds.split(",");
+                let departmentIds = []
+                strArray.forEach((el, index) => {
+                    departmentIds.push(parseInt(el));
+                });
+                data.departmentIds = departmentIds;
             }
         }
     }

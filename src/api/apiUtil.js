@@ -29,9 +29,6 @@ export const ApiKKS = createApi("kks");
 export const ApiFlevels = createApi("flevels");
 
 export const ApiDep = createApi("departments");
-export const ApiMajors = createApi("majors"); //专业
-export const ApiGroups = createApi("groups");//值别
-export const ApiTeams = createApi("teams");//班组
 
 export const ApiFaults = createApi("faults");//缺陷
 

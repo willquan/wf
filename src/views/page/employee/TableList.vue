@@ -18,28 +18,14 @@ export default {
                     able2search: true
                 },
                 {
-                    title: '用户名',
-                    key: 'username'
-                },
-                {
-                    title: '性别',
-                    key: 'sex',
-                    render:(h, params) => {
-                        return params.row.sex == '1' ? '男' : '女'
-                    }
+                    title: '手机号',
+                    key: 'mobile'
                 },
                 {
                     title: '部门',
-                    key: 'department',
+                    key: 'departmentIds',
                     render:(h, params) => {
-                        return params.row.departmentName || params.row.department.name
-                    }
-                },
-                {
-                    title: '职位',
-                    key: 'position',
-                    render:(h, params) => {
-                        return params.row.positionName || params.row.position.name
+                        return params.row.departmentName || params.row.departmentIds
                     }
                 },
                 {
@@ -48,7 +34,22 @@ export default {
                     able2search: true
                 },
                 {
-                    title: '角色',
+                    title: '业务角色',
+                    key: 'role',
+                    render:(h, params) => {
+                        let content = params.row.broleIds;
+                        if(params.row.broles && params.row.broles.length > 0) {
+                            content = '';
+                            params.row.broles.forEach(role => {
+                                content = content + role.name + ' | ';
+                            });
+                            content = content.substring(0, content.length - 2)
+                        }
+                        return content
+                    }
+                },
+                {
+                    title: '系统角色',
                     key: 'role',
                     render:(h, params) => {
                         let content = params.row.roleIds;
