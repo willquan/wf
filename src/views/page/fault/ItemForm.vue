@@ -125,7 +125,7 @@
 
 <script>
 import formMixin from '@/views/page/mixins/form'
-import {ApiFlevels, ApiFaults, ApiKKS, ApiUser, ApiDep} from '@/api/apiUtil'
+import {ApiFlevels, ApiFaults, ApiKKS, ApiUser} from '@/api/apiUtil'
 import apiMixin from './config'
 import KksModal from './KksModal'
 // import MajorModal from './MajorModal'
@@ -188,6 +188,7 @@ export default {
             });
         },
         onDataLoad(data) {
+
             // 查询功能位置
             ApiKKS.query(data.kksId).then((kks) => {
                 this.KksSelected(kks);
@@ -197,6 +198,22 @@ export default {
                 this.userName = user.name;
                 this.form.userId = user.id;
             });
+
+            if(data && data.groupIds) {
+                let strArray = data.groupIds.split(",");
+                let groupIds = []
+                strArray.forEach((el, index) => {
+                    groupIds.push(parseInt(el));
+                });
+                data.groupIds = groupIds;
+            }
+            if(data && data.teamIds) {
+                let strArray = data.teamIds.split(",");
+                data.teamIds = [];
+                strArray.forEach((el, index) => {
+                    data.teamIds.push(parseInt(el));
+                });
+            }
         },
         getFormRef() {
             return this.$refs.wfForm
@@ -237,23 +254,6 @@ export default {
             this.form.groupIds = this.form.groupIds.join();
             this.form.tjDate = parseTime(this.form.tjDate);
             this.form.yqjsDate = parseTime(this.form.yqjsDate);
-        },
-        onDataLoad(data) {
-            if(data && data.groupIds) {
-                let strArray = data.groupIds.split(",");
-                let groupIds = []
-                strArray.forEach((el, index) => {
-                    groupIds.push(parseInt(el));
-                });
-                data.groupIds = groupIds;
-            }
-            if(data && data.teamIds) {
-                let strArray = data.teamIds.split(",");
-                data.teamIds = [];
-                strArray.forEach((el, index) => {
-                    data.teamIds.push(parseInt(el));
-                });
-            }
         }
     }
 }
