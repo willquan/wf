@@ -34,7 +34,7 @@ export default {
             },
             rules: {
                 name: [
-                    { required: true, message: '岗位名称不能为空', trigger: 'blur' }
+                    { required: true, message: '缺陷状态名称不能为空', trigger: 'blur' }
                 ]
             }
         }

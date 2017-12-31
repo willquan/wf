@@ -1,5 +1,13 @@
 <template>
     <div style="padding-bottom: 150px;">
+        <Row type="flex" justify="center" style="margin-top: 8px; margin-bottom: 4px;">
+            <Col span="12" style="padding-bottom: 8px">
+               <Input type="text" v-model="desc" @on-enter="startSearch" @on-click="()=>{desc='';startSearch()}" placeholder="请输入KKS描述" :icon="desc!='' ? 'close-circled' : '' "/>
+            </Col>
+            <Col span="12" style="padding-left: 16px">
+                <Button type="default" @click="startSearch">搜索</Button>
+            </Col>
+        </Row>
         <Row type="flex" justify="center" align="middle" class="tree-table-row"
             style="background-color: #f8f8f9;border-top: 1px solid #e9eaec;">
             <Col span="10">
@@ -49,6 +57,7 @@ export default {
             treeData: [],
             submitType: 0, // 1 添加，2编辑
             selectedItem: {},
+            desc: '', //用于搜索
             form: {
                 id: 0,
                 parentId: 0,
@@ -70,6 +79,9 @@ export default {
         }
     },
     methods: {
+        startSearch() {
+            this.beginQuery();
+        },
         ok() {
             this.$refs.wfForm.validate((valid) => {
                 if (valid && this.isShow) {
@@ -89,6 +101,9 @@ export default {
         },
         beginQuery() {
             let params = {parentId: 0};
+            if(this.desc && this.desc != '') {
+                params = {desc: this.desc}
+            }
             this.getApi().queryList(params).then(data => {
                 data.forEach(el => {
                     el.loading = false;
