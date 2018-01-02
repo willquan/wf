@@ -142,9 +142,18 @@
     {
       "id": 4,
       "name": "state"
+    },
+    {
+      "id": 5,
+      "name": "operateManage"
     }
   ],
   "children": [
+    {
+      "id": 14,
+      "menuId": 5,
+      "name": "operateTicket"
+    },
     {
       "id": 1,
       "menuId": 1,
@@ -789,6 +798,62 @@
     {
       "name": "状态3",
       "id": 3
+    }
+  ],
+  "workTickets": [
+    
+  ],
+  "typicalTickets": [
+    {
+      "id": 1,
+      "parentId": 0,
+      "name": "W025",
+      "desc": "北京电厂",
+      "sid": "HNJT",
+      "hasChildren": true
+    },
+    {
+      "id": 2,
+      "parentId": 1,
+      "name": "W025 6",
+      "desc": "#6机组",
+      "sid": "HNJT",
+      "hasChildren": true
+    },
+    {
+      "id": 3,
+      "parentId": 2,
+      "name": "W025 4 0QEB10 AA202",
+      "desc": "#4炉尿素喷枪无油空压机来雾化空气逆止阀",
+      "sid": "HNJT",
+      "hasChildren": false
+    },
+    {
+      "id": 4,
+      "parentId": 2,
+      "name": "W025 6 0AEA01",
+      "desc": "#6主变压器6B高压侧开关间隔",
+      "sid": "HNJT",
+      "hasChildren": false
+    },
+    {
+      "id": 5,
+      "parentId": 1,
+      "name": "W025 5",
+      "type": "",
+      "sid": "HNJT",
+      "desc": "#5机组",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 1,
+      "nodeKey": 2
+    },
+    {
+      "id": 6,
+      "parentId": 1,
+      "name": "W025 4",
+      "desc": "#4机组",
+      "sid": "HNJT"
     }
   ]
 }

@@ -76,6 +76,17 @@ export const appRouter = [
         ]
     },
     {
+        path: '/operateManage',
+        redirect: {name: 'home_index'},
+        icon: 'bug',
+        name: 'operateManage',
+        meta: {title: '操作票管理'},
+        component: Main,
+        children: [
+            { path: 'operateTicket', meta:{title: '操作票管理'}, name: 'operateTicket', component: resolve => { require(['@/views/page/operateTicket/page.vue'], resolve); } },
+        ]
+    },
+    {
         path: '/manager',
         redirect: {name: 'home_index'},
         icon: 'briefcase',

@@ -33,5 +33,9 @@ export const ApiDep = createApi("departments");
 export const ApiFaults = createApi("faults");//缺陷
 
 export const ApiFstates = createApi("fstates");//缺陷状态
+
 export const ApiWorkTicketStates = createApi("workTicketStates");//工作票状态
+export const ApiWorkTickets= createApi("workTickets");//工作票
+export const ApiTypicalTickets= createApi("typicalTickets");//工作票
+
 export const ApiOperateTicketStates = createApi("operateTicketStates");//操作票状态
