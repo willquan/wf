@@ -7,7 +7,7 @@
                     <Step @click.native="currentStep = 0" title="关联典型票"></Step>
                     <Step @click.native="currentStep = 1" title="操作内容"></Step>
                     <Step @click.native="currentStep = 2" title="危险点预控卡"></Step>
-                    <Step @click.native="currentStep = 3" title="操作依据"></Step>
+                    <Step @click.native="currentStep = 3" title="审批流程"></Step>
                 </Steps>
             </Col>
         </Row>
@@ -19,7 +19,7 @@
                             <Col span="20" :lg="15">
                                 <Card>
                                     <p slot="title">引用典型票</p>
-                                    <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="60">
+                                    <Form ref="wfForm" :model="form" :rules="rules" label-position="left" :label-width="80">
                                         <FormItem prop="typicalTicketId" label="典型票">
                                             <Input class="input-disabled-white-bg" v-model="typicalTicket.typicalTicketName" placeholder="请选择典型票" :disabled="true">
                                                 <Button v-if="isEditable" slot="append" icon="ios-search" @click="$refs.typicalTicketModal.show()"></Button>
@@ -54,7 +54,20 @@
                         </Row>
                     </TabPane>
                     <TabPane label="标签三" name="tab2">标签三的内容</TabPane>
-                    <TabPane label="标签三" name="tab3">标签四的内容</TabPane>
+                    <TabPane label="标签三" name="tab3">
+                        <Row type="flex">
+                            <Col span="6" offset="18">
+                                <Steps :current="3" direction="vertical" size="small">
+                                    <Step title="操作人 - 已确认" content="2018-01-02 21:21"></Step>
+                                    <Step title="监护人 - 已确认" content="2018-01-02 21:21"></Step>
+                                    <Step title="值班负责人 - 已确认" content="2018-01-02 21:21"></Step>
+                                    <Step title="点击确认" style="color: blue" icon="edit" content="2018-01-02 21:21"></Step>
+                                    <Step title="等待值长确认" content="2018-01-02 21:21"></Step>
+                                </Steps>
+                            </Col>
+                        </Row>
+                       
+                    </TabPane>
                 </Tabs>
             </Col>
         </Row>

@@ -25,11 +25,11 @@ export default {
     },
     data() {
         return {
-            add: {name:'AddTab', label: '创建工作票', closable: true, show: false},
-            edit: {name:'EditTab', label: '编辑工作票', closable: true, show: false},
+            add: {name:'AddTab', label: '创建操作票', closable: true, show: false},
+            edit: {name:'EditTab', label: '编辑操作票', closable: true, show: false},
             view: {name:'ViewTab', label: '查看信息', closable: true, show: false},
             tabs: [
-                {name:'ListTab', label: '工作票列表', closable: false, show: true}, 
+                {name:'ListTab', label: '操作票列表', closable: false, show: true}, 
             ]
         }
     }
