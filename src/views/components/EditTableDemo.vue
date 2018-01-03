@@ -79,7 +79,7 @@
               "hsep2": "---------",
                        }
           },//右键效果
-          fillHandle: "horizontal", //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
+          fillHandle: false, //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
           fixedColumnsLeft: 0,//固定左边列数
           fixedRowsTop: 0,//固定上边列数
           mergeCells: [   //合并
