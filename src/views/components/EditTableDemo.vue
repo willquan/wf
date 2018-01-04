@@ -125,12 +125,39 @@
           customBorders:[],//添加边框
           columnSorting: true,//排序
           stretchH: 'all',//根据宽度横向扩展，last:只扩展最后一列，none：默认不扩展
+          afterSelectionEnd: function(r, c, r2, c2) {
+            let startRow = r2 > r ? r : r2;
+            let endRow = r2 > r ? r2 : r;
+            // 不处理点击单个单元格的情况，用默认处理方式
+            if(c === 2 && c2 === 2 && startRow != endRow) {
+              let a = [];
+              for(var i = startRow; i <= endRow; i++) {
+                a.push([i, c, true]);
+              }
+              this.setDataAtCell(a);
+          }
+        },
           afterChange: function (change, source) {
             // console.log(change)
             if (source === 'loadData') {
               return; //don't save this change
             }
             console.log(this.getData())
+          },
+          afterChange: function(change, source) {
+            // console.log(change)
+            if (source === "loadData") {
+              return; //don't save this change
+            }
+            let highlightSelector = "";
+            for(var i = 0; i < change.length; i++) {
+              highlightSelector += '.ht_master tr:nth-child(' + (change[i][0]+1) + ')'
+            }
+            let allTDs = document.querySelectorAll(highlightSelector);
+            for(let i=0; i<allTDs.length; i++) {
+              allTDs[i].classList.add('selected-highlight');
+            }
+            console.log(highlightSelector)
           }
         }
       };
