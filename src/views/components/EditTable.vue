@@ -1,7 +1,8 @@
 <template>
   <div>
+      <Button type="primary" @click="click">sss</Button>
       <div id="example-container" class="wrapper">
-      <HotTable :root="root" :settings="hotSettings"></HotTable>
+      <HotTable ref="hottable" :root="root" :settings="hotSettings"></HotTable>
     </div>
   </div>
 
@@ -79,19 +80,19 @@
               "hsep2": "---------",
                        }
           },//右键效果
-          fillHandle: "horizontal", //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
+          fillHandle: true, //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
           fixedColumnsLeft: 0,//固定左边列数
           fixedRowsTop: 0,//固定上边列数
-          mergeCells: [   //合并
-             {row: 1, col: 1, rowspan: 3, colspan: 3},  //指定合并，从（1,1）开始行3列3合并成一格
-             {row: 3, col: 4, rowspan: 2, colspan: 2}
-          ],
+          // mergeCells: [   //合并
+          //    {row: 1, col: 1, rowspan: 3, colspan: 3},  //指定合并，从（1,1）开始行3列3合并成一格
+          //    {row: 3, col: 4, rowspan: 2, colspan: 2}
+          // ],
           columns: [     //添加每一列的数据类型和一些配置
             {
-              type: 'date',   //时间格式
-              dateFormat: 'YYYYMMDD',
-              correctFormat: true,
-              defaultDate: '19000101'
+              type: 'numeric',   //时间格式
+              // dateFormat: 'YYYYMMDD',
+              // correctFormat: true,
+              // defaultDate: '19000101'
             },
             {
               type: 'dropdown', //下拉选择
@@ -112,9 +113,9 @@
           manualColumnResize: true,//手工更改列距
           manualRowResize: true,//手动更改行距
           comments: true, //添加注释
-          cell: [
-            {row: 1, col: 1, comment: {value: 'this is test'}},
-          ],
+          // cell: [
+          //   {row: 1, col: 1, comment: {value: 'this is test'}},
+          // ],
           customBorders:[],//添加边框
           columnSorting: true,//排序
           stretchH: 'all',//根据宽度横向扩展，last:只扩展最后一列，none：默认不扩展
@@ -124,6 +125,15 @@
     name: 'SampleApp',
     components: {
       HotTable
+    },
+    mounted: function() {
+     console.log(this.$refs.hottable.table)
+    },
+    methods: {
+      click() {
+         console.log(this.$refs.hottable.table.getValue())
+         this.$refs.hottable.table.selectCell(0, 0, 1, 5)
+      }
     }
   }
 </script>
