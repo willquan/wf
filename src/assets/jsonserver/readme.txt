@@ -2,6 +2,8 @@
     npm install json-server --save-dev
 2. 运行node server.js
 
+handsontable api文档
+https://docs.handsontable.com/0.35.0/tutorial-setting-options.html
 
 1. 为什么要分 系统角色 业务角色？
    业务角色 和 权限隔离
