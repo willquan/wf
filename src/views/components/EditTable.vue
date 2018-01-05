@@ -13,10 +13,27 @@ export default {
       name: "EditTable",
       root: "HotTableRoot",
       hotSettings: {
-        fillHandle: true, //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
+        fillHandle: 'vertical', //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
         rowHeaders: true, //行表头
         manualRowMove: true, //手动移动行
         stretchH: "all", //根据宽度横向扩展，last:只扩展最后一列，none：默认不扩展
+        afterRender: function() {
+          //conner单元格显示“序号”
+          setTimeout(function() {
+                let a = document.querySelectorAll(".colHeader.cornerHeader");
+                for(var i = 0; i < a.length; i++) {
+                  a[i].innerText = '序号';
+                }
+          }, 20);
+        },
+        beforeChange: function(change, source) {
+          for(var i = 0; i < change.length; i++) {
+            let c = change[i][1];
+            if(c === 1 && source=="CopyPaste.paste") {
+              return false
+            }
+          }
+        },
         contextMenu: {
           //自定义右键菜单，可汉化，默认布尔值
           items: {
@@ -28,7 +45,13 @@ export default {
             },
             remove_row: {
               name: "删除行"
-            }
+            },
+            copy: {
+              name: "拷贝"
+            },
+            cut: {
+              name: "剪切"
+            },
           }
         }, //右键效果
         data: [
@@ -54,7 +77,7 @@ export default {
               value: '确认无误？'
             }
           }
-        ]
+        ],
       }
     };
   },
