@@ -49,7 +49,7 @@
                     <TabPane label="标签二" name="tab1">
                         <Row>
                             <Col span="24">
-                                <edit-table></edit-table>
+                                <operate-ticket-table></operate-ticket-table>
                             </Col>
                         </Row>
                     </TabPane>
@@ -79,11 +79,11 @@
 <script>
 import apiMixin from './config'
 import TypicalTicketModal from './TypicalTicketModal'
-import EditTable from '@/views/components/EditTable'
+import OperateTicketTable from './OperateTicketTable'
 export default {
     mixins:[apiMixin],
     name: 'itemForm',
-    components: {TypicalTicketModal, EditTable},
+    components: {TypicalTicketModal, OperateTicketTable},
     data() {
         return {
             isEditable: true,

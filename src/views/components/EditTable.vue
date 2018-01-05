@@ -1,14 +1,13 @@
-<template>
-  <div>
-      <HotTable ref="hottable" :root="root" :settings="hotSettings"></HotTable>
-  </div>
-
-</template>
 <script>
 import HotTable from "vue-handsontable-official";
+import SheetClip from "handsontable/lib/SheetClip/SheetClip";
 
+var clipboardCache = '';
 export default {
-  data: function() {
+  render(h) {
+    return (<HotTable ref="hottable" root={this.root} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>)
+  },
+  data() {
     return {
       name: "EditTable",
       root: "HotTableRoot",
@@ -17,6 +16,7 @@ export default {
         rowHeaders: true, //行表头
         manualRowMove: true, //手动移动行
         stretchH: "all", //根据宽度横向扩展，last:只扩展最后一列，none：默认不扩展
+        copyPaste: true,
         afterRender: function() {
           //conner单元格显示“序号”
           setTimeout(function() {
@@ -26,73 +26,68 @@ export default {
                 }
           }, 20);
         },
-        beforeChange: function(change, source) {
-          for(var i = 0; i < change.length; i++) {
-            let c = change[i][1];
-            if(c === 1 && source=="CopyPaste.paste") {
-              return false
-            }
-          }
+        afterCopy: function(changes) {
+          clipboardCache = SheetClip.stringify(changes);
+        },
+        afterCut: function(changes) {
+          clipboardCache = SheetClip.stringify(changes);
+        },
+        afterPaste: function(changes) {
+          // we want to be sure that our cache is up to date, even if someone pastes data from another source than our tables.
+          clipboardCache = SheetClip.stringify(changes);
         },
         contextMenu: {
           //自定义右键菜单，可汉化，默认布尔值
           items: {
             row_above: {
-              name: "上方插入一行"
+              name: "上方插入一行",
             }, 
             row_below: {
               name: "下方插入一行"
             },
+            "hsep1": "---------", //提供分隔线
             remove_row: {
               name: "删除行"
             },
+            "hsep2": "---------",
             copy: {
-              name: "拷贝"
+              name: "拷贝",
+              disabled: function () {
+                //没选中任何单元格时，禁用
+                return !this.getSelected() || !this.getSelected()[0];
+              }
             },
             cut: {
-              name: "剪切"
+              name: "剪切",
+              disabled: function () {
+                //没选中任何单元格时，禁用
+                return !this.getSelected() || !this.getSelected()[0];
+              }
             },
-          }
-        }, //右键效果
-        data: [
-          //数据，可以是数据，对象
-          ['穿好防护服，代号防护面罩和手套', true],
-          ['检查#6燃机保安进线三412A09框架开关在“分闸”位', true],
-          ['检查#6燃机保安进线三412A09框架开关在“工作”位', true],
-          ['拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', true],
-          ['拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', true],
-          ['检查#6燃机保安进线三412A09框架开关在“试验”位', true],
-        ],
-        colHeaders: ["操作内容", "逐条确认"], //自定义列表头or 布尔值
-        columns: [
-          //添加每一列的数据类型和一些配置
-          {
-            type: "text",
-          },
-          { 
-            type: "checkbox",
-            // 添加label以后，点击单元格，复选框状态也可改变
-            label: {
-              position: 'before',
-              value: '确认无误？'
+           paste : {
+              key: 'paste',
+              name: '粘贴',
+              disabled: function() {
+                return !this.getSelected() || !this.getSelected()[0];
+              },
+              callback: function() {
+                var plugin = this.getPlugin('copyPaste');
+                this.listen();
+                plugin.paste(clipboardCache);
+              }
             }
           }
-        ],
+        }, //右键效果
       }
     };
   },
   components: {
     HotTable
   },
-  mounted: function() {
-    
-  },
-  methods: {}
+  methods: {
+    addHook(key, callback) {
+      this.$refs.hottable.table.addHook(key, callback);
+    }
+  }
 };
 </script>
-
-<style>
-.selected-highlight {
-  background-color:rgba(181,209,255,0.34) !important;
-}
-</style>
