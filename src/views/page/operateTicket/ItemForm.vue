@@ -53,7 +53,9 @@
                             </Col>
                         </Row>
                     </TabPane>
-                    <TabPane label="标签三" name="tab2">标签三的内容</TabPane>
+                    <TabPane label="标签三" name="tab2">
+                        <danger-point-table></danger-point-table>
+                    </TabPane>
                     <TabPane label="标签三" name="tab3">
                         <Row type="flex">
                             <Col span="6" offset="18">
@@ -80,10 +82,11 @@
 import apiMixin from './config'
 import TypicalTicketModal from './TypicalTicketModal'
 import OperateTicketTable from './OperateTicketTable'
+import DangerPointTable from './DangerPointTable'
 export default {
     mixins:[apiMixin],
     name: 'itemForm',
-    components: {TypicalTicketModal, OperateTicketTable},
+    components: {TypicalTicketModal, OperateTicketTable, DangerPointTable},
     data() {
         return {
             isEditable: true,
