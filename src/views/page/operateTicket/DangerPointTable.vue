@@ -6,6 +6,7 @@ export default {
     mixins:[EditTableMixin],
     data() {
         return {
+            rootName: 'DangerPointTable',
             tableData: [
                 //数据，可以是数据，对象
                 ['发布和接受命令出错', '操作人和监护人应了解操作目的和操作顺序，对指令有疑问应向值长询问清楚。值长在签发操作票之前必须认真审核操作票，确认无误后方可签名发令'],
@@ -23,7 +24,7 @@ export default {
             for(var i = 0; i < change.length; i++) {
                 let c = change[i][1];
                 if(c === 1 && typeof change[i][3] != 'boolean') {
-                return false
+                    return false
                 }
             }
         })

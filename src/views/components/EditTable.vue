@@ -5,12 +5,11 @@ import SheetClip from "handsontable/lib/SheetClip/SheetClip";
 var clipboardCache = '';
 export default {
   render(h) {
-    return (<HotTable ref="hottable" root={this.root} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>)
+    return (<HotTable ref="hottable" root={this.rootName} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>)
   },
   data() {
     return {
       name: "EditTable",
-      root: "HotTableRoot",
       hotSettings: {
         fillHandle: 'vertical', //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
         rowHeaders: true, //行表头
