@@ -44,7 +44,7 @@ export default {
             for(var i = 0; i < change.length; i++) {
                 let c = change[i][1];
                 if(c === 1 && typeof change[i][3] != 'boolean') {
-                return false
+                    return false
                 }
             }
         });
@@ -56,6 +56,16 @@ export default {
         });
     },
     methods: {
+        onCreateContextMenu(contextMenu) {
+            let vueThis = this;
+            contextMenu.items.import = {
+                key: "import",
+                name: "导入预控卡",
+                callback: function() {
+                    vueThis.$Message.info('开始导入预控卡')
+                }
+            }
+        },
         highlightSelectedRow() {
             let highlightSelector = "";
             for(var i = 0; i < this.tableData.length; i++) {

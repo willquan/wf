@@ -11,12 +11,12 @@
     <div style="padding-bottom: 150px; padding: 16px">
         <Row type="flex" justify="center" :gutter="16">
             <Col span="8">
-               <Tree :data="treeData" :load-data="loadData" @on-select-change="getTypeTickets"></Tree>
+               <Tree ref="tree" :data="treeData" :load-data="loadData" @on-select-change="getTypeTickets"></Tree>
             </Col>
             <Col span="16">
                 <Row style="margin-bottom: 8px">
                     <Col span="24">
-                        <Input type="text" v-model="name" @on-enter="startSearch" @on-click="()=>{name='';startSearch()}" placeholder="请输入操作任务，并回车" :icon="name!='' ? 'close-circled' : '' "/>
+                        <Input type="text" v-model="taskName" @on-enter="startSearch" @on-click="()=>{taskName='';startSearch()}" placeholder="请输入操作任务，并回车" :icon="taskName!='' ? 'close-circled' : '' "/>
                     </Col>
                 </Row>
                 <Row>
@@ -44,8 +44,8 @@ export default {
             treeData: [],
             selectedItem: {},
             isShow: false,
-            name: '', //用于搜索
-
+            taskName: '', //用于搜索
+            selectedTree: {},
             columns:[
                 {
                     type: 'index',
@@ -69,13 +69,10 @@ export default {
             this.isShow = true;
         },
         startSearch() {
-            this.beginQuery();
+             this.getTypeTickets(this.$refs.tree.getSelectedNodes())
         },
         beginQuery() {
             let params = {parentId: 0};
-            if(this.name && this.name != '') {
-                params = {name: this.name}
-            }
             ApiEquipments.queryList(params).then(data => {
                 this.convertData(data);
                 this.treeData = data;
@@ -88,9 +85,16 @@ export default {
             });
         },
        getTypeTickets(selectedNode) {
-            ApiTypicalTickets.queryList({equipmentId: selectedNode[0].id}).then(data => {
-                this.tdata = data;
-            });
+           if(selectedNode.length > 0) {
+                this.selectedTree = selectedNode[0];
+                let params = {equipmentId: selectedNode[0].id}
+                if(this.taskName && this.taskName != '') {
+                    params.taskName = this.taskName;
+                }
+                ApiTypicalTickets.queryList(params).then(data => {
+                    this.tdata = data;
+                });
+           }
        },
         onOk() {
             if(this.selectedItem.id) {
@@ -109,13 +113,6 @@ export default {
                 el.expand = false;
                 if(el.hasChildren) el.children = []
             });
-        }
-    },
-    watch: {
-        desc: function(value) {
-            if(!value || value == '') {
-                this.beginQuery();
-            }
         }
     }
 }
