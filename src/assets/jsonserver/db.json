@@ -29,7 +29,7 @@
     },
     {
       "id": 3,
-      "res": "positions",
+      "res": "equipments",
       "create": true,
       "del": true,
       "dels": true,
@@ -102,6 +102,18 @@
     {
       "id": 9,
       "res": "operateTicketStates",
+      "create": true,
+      "del": true,
+      "dels": true,
+      "update": true,
+      "list": true,
+      "detail": true,
+      "export": true,
+      "userId": 5
+    },
+    {
+      "id": 9,
+      "res": "operateTickets",
       "create": true,
       "del": true,
       "dels": true,
@@ -187,7 +199,7 @@
     {
       "id": 5,
       "menuId": 2,
-      "name": "position"
+      "name": "equipment"
     },
     {
       "id": 6,
@@ -800,63 +812,213 @@
       "id": 3
     }
   ],
-  "workTickets": [
-    
-  ],
-  "optTickets": [
-    
-  ],
+  "workTickets": [],
+  "operateTickets": [],
   "typicalTickets": [
     {
       "id": 1,
-      "parentId": 0,
-      "name": "W025",
-      "desc": "北京电厂",
-      "sid": "HNJT",
-      "hasChildren": true
+      "equipmentId": 17,
+      "num":"DW025260D1",
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 2,
-      "parentId": 1,
-      "name": "W025 6",
-      "desc": "#6机组",
-      "sid": "HNJT",
-      "hasChildren": true
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 3,
-      "parentId": 2,
-      "name": "W025 4 0QEB10 AA202",
-      "desc": "#4炉尿素喷枪无油空压机来雾化空气逆止阀",
-      "sid": "HNJT",
-      "hasChildren": false
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 4,
-      "parentId": 2,
-      "name": "W025 6 0AEA01",
-      "desc": "#6主变压器6B高压侧开关间隔",
-      "sid": "HNJT",
-      "hasChildren": false
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 5,
-      "parentId": 1,
-      "name": "W025 5",
-      "type": "",
-      "sid": "HNJT",
-      "desc": "#5机组",
-      "loading": false,
-      "expand": false,
-      "nodeLevel": 1,
-      "nodeKey": 2
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 6,
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
+    },
+    {
+      "id": 7,
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
+    },
+    {
+      "id": 8,
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
+    },
+    {
+      "id": 9,
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
+    },
+    {
+      "id": 10,
+      "num":"DW025260D1",
+      "equipmentId": 17,
+      "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
+    }
+  ],
+  "equipments": [
+    {
+      "id": 1,
+      "parentId": 0,
+      "name": "电气专业",
+      "hasChildren": true,
+      "type": "部门"
+    },
+    {
+      "id": 2,
+      "parentId": 0,
+      "name": "热机专业",
+      "hasChildren": true,
+      "type": "部门"
+    },
+    {
+      "id": 3,
       "parentId": 1,
-      "name": "W025 4",
-      "desc": "#4机组",
-      "sid": "HNJT"
+      "name": "一单元",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 4,
+      "parentId": 1,
+      "name": "二单元",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 5,
+      "parentId": 3,
+      "name": "#1号机组",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 6,
+      "parentId": 3,
+      "name": "二号机组",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 7,
+      "parentId": 5,
+      "name": "负荷",
+      "hasChildren": true,
+      "type": "",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 3,
+      "children": [],
+      "nodeKey": 3
+    },
+    {
+      "id": 8,
+      "parentId": 5,
+      "name": "变压器",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 9,
+      "parentId": 5,
+      "name": "母线",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 10,
+      "parentId": 5,
+      "name": "发电机",
+      "hasChildren": true,
+      "type": "",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 3,
+      "children": [],
+      "nodeKey": 6
+    },
+    {
+      "id": 11,
+      "parentId": 7,
+      "name": "61A",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 12,
+      "parentId": 7,
+      "name": "61B",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 13,
+      "parentId": 7,
+      "name": "411A",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 14,
+      "parentId": 7,
+      "name": "411B",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 15,
+      "parentId": 7,
+      "name": "411C",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 16,
+      "parentId": 7,
+      "name": "411D",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 17,
+      "parentId": 13,
+      "name": "411A01-1 #1机组汽机A段进线开关",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 18,
+      "parentId": 13,
+      "name": "411A02-1 #1汽机#1凝结水泵",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 19,
+      "parentId": 13,
+      "name": "411A02-2 #1汽机#1密封油泵",
+      "hasChildren": true,
+      "type": ""
     }
   ]
 }

@@ -38,5 +38,7 @@ export const ApiWorkTicketStates = createApi("workTicketStates");//工作票状�
 export const ApiWorkTickets= createApi("workTickets");//工作票
 
 export const ApiOperateTicketStates = createApi("operateTicketStates");//操作票状态
-export const ApiOptTickets= createApi("workTickets");//操作票
+export const ApiOptTickets= createApi("operateTickets");//操作票
 export const ApiTypicalTickets= createApi("typicalTickets");//典型票
+
+export const ApiEquipments= createApi("equipments");//单元机组

@@ -1,12 +1,17 @@
 <template>
     <div style="padding-bottom: 150px;">
-        <Row type="flex" justify="center" align="middle" class="tree-table-row"
+        <Row type="flex" style="margin-top: 8px; margin-bottom: 4px;">
+            <Col span="12" style="padding-bottom: 8px">
+               <Input type="text" v-model="name" @on-enter="startSearch" @on-click="()=>{name='';startSearch()}" placeholder="请输入名称" :icon="name!='' ? 'close-circled' : '' "/>
+            </Col>
+            <Col span="12" style="padding-left: 16px">
+                <Button type="default" @click="startSearch">搜索</Button>
+            </Col>
+        </Row>
+        <Row type="flex" align="middle" class="tree-table-row"
             style="background-color: #f8f8f9;border-top: 1px solid #e9eaec;">
             <Col span="10">
-                组织名称
-            </Col>
-            <Col span="9">
-                组织类型
+                名称
             </Col>
             <Col span="5">
                 操作
@@ -15,7 +20,7 @@
         <Tree class="table-tree" :data="treeData" :load-data="loadData" :render="renderContent"></Tree>
         <Modal
             v-model="isShow"
-            title="添加部门节点"
+            title="添加设备节点"
             @on-ok="ok"
             :loading = "isShow"
             >
@@ -23,22 +28,16 @@
                 <FormItem prop="name" label="节点名称">
                     <Input v-model="form.name" :maxlength="50" placeholder="请输入节点名称" class="check-input"/>
                 </FormItem>
-                <FormItem prop="type" label="类型">
-                    <Select v-model="form.type" placeholder="选择节点类型">
-                        <Option v-for="el in ['部门', '专业', '班组', '值别']" :value="el" :key="el">{{ el }}</Option>
-                    </Select>
-                </FormItem>
             </Form>
         </Modal>
     </div>
 </template>
 <script>
-import { ApiDep } from '@/api/apiUtil'
 import { Icon, Row, Col, Poptip, Button } from 'iview'
 import apiMixin from './config'
 
 export default {
-    name: "DepTree",
+    name: "EquipmentsTree",
     mixins:[apiMixin],
     mounted: function() {
         this.beginQuery();
@@ -49,33 +48,34 @@ export default {
             treeData: [],
             submitType: 0, // 1 添加，2编辑
             selectedItem: {},
+            name:'',//用于搜索
             form: {
                 id: 0,
                 parentId: 0,
                 name: '',
-                type: ''
+                hasChildren: true
             },
             rules: {
                 name: [
-                    { required: true, message: '部门名称不能为空', trigger: 'blur' }
-                ],
-                type: [
-                    { required: true, message: '类型名称不能为空', trigger: 'blur' }
+                    { required: true, message: '名称不能为空', trigger: 'blur' }
                 ]
             }
         }
     },
     methods: {
+        startSearch() {
+            this.beginQuery();
+        },
         ok() {
             this.$refs.wfForm.validate((valid) => {
                 if (valid && this.isShow) {
                     if(this.submitType == 1) { //创建
-                        ApiDep.create(this.form).then(()=>{
+                        this.getApi().create(this.form).then(()=>{
                             this.reloadParentNode(this.form);
                             this.isShow = false;
                         });
                     } else if(this.submitType == 2) {//更新
-                        ApiDep.update(this.form).then(()=>{
+                        this.getApi().update(this.form).then(()=>{
                             this.reloadParentNode(this.form);
                             this.isShow = false;
                         });
@@ -85,7 +85,10 @@ export default {
         },
         beginQuery() {
             let params = {parentId: 0};
-            ApiDep.queryList(params).then(data => {
+            if(this.name && this.name != '') {
+                params = {name: this.name}
+            }
+            this.getApi().queryList(params).then(data => {
                 data.forEach(el => {
                     el.loading = false;
                     el.expand = false;
@@ -96,6 +99,18 @@ export default {
             });
         },
         loadData(item, callback) {
+            this.getApi().queryList({parentId: item.id}).then(data => {
+                data.forEach(el => {
+                    el.loading = false;
+                    el.expand = false;
+                    el.nodeLevel = item.nodeLevel + 1;
+                    if(el.hasChildren) el.children = []
+                });
+                callback(data);
+            });
+        },
+        reloadParentNode(node) { // 增删改之后重新加载节点信息
+            let parent = this.findNodeById(node.parentId, this.treeData);
             if(parent) {
                 this.loadData(parent,(children)=>{
                     if(children.length > 0) {
@@ -112,32 +127,15 @@ export default {
                 this.beginQuery();
             }
         },
-        reloadParentNode(node) { // 增删改之后重新加载节点信息
-            let parent = this.findNodeById(node.parentId, this.treeData);
-            this.loadData(parent,(children)=>{
-                if(children.length > 0) {
-                    parent.hasChildren = true; // 防止添加第一个子节点或没有查到子节点时,父节点状态错误
-                    parent.children = children;
-                    parent.expand = true;
-                } else {
-                    parent.hasChildren = false;
-                    parent.children = undefined;
-                    parent.expand = false; 
-                }
-            });
-        },
         renderContent(h, { root, node, data }) {
             return (
                 <div onDblclick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
-                    <Row type="flex" justify="center" align="middle" class={[{'row-high-light': this.selectedItem.id==data.id}, 'tree-table-row']} nativeOnClick={()=>{this.selectedItem = data}}>
+                    <Row type="flex" align="middle" class={[{'row-high-light': this.selectedItem.id==data.id}, 'tree-table-row']} nativeOnClick={()=>{this.selectedItem = data}}>
                         <Col span="10" style={{paddingLeft : data.nodeLevel*16 + 'px'}}>
                             <span onClick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
                                 <Icon color={data.hasChildren ? '' : 'white'} type={data.expand ? "arrow-down-b" : "arrow-right-b"} style="margin-right:4px; width: 11px"></Icon>
                             </span>
                             {data.name}
-                        </Col>
-                        <Col span="9">
-                            {data.type}
                         </Col>
                         <Col span="5">
                             <Button type="primary" size="small" style="margin-right: 4px" onClick={()=>{this.addNode(data)}} v-show={this.hasPermission('create')}>添加</Button>
@@ -173,7 +171,7 @@ export default {
             this.submitType = 2;
         },
         deleteNode(node) {
-           ApiDep.delete(node.id).then(()=>{
+           this.getApi().delete(node.id).then(()=>{
                 this.reloadParentNode(node);
            });
         },

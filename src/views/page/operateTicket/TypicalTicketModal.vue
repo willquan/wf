@@ -8,43 +8,31 @@
             <Button type="text" @click="isShow=!isShow">取消</Button>
             <Button type="primary" @click="onOk">确定</Button>
     </div>
-    <div style="padding-bottom: 150px;">
-        <Row type="flex" justify="center" style="margin-top: 8px; margin-bottom: 4px;">
-            <Col span="12" style="padding-left: 8px">
-               <Input type="text" v-model="desc" @on-enter="startSearch()" @on-click="desc=''" placeholder="请输入KKS描述" :icon="desc!='' ? 'close-circled' : '' "/>
+    <div style="padding-bottom: 150px; padding: 16px">
+        <Row type="flex" justify="center" :gutter="16">
+            <Col span="8">
+               <Tree :data="treeData" :load-data="loadData" @on-select-change="getTypeTickets"></Tree>
             </Col>
-            <Col span="12" style="padding-left: 16px">
-                <Button type="default" @click="startSearch()">搜索</Button>
-            </Col>
-        </Row>
-        <Row type="flex" justify="center" align="middle"
-            style="
-                background-color: #f8f8f9;
-                border-top: 1px solid #e9eaec;
-                border-bottom: 1px solid #e9eaec; 
-                height: 38px;
-                padding-left: 16px
-            ">
-            <Col span="9">
-                典型票编号
-            </Col>
-            <Col span="7">
-                操作任务
-            </Col>
-            <Col span="4">
-                单元
-            </Col>
-            <Col span="4">
-                机组
+            <Col span="16">
+                <Row style="margin-bottom: 8px">
+                    <Col span="24">
+                        <Input type="text" v-model="name" @on-enter="startSearch" @on-click="()=>{name='';startSearch()}" placeholder="请输入操作任务，并回车" :icon="name!='' ? 'close-circled' : '' "/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="24">
+                        <Table @on-current-change="onRowSelected" @on-row-dblclick="(currentRow)=>{this.selectedItem = currentRow; this.onOk()}" highlight-row ref="typicalTicketTable" :columns="columns" :data="tdata"></Table>
+                    </Col>
+                </Row>
             </Col>
         </Row>
-        <Tree class="table-tree" :data="treeData" :load-data="loadData" :render="renderContent"></Tree>
     </div>
 </Modal>
 </template>
 
 <script>
-import { ApiKKS } from '@/api/apiUtil'
+import { ApiEquipments } from '@/api/apiUtil'
+import { ApiTypicalTickets } from '@/api/apiUtil'
 import { Icon, Row, Col } from 'iview'
 export default {
     name: "TypicalTicketModal",
@@ -56,7 +44,24 @@ export default {
             treeData: [],
             selectedItem: {},
             isShow: false,
-            desc: '' //用于搜索
+            name: '', //用于搜索
+
+            columns:[
+                {
+                    type: 'index',
+                    width: 50,
+                },
+                {
+                    title: '典型票编号',
+                    key: 'num',
+                    width: 150
+                },
+                {
+                    title: '操作任务',
+                    key: 'taskName'
+                }
+            ],
+            tdata: []
         }
     },
     methods: {
@@ -68,69 +73,42 @@ export default {
         },
         beginQuery() {
             let params = {parentId: 0};
-            if(this.desc && this.desc != '') {
-                params = {desc: this.desc}
+            if(this.name && this.name != '') {
+                params = {name: this.name}
             }
-            ApiKKS.queryList(params).then(data => {
-                data.forEach(el => {
-                    el.title = el.name + el.desc + el.sid,
-                    el.loading = false,
-                    el.expand = false,
-                    el.hasChildren = true,
-                    el.nodeLevel = 0,
-                    el.children = []
-                });
+            ApiEquipments.queryList(params).then(data => {
+                this.convertData(data);
                 this.treeData = data;
             });
         },
         loadData(item, callback) {
-            ApiKKS.queryList({parentId: item.id}).then(data => {
-                data.forEach(el => {
-                    el.title = el.name + el.desc + el.sid,
-                    el.loading = false,
-                    el.expand = false,
-                    el.hasChildren = true,
-                    el.nodeLevel = item.nodeLevel + 1,
-                    el.children = []
-                });
+            ApiEquipments.queryList({parentId: item.id}).then(data => {
+                this.convertData(data);
                 callback(data);
             });
         },
-        renderContent(h, { root, node, data }) {
-            return (
-                <div onDblclick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
-                    <Row type="flex" justify="center" align="middle" class={{'row-high-light': this.selectedItem.id==data.id}} nativeOnClick={()=>{this.selectedItem = data}}
-                        style="border-bottom: 1px solid #e9eaec; padding-left: 16px; height: 38px;">
-                        <Col span="9" style={{paddingLeft : data.nodeLevel*16 + 'px'}}>
-                            <span onClick={(event)=>{event.stopPropagation(); this.requestExpand(data)}}>
-                            <Icon color={data.hasChildren ? '' : 'white'} type={data.expand ? "arrow-down-b" : "arrow-right-b"} style="margin-right:4px; width: 11px"></Icon>
-                            <Icon size="16" type={data.expand||!data.hasChildren ? "android-folder-open" : "android-folder"} style="padding-right:4px"></Icon>
-                            </span>
-                            {data.name}
-                        </Col>
-                        <Col span="11">
-                            {data.desc}
-                        </Col>
-                        <Col span="4">
-                            {data.sid}
-                        </Col>
-                    </Row>
-                </div>
-            );
-        },
+       getTypeTickets(selectedNode) {
+            ApiTypicalTickets.queryList({equipmentId: selectedNode[0].id}).then(data => {
+                this.tdata = data;
+            });
+       },
         onOk() {
             if(this.selectedItem.id) {
                 this.isShow = !this.isShow;
-                this.$emit('KksSelected', this.selectedItem);
+                this.$emit('TypicalTicketSelected', this.selectedItem);
             } else 
-                this.$Message.warning('请选择一个节点');
+                this.$Message.warning('请选择典型票');
         },
-        requestExpand(data) {
-            data.expand = !data.expand; 
-            this.loadData(data,(children)=>{
-                data.children=children;
-                if(children.length == 0) data.hasChildren = false
-            })
+        onRowSelected(currentRow) {
+            this.selectedItem = currentRow;
+        },
+        convertData(data) {
+            data.forEach(el => {
+                el.title = el.name;
+                el.loading = false;
+                el.expand = false;
+                if(el.hasChildren) el.children = []
+            });
         }
     },
     watch: {

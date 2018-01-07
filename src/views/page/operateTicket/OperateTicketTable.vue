@@ -3,7 +3,6 @@ import EditTableMixin from '@/views/components/EditTable'
 
 export default {
     name: "OperateTicketTable",
-    
     mixins:[EditTableMixin],
     data() {
         return {
