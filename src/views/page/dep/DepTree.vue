@@ -96,6 +96,18 @@ export default {
             });
         },
         loadData(item, callback) {
+            this.getApi().queryList({parentId: item.id}).then(data => {
+                data.forEach(el => {
+                    el.loading = false;
+                    el.expand = false;
+                    el.nodeLevel = item.nodeLevel + 1;
+                    if(el.hasChildren) el.children = []
+                });
+                callback(data);
+            });
+        },
+        reloadParentNode(node) { // 增删改之后重新加载节点信息
+            let parent = this.findNodeById(node.parentId, this.treeData);
             if(parent) {
                 this.loadData(parent,(children)=>{
                     if(children.length > 0) {
@@ -111,20 +123,6 @@ export default {
             } else {
                 this.beginQuery();
             }
-        },
-        reloadParentNode(node) { // 增删改之后重新加载节点信息
-            let parent = this.findNodeById(node.parentId, this.treeData);
-            this.loadData(parent,(children)=>{
-                if(children.length > 0) {
-                    parent.hasChildren = true; // 防止添加第一个子节点或没有查到子节点时,父节点状态错误
-                    parent.children = children;
-                    parent.expand = true;
-                } else {
-                    parent.hasChildren = false;
-                    parent.children = undefined;
-                    parent.expand = false; 
-                }
-            });
         },
         renderContent(h, { root, node, data }) {
             return (

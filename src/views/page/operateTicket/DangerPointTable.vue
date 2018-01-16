@@ -24,6 +24,7 @@ export default {
                 {
                     data: 'content',
                     type: "text",
+                    width: 200
                 },
                 { 
                     data: 'isChecked',

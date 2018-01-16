@@ -47,9 +47,14 @@
                         </Row>
                     </TabPane>
                     <TabPane label="标签二" name="tab1">
-                        <Row>
+                        <Row type="flex" justify="center">
                             <Col span="24">
                                 <operate-ticket-table></operate-ticket-table>
+                            </Col>
+                        </Row>
+                         <Row>
+                            <Col span="2412">
+                                    <danger-point-table></danger-point-table>
                             </Col>
                         </Row>
                     </TabPane>

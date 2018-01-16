@@ -22,6 +22,7 @@ export default {
                 {
                     data: 'name',
                     type: "text",
+                    width: 300
                 },
                 { 
                     data: 'isChecked',

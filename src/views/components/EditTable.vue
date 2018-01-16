@@ -17,6 +17,8 @@ export default {
         stretchH: "all", //根据宽度横向扩展，last:只扩展最后一列，none：默认不扩展
         copyPaste: true,
         autoWrapRow: true, //自动换行
+        manualRowResize: true,
+        manualColumnResize: true,
         afterRender: function() {
           //conner单元格显示“序号”
           setTimeout(function() {
