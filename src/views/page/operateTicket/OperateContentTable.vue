@@ -1,7 +1,7 @@
 <script>
 import EditTableMixin from '@/views/components/EditTable'
 import Handsontable from 'handsontable';//不能放到mixin里面
-
+console.log(Handsontable.cellTypes)
 export default {
     name: "OperateContentTable",
     mixins:[EditTableMixin],
@@ -27,12 +27,12 @@ export default {
                 },
                 {
                     data: 'nums',
+                    readOnly: true,
                     renderer: function (instance, td, row, col, prop, value, cellProperties) {
-                        // Handsontable.dom.empty(td);
+                        Handsontable.dom.empty(td);
                         let a = document.createElement('a');
                         a.href="javascript:void(0);"
-                        a.innerText="test";
-                        td.innerHTML = '';
+                        a.innerText=value;
                         td.appendChild(a);
                     }
                 },
@@ -65,7 +65,7 @@ export default {
         });
         this.addHook("afterOnCellMouseOver", (event, coords, TD)=>{
             let cellData = this.getHottableInstant().getDataAtCell(coords.row, coords.col);
-            this.$emit('previewDangerPoint', cellData)
+            this.$emit('previewDangerPoint', event)
         });
     },
     methods: {

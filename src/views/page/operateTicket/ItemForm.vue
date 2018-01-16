@@ -52,16 +52,11 @@
                                 <operate-content-table @previewDangerPoint="previewDangerPoint" ></operate-content-table>
                             </Col>
                         </Row>
+                        
                     </TabPane>
                     <TabPane label="标签三" name="tab2">
                         <danger-point-table></danger-point-table>
-                        <Poptip v-model="visible">
-                            <a>click 激活</a>
-                            <div slot="title"><i>自定义标题</i></div>
-                            <div slot="content">
-                                <a >关闭提示框</a>
-                            </div>
-                        </Poptip>
+                        
                     </TabPane>
                     <TabPane label="标签三" name="tab3">
                         <Row type="flex">
@@ -80,7 +75,14 @@
                 </Tabs>
             </Col>
         </Row>
+        <Row>
+        </Row>
     </Col>
+    <div style="position:'fixed'; z-index:999999" :style="{left: left,top: top}">
+        <p>Content of dialog</p>
+        <p>Content of dialog</p>
+        <p>Content of dialog</p>
+    </div>
 </Row>
 
 </template>
@@ -107,7 +109,8 @@ export default {
                 typicalTicketId: 0,
                 title: '',
             },
-            visible: false,
+            left: '300px',
+            top: '200px',
             form: {
                 typicalTicketId: 0,
                 name: ''
@@ -129,8 +132,11 @@ export default {
         nextStep() {
             this.currentStep ++
         },
-        previewDangerPoint() {
-            this.visible = true;
+        previewDangerPoint(event) {
+            console.log(event)
+            // this.visible = true;
+            this.left = event.screenX + 'px'
+            this.top = event.screenY + 'px'
         }
     },
     computed: {

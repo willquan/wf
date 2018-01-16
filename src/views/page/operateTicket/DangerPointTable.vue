@@ -27,8 +27,8 @@ export default {
                     case 2: 
                         txt = "控制措施";
                         break;
-                    case 4:
-                        txt = "<input id='checkall' type='checkbox' class='check-all'";
+                    case 3:
+                        txt = "<input id='checkall' type='checkbox' class='check-all' style='padding-top:10px'";
                         txt += isCheckedAll ? 'checked="checked"' : '';
                         txt += "><label for='checkall'> 逐条确认</label>";
                         break;
