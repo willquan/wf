@@ -1,11 +1,13 @@
 <script>
 import HotTable from "vue-handsontable-official";
 import SheetClip from "handsontable/lib/SheetClip/SheetClip";
-
+import {Row, Col, Poptip, Button } from 'iview'
 var clipboardCache = '';
 export default {
   render(h) {
-    return (<HotTable ref="hottable" root={this.rootName} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>)
+    return (
+          <HotTable ref="hottable" root={this.rootName} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>
+      )
   },
   data() {
     return {
@@ -96,7 +98,10 @@ export default {
       this.$refs.hottable.table.addHook(key, callback);
     },
     updateSettings(settings) {
-      this.$refs.hottable.table.updateSettings(settings);
+      this.getHottableInstant().updateSettings(settings);
+    },
+    getHottableInstant() {
+      return this.$refs.hottable.table;
     },
     onCreateContextMenu() {
 

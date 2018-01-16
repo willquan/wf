@@ -49,17 +49,19 @@
                     <TabPane label="标签二" name="tab1">
                         <Row type="flex" justify="center">
                             <Col span="24">
-                                <operate-ticket-table></operate-ticket-table>
-                            </Col>
-                        </Row>
-                         <Row>
-                            <Col span="2412">
-                                    <danger-point-table></danger-point-table>
+                                <operate-content-table @previewDangerPoint="previewDangerPoint" ></operate-content-table>
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane label="标签三" name="tab2">
                         <danger-point-table></danger-point-table>
+                        <Poptip v-model="visible">
+                            <a>click 激活</a>
+                            <div slot="title"><i>自定义标题</i></div>
+                            <div slot="content">
+                                <a >关闭提示框</a>
+                            </div>
+                        </Poptip>
                     </TabPane>
                     <TabPane label="标签三" name="tab3">
                         <Row type="flex">
@@ -86,12 +88,12 @@
 <script>
 import apiMixin from './config'
 import TypicalTicketModal from './TypicalTicketModal'
-import OperateTicketTable from './OperateTicketTable'
+import OperateContentTable from './OperateContentTable'
 import DangerPointTable from './DangerPointTable'
 export default {
     mixins:[apiMixin],
     name: 'itemForm',
-    components: {TypicalTicketModal, OperateTicketTable, DangerPointTable},
+    components: {TypicalTicketModal, OperateContentTable, DangerPointTable},
     data() {
         return {
             isEditable: true,
@@ -105,6 +107,7 @@ export default {
                 typicalTicketId: 0,
                 title: '',
             },
+            visible: false,
             form: {
                 typicalTicketId: 0,
                 name: ''
@@ -125,6 +128,9 @@ export default {
         },
         nextStep() {
             this.currentStep ++
+        },
+        previewDangerPoint() {
+            this.visible = true;
         }
     },
     computed: {
