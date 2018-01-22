@@ -1,15 +1,81 @@
 <script>
 import EditTableMixin from '@/views/components/EditTable'
 import Handsontable from 'handsontable';//不能放到mixin里面
-console.log(Handsontable.cellTypes)
 export default {
     name: "OperateContentTable",
     mixins:[EditTableMixin],
     data() {
         return {
             rootName: 'OperateTicketTable',
+            height: (this.$store.getters.singlePageHeight-80),
             tableData: [
                 //数据，可以是数据，对象
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
+                {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
+                {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF2开关', nums:'', isChecked:true},
+                {name:'拉开#6燃机保安进线三412A09框架开关储能电源QF1开关', nums:'', isChecked:true},
+                {name:'检查#6燃机保安进线三412A09框架开关在“试验”位', nums:'', isChecked:true},
                 {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},
                 {name:'检查#6燃机保安进线三412A09框架开关在“分闸”位', nums:'1003', isChecked:false},
                 {name:'检查#6燃机保安进线三412A09框架开关在“工作”位', nums:'1004', isChecked:false},
@@ -46,6 +112,10 @@ export default {
                     }
                 }
             ],
+            cell: [
+                {row: 0, col: 1, comment: {value: '发布和接受命令出错-操作人和监护人应了解操作目的和操作顺序，对指令有疑问应向值长询问清楚。值长在签发操作票之前必须认真审核操作票，确认无误后方令可签名发'}},
+                {row: 1, col: 1, comment: {value: '发布和接受命令出错-操作人和监护人应了解操作目的和操作顺序，对指令有疑问应向值长询问清楚。值长在签发操作票之前必须认真审核操作票，确认无误后方令可签名发'}}
+            ]
         }
     },
     mounted: function() {
@@ -65,7 +135,25 @@ export default {
         });
         this.addHook("afterOnCellMouseOver", (event, coords, TD)=>{
             let cellData = this.getHottableInstant().getDataAtCell(coords.row, coords.col);
-            this.$emit('previewDangerPoint', event)
+            var commentsPlugin = this.getHottableInstant().getPlugin('comments');
+            if(commentsPlugin.targetIsCellWithComment(event)) {
+                setTimeout(function() {
+                    let comments = document.querySelectorAll(".htCommentsContainer .htComments");
+                    comments.forEach(el => {
+                        //重新调整下备注弹框的位置
+                        if(el.style.display == 'block') {
+                            let rect = TD.getBoundingClientRect();
+                            let commentWidth = 400;
+                            el.style.left = (rect.left - commentWidth) + 'px';
+                            el.style.top = rect.top + 'px';
+                            let ta = el.querySelector('.htCommentTextArea');
+                            ta.style.backgroundColor = '#eee'
+                            ta.style.width= commentWidth + 'px';
+                            ta.style.height = '200px';
+                        }
+                    })
+                }, 200);
+            }
         });
     },
     methods: {

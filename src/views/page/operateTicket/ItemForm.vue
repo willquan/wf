@@ -49,7 +49,7 @@
                     <TabPane label="标签二" name="tab1">
                         <Row type="flex" justify="center">
                             <Col span="24">
-                                <operate-content-table @previewDangerPoint="previewDangerPoint" ></operate-content-table>
+                                <operate-content-table></operate-content-table>
                             </Col>
                         </Row>
                         
@@ -75,14 +75,7 @@
                 </Tabs>
             </Col>
         </Row>
-        <Row>
-        </Row>
     </Col>
-    <div style="position:'fixed'; z-index:999999" :style="{left: left,top: top}">
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-    </div>
 </Row>
 
 </template>
@@ -109,8 +102,6 @@ export default {
                 typicalTicketId: 0,
                 title: '',
             },
-            left: '300px',
-            top: '200px',
             form: {
                 typicalTicketId: 0,
                 name: ''
@@ -131,12 +122,6 @@ export default {
         },
         nextStep() {
             this.currentStep ++
-        },
-        previewDangerPoint(event) {
-            console.log(event)
-            // this.visible = true;
-            this.left = event.screenX + 'px'
-            this.top = event.screenY + 'px'
         }
     },
     computed: {

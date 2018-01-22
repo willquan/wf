@@ -1,89 +1,11 @@
 <template>
-  <div class="tab-content-scroll">
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p><p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-     <p>home</p>
-  </div>
+     <item-form></item-form>
 </template>
 
 <script>
+import ItemForm from '../operateTicket/ItemForm'
 export default {
-
+  components: {ItemForm},
 }
 </script>
 <style lang="less">

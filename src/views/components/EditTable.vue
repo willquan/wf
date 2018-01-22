@@ -6,12 +6,13 @@ var clipboardCache = '';
 export default {
   render(h) {
     return (
-          <HotTable ref="hottable" root={this.rootName} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>
+          <HotTable ref="hottable" root={this.rootName} height={this.height} cell={this.cell} settings={this.hotSettings} data={this.tableData} colHeaders={this.colHeaders} columns={this.columns}></HotTable>
       )
   },
   data() {
     return {
       name: "EditTable",
+      height: 400,
       hotSettings: {
         fillHandle: 'vertical', //选中拖拽复制 possible values: true, false, "horizontal", "vertical"
         rowHeaders: true, //行表头
@@ -21,6 +22,7 @@ export default {
         autoWrapRow: true, //自动换行
         manualRowResize: true,
         manualColumnResize: true,
+        comments: {displayDelay:100},
         afterRender: function() {
           //conner单元格显示“序号”
           setTimeout(function() {

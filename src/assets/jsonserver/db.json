@@ -818,60 +818,60 @@
     {
       "id": 1,
       "equipmentId": 17,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 2,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 3,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 4,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 5,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 6,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 7,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 8,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 9,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-02框"
     },
     {
       "id": 10,
-      "num":"DW025260D1",
+      "num": "DW025260D1",
       "equipmentId": 17,
       "taskName": "六号机组#6燃机保安MCC段电源三412A02-01框"
     }
@@ -960,9 +960,14 @@
     {
       "id": 11,
       "parentId": 7,
-      "name": "61A",
+      "name": "61A #1机6KV 工作段A",
       "hasChildren": true,
-      "type": ""
+      "type": "",
+      "loading": false,
+      "expand": true,
+      "nodeLevel": 4,
+      "children": [],
+      "nodeKey": 4
     },
     {
       "id": 12,
@@ -1002,9 +1007,14 @@
     {
       "id": 17,
       "parentId": 13,
-      "name": "411A01-1 #1机组汽机A段进线开关",
+      "name": "404M01-6+污泥循环泵B",
       "hasChildren": true,
-      "type": ""
+      "type": "",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 5,
+      "children": [],
+      "nodeKey": 7
     },
     {
       "id": 18,
