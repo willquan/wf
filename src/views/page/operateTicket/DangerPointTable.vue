@@ -56,7 +56,7 @@ export default {
                     // 添加label以后，点击单元格，复选框状态也可改变
                     label: {
                         position: 'after',
-                        value: ' 确认无误？'
+                        value: ' 确认无误'
                     }
                 }
             ],

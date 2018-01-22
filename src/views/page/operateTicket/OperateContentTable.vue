@@ -94,13 +94,7 @@ export default {
                 {
                     data: 'nums',
                     readOnly: true,
-                    renderer: function (instance, td, row, col, prop, value, cellProperties) {
-                        Handsontable.dom.empty(td);
-                        let a = document.createElement('a');
-                        a.href="javascript:void(0);"
-                        a.innerText=value;
-                        td.appendChild(a);
-                    }
+                    type: "text"
                 },
                 { 
                     data: 'isChecked',
@@ -108,7 +102,7 @@ export default {
                     // 添加label以后，点击单元格，复选框状态也可改变
                     label: {
                         position: 'after',
-                        value: ' 确认无误？'
+                        value: ' 确认无误'
                     }
                 }
             ],
@@ -164,7 +158,7 @@ export default {
                 name: "导入预控卡",
                 disabled: function () {
                     //没选中任何单元格时，禁用
-                    return !this.getSelected() || !this.getSelected()[0];
+                    return !this.getSelected();
                 },
                 callback: function() {
                     vueThis.$Message.info('开始导入预控卡')

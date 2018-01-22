@@ -68,21 +68,21 @@ export default {
           name: "拷贝",
           disabled: function () {
             //没选中任何单元格时，禁用
-            return !this.getSelected() || !this.getSelected()[0];
+            return !this.getSelected();
           }
         },
         cut: {
           name: "剪切",
           disabled: function () {
             //没选中任何单元格时，禁用
-            return !this.getSelected() || !this.getSelected()[0];
+            return !this.getSelected();
           }
         },
         paste : {
           key: 'paste',
           name: '粘贴',
           disabled: function() {
-            return !this.getSelected() || !this.getSelected()[0];
+            return !this.getSelected();
           },
           callback: function() {
             var plugin = this.getPlugin('copyPaste');
