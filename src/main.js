@@ -13,6 +13,13 @@ Vue.directive('fix-height', function (el, binding) {
     el.style.height = store.getters.singlePageHeight + 'px'
 })
 
+Vue.directive('fix-height-npb', function (el, binding) {
+    el.style.overflow = 'auto'
+    el.style.paddingRight = '10px'
+    el.style.paddingLeft = '10px'
+    el.style.height = store.getters.singlePageHeight + 'px'
+})
+
 Vue.filter('mapFstate', function(v) {
     return wfUtil.mapFstate(v);
 })

@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             rootName: 'OperateTicketTable',
-            height: (this.$store.getters.singlePageHeight-80),
+            height: (this.$store.getters.singlePageHeight-35),
             tableData: [
                 //数据，可以是数据，对象
                 {name:'穿好防护服，代号防护面罩和手套', nums:'1001,1002', isChecked:false},

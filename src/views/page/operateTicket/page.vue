@@ -1,7 +1,7 @@
 <template>
 <auto-tabs ref="autotabs" :tabs.sync="tabs" :currentTab.sync="currentTab">
     <table-list v-fix-height ref="list" :slot="tabs[0].name" @ViewBtnClicked="ViewBtnClicked" @EditBtnClicked="EditBtnClicked"></table-list>
-    <item-form v-fix-height :slot="add.name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
+    <item-form v-fix-height-npb :slot="add.name" :isEditable="true" @FormDataChanged="DataFormChanged"></item-form>
     <item-form v-fix-height :slot="edit.name" :isEditable="true" :itemId="editItemId" @FormDataChanged="DataFormChanged"></item-form>
     <item-form v-fix-height :slot="view.name" :isEditable="false" :itemId="viewItemId"></item-form>
     <Button type="primary" @click="AddBtnClicked" size="small" slot="extra" style="margin-right: 10px" v-if="hasPermission('create')">{{add.label}}</Button>
