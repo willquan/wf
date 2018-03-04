@@ -4,8 +4,13 @@
             <Col span="12" style="padding-bottom: 8px">
                <Input type="text" v-model="name" @on-enter="startSearch" @on-click="()=>{name='';startSearch()}" placeholder="请输入名称" :icon="name!='' ? 'close-circled' : '' "/>
             </Col>
-            <Col span="12" style="padding-left: 16px">
+            <Col span="4" style="padding-left: 16px">
                 <Button type="default" @click="startSearch">搜索</Button>
+            </Col>
+            <Col span="8" style="padding-left: 16px">
+                <Upload multiple action="/upload">
+                    <Button type="ghost" icon="ios-cloud-upload-outline">Upload files</Button>
+                </Upload>
             </Col>
         </Row>
         <Row type="flex" align="middle" class="tree-table-row"
@@ -103,7 +108,8 @@ export default {
                 data.forEach(el => {
                     el.loading = false;
                     el.expand = false;
-                    el.nodeLevel = item.nodeLevel + 1;
+
+                  el.nodeLevel = item.nodeLevel + 1;
                     if(el.hasChildren) el.children = []
                 });
                 callback(data);

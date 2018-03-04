@@ -83,7 +83,8 @@ export const appRouter = [
         meta: {title: '操作票管理'},
         component: Main,
         children: [
-            { path: 'operateTicket', meta:{title: '操作票管理'}, name: 'operateTicket', component: resolve => { require(['@/views/page/operateTicket/page.vue'], resolve); } },
+            { path: 'operateTicket', meta:{title: '操作票列表'}, name: 'operateTicket', component: resolve => { require(['@/views/page/operateTicket/page.vue'], resolve); } },
+            { path: 'typicalTicket', meta:{title: '典型票管理'}, name: 'typicalTicket', component: resolve => { require(['@/views/page/operateTicket/page.vue'], resolve); } },
         ]
     },
     {

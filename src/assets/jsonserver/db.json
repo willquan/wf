@@ -167,6 +167,11 @@
       "name": "operateTicket"
     },
     {
+      "id": 15,
+      "menuId": 5,
+      "name": "typicalTicket"
+    },
+    {
       "id": 1,
       "menuId": 1,
       "name": "home_index"
@@ -979,9 +984,51 @@
     {
       "id": 13,
       "parentId": 7,
-      "name": "411A",
+      "name": "404L",
       "hasChildren": true,
-      "type": ""
+      "type": "",
+      "loading": false,
+      "expand": false,
+      "nodeLevel": 4,
+      "children": [
+        {
+          "id": 17,
+          "parentId": 13,
+          "name": "污泥循环泵A开关404L01-3",
+          "hasChildren": true,
+          "type": "",
+          "loading": false,
+          "expand": false,
+          "nodeLevel": 5,
+          "children": [],
+          "nodeKey": 7
+        },
+        {
+          "id": 18,
+          "parentId": 13,
+          "name": "411A02-1 #1汽机#1凝结水泵",
+          "hasChildren": true,
+          "type": "",
+          "loading": false,
+          "expand": false,
+          "nodeLevel": 5,
+          "children": [],
+          "nodeKey": 8
+        },
+        {
+          "id": 19,
+          "parentId": 13,
+          "name": "411A02-2 #1汽机#1密封油泵",
+          "hasChildren": true,
+          "type": "",
+          "loading": false,
+          "expand": false,
+          "nodeLevel": 5,
+          "children": [],
+          "nodeKey": 9
+        }
+      ],
+      "nodeKey": 6
     },
     {
       "id": 14,
@@ -1007,11 +1054,11 @@
     {
       "id": 17,
       "parentId": 13,
-      "name": "404M01-6+污泥循环泵B",
+      "name": "污泥循环泵A开关404L01-3",
       "hasChildren": true,
       "type": "",
       "loading": false,
-      "expand": false,
+      "expand": true,
       "nodeLevel": 5,
       "children": [],
       "nodeKey": 7
@@ -1027,6 +1074,20 @@
       "id": 19,
       "parentId": 13,
       "name": "411A02-2 #1汽机#1密封油泵",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 20,
+      "parentId": 17,
+      "name": "污泥循环泵A开关404L01-3检修转热备用",
+      "hasChildren": true,
+      "type": ""
+    },
+    {
+      "id": 21,
+      "parentId": 17,
+      "name": "污泥循环泵A开关404L01-3测绝缘",
       "hasChildren": true,
       "type": ""
     }

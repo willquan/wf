@@ -5,7 +5,7 @@ import { getToken } from '@/libs/auth'
 import env from '../config/env';
 import { router } from '@/router/router.js';
 
-const ajaxUrl = env === 'development' ? 'http://localhost:3000' :
+const ajaxUrl = env === 'development' ? 'http://localhost:8081' :
                 env === 'production' ? 'https://www.url.com' : 'https://debug.url.com';
 
 // 创建axios实例
